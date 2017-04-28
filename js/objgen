@@ -1,0 +1,41 @@
+class [0]
+  indoor
+    subclass [0]
+      kitchen
+        item [] s = knife , blender , apron
+     subclass [1]
+      livingRoom
+        item [] s = chromcast , lifx
+class [1]
+  outdoor
+    subclass [0]
+      sports
+        item [] s = basketball , seahawks , baseball
+     subclass [1]
+      camping
+        item [] s =  backpack, water bottle
+class [2]
+  fashion
+    subclass [0]
+      accessories
+        item [] s = watch , neckless , hats
+     subclass [1]
+      shoes
+        item [] s =  nike, adidas,vans
+
+
+
+
+new way
+
+
+class[0]
+  subclass[0]
+    items [] s = knife,blender,apron
+  subclass[1]
+    items [] s = chromecast, lifx
+class[1]
+  subclass[0]
+    items [] s = basketball,seahawks,baseball
+  subclass[1]
+    items [] s = backpack, waterbottle
