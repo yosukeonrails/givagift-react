@@ -14,7 +14,8 @@ import LoginContainer from './login.js'
 import QuizInfoContainer from './quizinfo.js'
 import SignInBoxContainer from './signinbox.js'
 import FeaturedContainer from './featured.js'
-
+import SignInContainer from './sign-in.js'
+var logInOpen=false;
 var view='.tagLine';
 var viewModes=['.tagLine', '.whatwedo', '.loginbox','.affiliate','.giva-sign-up','.givaquiz'];
 var nomargin= {
@@ -71,6 +72,9 @@ export class LandingPage extends React.Component{
     this.goTo= this.goTo.bind(this);
     this.goToQuiz= this.goToQuiz.bind(this);
     this.signIn= this.signIn.bind(this);
+    this.facebooklogin= this.facebooklogin.bind(this);
+    this.showLogIn = this.showLogIn.bind(this);
+    this.closeLogIn= this.closeLogIn.bind(this);
   }
 
 componentDidMount(){
@@ -92,6 +96,42 @@ componentDidMount(){
 
   $("html, body").animate({ scrollTop: $(".header").offset().top }, 1000);
 }
+
+  facebooklogin(){
+    console.log('login in ');
+     window.location.href='/auth/facebook';
+     /*
+     1. if facebook log in successful , redirect to user page
+     2. if fail, sing up page*/
+  }
+
+  closeLogIn(){
+    console.log('closed loged in');
+    $('.dark-blurr').animate({opacity:'0'} , function(){
+          $('.dark-blurr').css('display', 'none');
+    });
+
+    logInOpen=false;
+  }
+
+  showLogIn(){
+
+      if(logInOpen==false){
+        $('.dark-blurr').css("display", "block");
+        $('.dark-blurr').animate({opacity:'1'});
+          logInOpen=true;
+
+      }  else {
+
+        console.log('showing log in ');
+        $('.dark-blurr').animate({opacity:'0'}, function(){
+            $('.dark-blurr').css("display", "none");
+            logInOpen=false;
+        });
+
+      }
+
+  }
 
   signIn(){
 
@@ -119,9 +159,6 @@ componentDidMount(){
 
   goToQuiz(){
 
-
-
-
         hideSignIn();
         $('.letsparty').finish().animate({top:'70%'}, 500 , function(){
         $('.letsparty').finish().animate({opacity:'0'}, 1000);
@@ -141,8 +178,6 @@ componentDidMount(){
       });
 
     $('.banner').css("height" , "100vh");
-
-
 
 
     }
@@ -188,16 +223,10 @@ componentDidMount(){
             <h2 onClick={this.goHome}>Givagift</h2>
 
                     <div className="signin">
-                    <button onClick={this.signIn}><h3>Sign In</h3></button>
-                    <button onClick={this.goToQuiz}><h3>GivaQuiz</h3></button>
-                    <button onClick={this.whatwedo} ><a href="#whatwedo"><h3>WhatWeDo</h3></a></button>
-                    <button ><a href="#affiliates"><h3>Affiliates</h3></a></button>
+                    <button onClick={this.showLogIn} ><h3>Log In</h3></button>
+                    <button ><h3>Sign Up</h3></button>
                     </div>
             </div>
-
-
-
-
 
         <div  className="quizcontainer">
           <QuizInfoContainer/>
@@ -210,7 +239,7 @@ componentDidMount(){
         </div>
 
     		<h1 style={{display:'block'}} className="letsparty"> Life is a Gift .</h1>
-
+          <i className="fa fa-gift" aria-hidden="true"></i>
 
         <div className="explanation">
                   <h2> Looking for a gift?</h2>
@@ -222,6 +251,16 @@ componentDidMount(){
     	</div>
 
 
+<div className="dark-blurr">
+
+  <div className="login-window">
+
+  <i  onClick={this.closeLogIn} className="fa fa-times-circle-o" aria-hidden="true"></i>
+    <SignInContainer/>
+  </div>
+
+</div>
+
 
 
 <div  className="whatwedo">
@@ -229,35 +268,24 @@ componentDidMount(){
 
 						<div className="whatwedo-left">
 
-									<div className="part1">We are here to save you from akward situations..</div>
-									<br></br>
-									<p>We have put together for you the best gift selection so you don't need to worry about what to get for your friend's birthday!</p>
-									<br></br>
-									<button type="button" name="button">		<h3>Take a look!</h3></button>
+                  <div className="part1">Say GoodBye to Akward!  </div>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Emoji_u1f601.svg/2000px-Emoji_u1f601.svg.png"></img>
+                  <br></br>
+                  <p>We have put together for you the best gift selection so you don't need to worry about what to get for your friend's birthday!</p>
+                  <br></br>
+                  <button type="button" name="button">		<h3>Take a look!</h3></button>
 
-						</div>
+                  </div>
 
 
-							<div className="whatwedo-right">
+                  <div className="whatwedo-right">
 
-									<div className="field-container">
+                  <div className="field" id="#login">
 
-														<h1> Log In</h1>
-														<div className="email field">
-															<label >Email</label>
-															<input type="text" className=""></input>
-														</div>
-														<div  className="password field">
-															<label >Password</label>
-															<input type="password" className=""></input>
-														</div>
-													  <hr></hr>
-												   	<button type="submit" name="button"> Submit</button>
+                  <SignInContainer/>
 
-													  <button style={{backgroundColor:'#3B5998'}}  onClick={this.facebooklogin} name="button"> Log in with Facebook</button>
-									</div>
 							</div>
-
+              </div>
  </div>
 
 
@@ -279,29 +307,25 @@ componentDidMount(){
 </div>
 
 
-                 <div className="featured">
-
-                 <FeaturedContainer/>
-                 </div>
-
-
-    <div className="firstRow">
-
-                <div className="startquiz">
-
-                      <i className="fa fa-check-square-o" aria-hidden="true"></i>
-                      <h1>
-                      Take this short quiz and let us help you find an awesome gift!
-                      </h1>
-
-
-
-                      <button onClick={this.goToQuiz} >Start GivaQuiz</button>
-                </div>
-  </div>
 
 {/**
  *
+
+     <div className="firstRow">
+
+                 <div className="startquiz">
+
+                       <i className="fa fa-check-square-o" aria-hidden="true"></i>
+                       <h1>
+                       Take this short quiz and let us help you find an awesome gift!
+                       </h1>
+
+
+
+                       <button onClick={this.goToQuiz} >Start GivaQuiz</button>
+                 </div>
+   </div>
+
 
  <div id="affiliates" className="affiliates">
  <i className="fa fa-amazon" aria-hidden="true"></i>

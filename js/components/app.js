@@ -15,15 +15,10 @@ export class App extends React.Component{
 
   render () {
 
-  var sideBar;
+
 
     if(this.props.user){
-
-     sideBar= (
-       <div style={{float:'left'}}>
-        <UserSideBarContainer/>
-       </div>
-     );
+          console.log('now with user!');
 
     }
 

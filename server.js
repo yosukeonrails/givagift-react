@@ -9,7 +9,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var User= require('./models/facebookuser.js');
 var app = express();
 var List= require('./models/lists.js');
-
+var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
@@ -33,6 +33,8 @@ app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
       console.log(user);
@@ -105,6 +107,177 @@ app.get('/mockuser/:id', function(req, res){
 
 });
 
+/* user sign up start*/
+
+
+app.post('/users', function(req, res) {
+
+    if (!req.body) {
+        return res.status(400).json({
+            message: "No request body"
+        });
+    }
+
+    if (!('username' in req.body)) {
+        return res.status(422).json({
+            message: 'Missing field: username'
+        });
+    }
+
+    var username = req.body.username;
+
+    if (typeof username !== 'string') {
+        return res.status(422).json({
+            message: 'Incorrect field type: username'
+        });
+    }
+
+    username = username.trim();
+
+    if (username === '') {
+        return res.status(422).json({
+            message: 'Incorrect field length: username'
+        });
+    }
+
+          /* handle password*/
+
+
+    if (!('password' in req.body)) {
+        return res.status(422).json({
+            message: 'Missing field: password'
+        });
+    }
+
+    var password = req.body.password;
+
+    if (typeof password !== 'string') {
+        return res.status(422).json({
+            message: 'Incorrect field type: password'
+        });
+    }
+
+    password = password.trim();
+
+    if (password === '') {
+        return res.status(422).json({
+            message: 'Incorrect field length: password'
+        });
+    }
+
+    var newUser = new User({
+
+        username: username,
+        password: password,
+        email:req.body.email
+    });
+
+    User.createUser(newUser, function(err, user) {
+        if (err) throw err;
+        console.log(user);
+        console.log('user was CREATED!');
+        res.json(user);
+    });
+
+});
+
+/* user sign up end */
+
+
+
+
+/*login in user start*/
+
+passport.use(new LocalStrategy(
+
+    function(username, password, done) {
+
+        User.getUserByUsername(username, function(err, user) {
+            if (err) throw err;
+            if (!user) {
+                console.log('Unkwown User');
+                return done(null, false, {
+                    message: 'Unknown User'
+                });
+
+            }
+
+            User.comparePassword(password, user.password, function(err, isMatch) {
+                if (err) throw err;
+
+                if (isMatch) {
+
+                    console.log('You are Loggeeeeed in');
+
+                    return done(null, user);
+
+
+                } else {
+                    console.log('Invalid Password');
+                    return done(null, false, {
+                        message: 'Invalid password'
+                    });
+                }
+            });
+        });
+    }));
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
+function isLoggedIn(req, res, next) {
+    /* For production */
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    /* For testing, inject a user manually */
+    if (process.env.NODE_ENV == 'test') {
+
+        req.user = {
+            '_id': '1',
+            'username': 'test',
+            'password': 'test'
+        };
+        return next();
+    }
+
+    res.sendStatus(403);
+}
+
+
+
+
+app.post('/login',
+
+    passport.authenticate('local'),
+
+    function(req, res) {
+
+        res.json(req.user);
+
+    });
+
+
+app.get('/hidden', function(req, res) {
+
+    console.log('using the path');
+
+});
+
+
+/*login in user end*/
+
+
+
 app.post('/mockuser', function(req, res){
 
   let mockData= {
@@ -127,15 +300,20 @@ app.post('/mockuser', function(req, res){
   passport.use(new FacebookStrategy({
     clientID: config.clientID,
     clientSecret: config.clientSecret,
-    callbackURL: config.URL+'auth/facebook/callback'
-    // profileFields: ['id', 'displayName','birthday', 'picture', 'email']
+    callbackURL: config.URL+'auth/facebook/callback',
+    profileFields: ['id', 'displayName','birthday', 'picture', 'email' , 'first_name']
   }, function(accessToken, refreshToken, profile, done) {
-
+    console.log('here is ');
+    console.log(profile.birthday);
     console.log('here is picture data');
     console.log(profile._json.picture);
     console.log('end');
+    console.log(profile);
+    console.log(profile.name);
+    console.log(profile.name.familyName);
 
     let userData= {
+      first_name:profile._json.first_name,
       username:profile.displayName,
       facebookId:profile.id,
       token:profile.accessToken,
@@ -152,8 +330,7 @@ app.post('/mockuser', function(req, res){
    }));
 
 
-      app.use(passport.initialize());
-      app.use(passport.session());
+
 
 
    app.get('/auth/facebook',

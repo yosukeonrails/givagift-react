@@ -13,13 +13,16 @@ import EventsContainer from './events.js'
 import UserListsContainer from './user-lists.js'
 var contentArray=['home', 'userlists', 'userquiz']
 import QuizInfoContainer from './quizinfo.js'
+import {getFacebookUser} from '../actions/index.js'
 var listarrayContainerVar;
-
+var loggedUser;
 export class Dashboard extends React.Component{
 
   constructor(props){
     super(props);
-    this.selectNav=this.selectNav.bind(this);
+
+     this.props.dispatch(getFacebookUser());
+     this.selectNav=this.selectNav.bind(this);
 
   }
 
@@ -70,64 +73,194 @@ export class Dashboard extends React.Component{
    }
 
   render(){
-  var imageUrl="";
-  var userName="";
 
+      var imageUrl="";
+      var userName="";
 
+      if(this.props.loggedUser){
+          loggedUser=this.props.loggedUser;
 
-    if(this.props.loggedUser){
-     imageUrl="https://graph.facebook.com/"+this.props.loggedUser.facebookId+"/picture?width=100&height=100";
-     userName=this.props.loggedUser.username;
-      listarrayContainerVar= <UserListsContainer user={this.props.loggedUser.facebookId}/>
-    }
+          imageUrl= "url(https://graph.facebook.com/"+this.props.loggedUser.facebookId+"/picture?width=800&height=800)";
+          console.log(imageUrl);
+          userName=loggedUser.first_name;
+          listarrayContainerVar= <UserListsContainer user={loggedUser.facebookId}/>
+      }
 
 
 
     return (
 
+<div>
 
-<div className="userpage">
-    			<div className="user-header">
-        			<div className="logo">
-        							<h1>Givagifts</h1>
-        			</div>
+                    <div className="profile-top">
 
-        			<div className="user-profile">
-        			<img  src={imageUrl} alt=""></img>
-        			<h1>{userName}</h1>
-        			</div>
+                    	       <div className="profile-top-welcome">
 
+                                    <h2>Givagifts</h2>
+                                    <div style={{backgroundImage:imageUrl}} className="profile-image">
+                                    </div>
+                                    <h1>Hello, {userName} !</h1>
+                    		    </div>
 
-          		<div className="nav">
-          		<ul >
-          		<button  onClick={this.selectNav} id="home" type="button" name="button"> <i  id="home" className="fa fa-home" aria-hidden="true"></i> <h1  id="home" >Home</h1> </button>
-          		<button  onClick={this.selectNav}  id="userlists" name="button"><i  id="userlists"  className="fa fa-list-alt" aria-hidden="true"></i><h1 id="userlists"  >Lists</h1></button>
-          		<button   onClick={this.selectNav} id="birthdays" name="button"> <i  id="birthdays" className="fa fa-birthday-cake" aria-hidden="true"></i> <h1 id="birthdays">Birthdays</h1></button>
-          		<button   onClick={this.selectNav} id="userquiz" name="button"> <i id="userquiz" className="fa fa-check-square-o" aria-hidden="true"></i><h1 id="userquiz">GivaQuiz</h1></button>
-          		</ul>
-          		</div>
+                          		<div className="side-nav">
+                                            <div className="nav-item">
+                                            <i className="fa fa-calendar" aria-hidden="true"></i> Events
+                                            </div>
 
-        	</div>
+                                            <div className="nav-item">
+                                            <i className="fa fa-user" aria-hidden="true"></i> Profile
+                                            </div>
 
 
-	<div className="userpage-content">
+                                        		 <div className="nav-item">
+                                        		 <i className="fa fa-check-square-o" aria-hidden="true"></i> GivaQuiz
+                                        		 </div>
 
 
-        <div className="home">
-        <EventsContainer/>
-        </div>
+                                        		 <div className="nav-item">
+                                        		 <i className="fa fa-star" aria-hidden="true"></i> Featured Gifts
+                                        		 </div>
+                          		</div>
 
-        <div className="userlists">
-          {listarrayContainerVar}
-        </div>
-
-        <div className="userquiz">
-            <QuizInfoContainer/>
-        </div>
+                    </div>
 
 
-    </div>
+
+
+
+                    <div className="profile-content">
+
+                                        <div className="event">
+
+                                                    		<div className="event-top">
+                                                    					<h2>April , Sunday</h2>
+
+                                                    					<h1>Easter</h1>
+
+                                                    				<span className="view-more"> <h3> view more</h3><i className="fa fa-sort-desc" aria-hidden="true"></i> </span>
+
+                                                    		</div>
+
+
+
+                                                  		<div className="event-bottom">
+
+                                                  					<div className="event-like event-element">
+                                                  					<i className="fa fa-heart" aria-hidden="true"></i>
+                                                  						<h2>22</h2>
+                                                  					</div>
+
+                                                  					<div className="event-comment event-element">
+                                                  					<i className="fa fa-comment-o" aria-hidden="true"></i>
+                                                  						<h2>5</h2>
+                                                  					</div>
+
+                                                  					<div className="event-gift event-element">
+                                                  					<i className="fa fa-gift" aria-hidden="true"></i>
+                                                  						<h2>view gifts</h2>
+                                                  					</div>
+
+                                                  		</div>
+                                        </div>
+
+
+
+                                        <div className="event">
+                                                    <div className="event-top">
+                                                    <h2>April , Monday</h2>
+
+                                                    <h1>Patriot's Day</h1>
+                                                    </div>
+
+
+                                                		<div className="event-bottom">
+
+                                                					<div className="event-like event-element">
+                                                					<i className="fa fa-heart" aria-hidden="true"></i>
+                                                					<h2>22</h2>
+                                                					</div>
+
+                                                					<div className="event-comment event-element">
+                                                					<i className="fa fa-comment-o" aria-hidden="true"></i>
+                                                					<h2>4</h2>
+                                                					</div>
+
+                                                					<div className="event-gift event-element">
+                                                					<i className="fa fa-gift" aria-hidden="true"></i>
+                                                					<h2>view gifts</h2>
+                                                					</div>
+
+                                                		</div>
+
+
+                                        </div>
+
+
+
+
+                                        <div className="event">
+
+                                                  		<div className="event-top">
+                                                  			<h2>April , Thursday</h2>
+
+                                                  	 	 			<h1>Thank You Thursday</h1>
+                                                  		</div>
+
+
+                                                  		<div className="event-bottom">
+
+                                                                    <div className="event-like event-element">
+                                                                              <i className="fa fa-heart" aria-hidden="true"></i>
+                                                                              <h2>2</h2>
+                                                                    </div>
+
+                                                                    <div className="event-comment event-element">
+                                                                            <i className="fa fa-comment-o" aria-hidden="true"></i>
+                                                                            <h2>24</h2>
+                                                                    </div>
+
+                                                                    <div className="event-gift event-element">
+                                                                            <i className="fa fa-gift" aria-hidden="true"></i>
+                                                                            <h2>view gifts</h2>
+                                                                    </div>
+
+                                                  		</div>
+                                        </div>
+
+
+
+
+
+
+                                      <div className="bottom-nav-container">
+
+                                                  <div className="bottom-nav">
+                                                              <div className="nav-item">
+                                                              <i className="fa fa-calendar" aria-hidden="true"></i>
+                                                              </div>
+
+                                                              <div className="nav-item">
+                                                              <i className="fa fa-user" aria-hidden="true"></i>
+                                                              </div>
+
+
+                                                                <div className="nav-item">
+                                                                <i className="fa fa-check-square-o" aria-hidden="true"></i>
+                                                                </div>
+
+
+                                                                <div className="nav-item">
+                                                                <i className="fa fa-star" aria-hidden="true"></i>
+                                                                </div>
+                                          	         </div>
+                                      </div>
+
+
+
+                        </div>
+
 </div>
+
 
     );
   }
@@ -135,8 +268,7 @@ export class Dashboard extends React.Component{
 
 
 var mapStateToProps= function(state){
-
-
+  console.log(state);
   return {
     user:state.user,
     userImageURL:state.userImageURL,
