@@ -71,97 +71,63 @@ export class SignUp extends React.Component {
 
       render(){
 
-          var sign_in= {
-
-          fontFamily:cssStyle.font4,
-          fontSize: "16px",
-          backgroundColor: cssStyle.white,
-          width: "600px",
-          height:"550px",
-          border:"3px solid"+cssStyle.pink,
-          borderRadius:'2pc',
-          color:cssStyle.light_black,
-          marginTop:"50px",
-          marginLeft:"auto",
-          marginRight:"auto"
-          };
-
-          var  h1Style= {
-          fontSize:'50px',
-          fontFamily: cssStyle.baloo,
-          textAlign: "center"
-
-          };
-
-
-          var  h2Style= {
-          fontSize:'30px',
-          fontFamily: cssStyle.font3,
-          textAlign: "center"
-          };
-
-          var buttonDiv={
-          height:'400px',
-          width:'700px'
-          };
-
-          var buttonStyle= {
-          fontSize:'17px',
-          width: "200px",
-          height:"40px",
-          display:'block',
-          backgroundColor: cssStyle.pink,
-          border: "0px",
-          borderRadius:"5px",
-          fontFamily:cssStyle.baloo,
-          color:cssStyle.white,
-          marginLeft:'auto',
-          marginRight:'auto',
-          marginTop:'30px'
-          };
 
         return(
 
-    <div style={sign_in}>
+       <div>
 
-    <div style={{
-    marginTop:'30px',
-    width:'600px',
-    marginLeft:'auto',
-    marginRight:'auto',
-    marginBottom:'20px'}}>
 
-    <form onSubmit={this.handleSubmit} >
+     	<div className="sign-up">
 
-     <h4 style={{fontSize:'30px',textAlign:'center'}}> SignUp</h4>
+     	<h1> Sign Up</h1>
+     	<hr></hr>
+     					<button  id="facebook-button" onClick={this.facebooklogin}  name="button">Sign Up with Facebook</button>
 
-    <h4 style={{fontSize:'20px', marginLeft:'30px',  color:cssStyle.light_black }}>Username:</h4>
-    <input  onChange={this.handleChangeEmail} style={{ color:'black',marginLeft:'30px', width:'500px'}} type="text" name="name" id="login-email-input" placeholder="ex:CanadianPilot1234" required/>
+     	<h1>or</h1>
 
-    <h4 style={{fontSize:'20px',  color:cssStyle.light_black , marginLeft:'30px'}}>Password:</h4>
-    <input  onChange={this.handleChangePassword} style={{ color:'black', width:'500px', marginLeft:'30px'}} type="password" name="name" placeholder="ex:gitin123" id="login-password-input" required/>
+     	<p>Plese fill in the fields.</p>
+     	<div className="sign-up-field-container">
 
-    <h4 style={{fontSize:'20px',  color:cssStyle.light_black , marginLeft:'30px'}}>Confirm Password:</h4>
-    <input  onChange={this.handleChangeConfirmation} style={{ color:'black', width:'500px', marginLeft:'30px'}} type="password" name="name" placeholder="ex:gitin123" id="login-password-input" required/>
+     		<div className="first-name">
+     				<label >First Name</label>
+     				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+     				</div>
 
-    <div style={alert}>
-     <h4 style={{fontSize:'15px',color:cssStyle.white, textAlign:'center' }}> Confirm your password one more time. </h4>
-     </div>
 
-      <input type="submit"  style={buttonStyle} value="Create Account"/>
-    </form>
-      <button style={buttonStyle}>Guest Log In</button>
-    </div>
+     				<div className="last-name">
+     				<label >Last Name</label>
+     				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+     				</div>
 
-    <div style={{
-    marginTop:'30px',
-    width:'400px',
-    marginLeft:'auto',
-    marginRight:'auto'}}>
+     				<hr></hr>
+     					<div className="email">
+     					<label >Username</label>
+     					<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+     					</div>
 
-    </div>
-    </div>
+     					<div  className="password">
+     					<label >Password</label>
+     					<input onChange={this.handleChangePassword} type="password" className=""></input>
+     					</div>
 
+     					<div  className="password">
+     					<label >Confirm Password</label>
+     					<input onChange={this.handleChangePassword} type="password" className=""></input>
+     					</div>
+
+
+
+
+     					<hr></hr>
+     					<button  id="submit-button" type="submit"  onClick={this.handleSubmit} name="button"> Submit</button>
+
+
+
+     	</div>
+
+     	</div>
+
+       </div>
         );
       }
 }

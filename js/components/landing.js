@@ -106,30 +106,11 @@ componentDidMount(){
   }
 
   closeLogIn(){
-    console.log('closed loged in');
-    $('.dark-blurr').animate({opacity:'0'} , function(){
-          $('.dark-blurr').css('display', 'none');
-    });
 
-    logInOpen=false;
   }
 
   showLogIn(){
 
-      if(logInOpen==false){
-        $('.dark-blurr').css("display", "block");
-        $('.dark-blurr').animate({opacity:'1'});
-          logInOpen=true;
-
-      }  else {
-
-        console.log('showing log in ');
-        $('.dark-blurr').animate({opacity:'0'}, function(){
-            $('.dark-blurr').css("display", "none");
-            logInOpen=false;
-        });
-
-      }
 
   }
 
@@ -214,19 +195,13 @@ componentDidMount(){
 
       return(
 
+
     <div className="landing-page">
 
 
     	<div className= "banner">
 
-            <div className="header">
-            <h2 onClick={this.goHome}>Givagift</h2>
 
-                    <div className="signin">
-                    <button onClick={this.showLogIn} ><h3>Log In</h3></button>
-                    <button ><h3>Sign Up</h3></button>
-                    </div>
-            </div>
 
         <div  className="quizcontainer">
           <QuizInfoContainer/>
@@ -251,15 +226,7 @@ componentDidMount(){
     	</div>
 
 
-<div className="dark-blurr">
 
-  <div className="login-window">
-
-  <i  onClick={this.closeLogIn} className="fa fa-times-circle-o" aria-hidden="true"></i>
-    <SignInContainer/>
-  </div>
-
-</div>
 
 
 

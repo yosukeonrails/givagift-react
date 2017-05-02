@@ -27,6 +27,18 @@ export var INITIALIZE_RESULTS= 'INITIALIZE_RESULTS';
 
 
 
+  export var LAYOUT_STATE= 'LAYOUT_STATE';
+
+   export var layOutState= function(layOut){
+
+          return {
+            type:LAYOUT_STATE,
+            layOutState:layOut
+          };
+
+   };
+
+
    export var ARROW_RIGHT= 'ARROW_RIGHT';
 
     export var ArrowRight= function(id){

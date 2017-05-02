@@ -28,7 +28,7 @@ import UserSignUpContainer from './components/user-signup.js'
 import LoginContainer from './components/login.js'
 import BubbleAnswerContainer from './components/bubble-answer.js'
 import ResultContainer from './components/result.js'
-
+import SignUpContainer from './components/sign-up.js'
 
 var routes = (
     <Router history={hashHistory}>
@@ -47,6 +47,7 @@ var routes = (
                 <Route path="/signupuser" component={UserSignUpContainer}/>
                 <Route path="/bubble" component={BubbleAnswerContainer}/>
                   <Route path="/result/:id" component={ResultContainer}/>
+                        <Route path="/signup" component={SignUpContainer}/>
            </Route>
    </Router>
 );
