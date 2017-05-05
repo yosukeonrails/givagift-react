@@ -66,6 +66,11 @@ app.get('/amazonlist/:id', function(req, res){
 
 });
 
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+  console.log('user is logged out');
+});
 
 app.post('/amazonlist' , function(req, res){
 

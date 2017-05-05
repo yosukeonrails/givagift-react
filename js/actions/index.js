@@ -15,6 +15,15 @@ export var INITIALIZE_RESULTS= 'INITIALIZE_RESULTS';
  };
 
 
+export var CHANGE_MODE = 'CHANGE_MODE';
+
+ export var changeMode= function(mode){
+    return {
+       type:CHANGE_MODE,
+       mode:mode
+    }
+ }
+
  export var ARROW_LEFT= 'ARROW_LEFT';
 
   export var ArrowLeft= function(id){
@@ -37,6 +46,7 @@ export var INITIALIZE_RESULTS= 'INITIALIZE_RESULTS';
           };
 
    };
+
 
 
    export var ARROW_RIGHT= 'ARROW_RIGHT';
@@ -275,6 +285,28 @@ credentials: 'include'
 };
 
 }
+
+
+
+
+export var LOG_OUT= 'LOG_OUT'
+
+export function logOut(){
+
+  return{
+  type:LOG_OUT,
+  promise: fetch('/logout',
+  {
+method: 'GET',
+credentials: 'include'
+}).then(function(data){
+    console.log('loggint out from action');
+         return data.json();
+  })
+};
+
+}
+
 
 
 

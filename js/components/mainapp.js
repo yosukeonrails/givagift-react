@@ -11,11 +11,13 @@ var MainApp= function(){
   return(
        <div>
       <LandingPageContainer/>
-      <div className="footer-container">
-      <FooterContainer/>
 
-      </div>
+        <div className="footer-container">
+        <FooterContainer/>
+
         </div>
+        
+      </div>
   );
 };
 

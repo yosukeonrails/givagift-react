@@ -46,8 +46,8 @@ var routes = (
                 <Route path="/login" component={LoginContainer}/>
                 <Route path="/signupuser" component={UserSignUpContainer}/>
                 <Route path="/bubble" component={BubbleAnswerContainer}/>
-                  <Route path="/result/:id" component={ResultContainer}/>
-                        <Route path="/signup" component={SignUpContainer}/>
+                <Route path="/result/:id" component={ResultContainer}/>
+                <Route path="/signup" component={SignUpContainer}/>
            </Route>
    </Router>
 );

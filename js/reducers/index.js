@@ -1,7 +1,7 @@
 var actions = require('../actions/index');
 var resultsArray = require('../results.js');
 var questionsArray =  require('../questions.js');
-import {INITIALIZE_RESULTS, LAYOUT_STATE ,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
+import {INITIALIZE_RESULTS,CHANGE_MODE, LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
 import {handle} from 'redux-pack';
 import cssStyle from '../css-variables.js'
 
@@ -12,7 +12,8 @@ var stateDefault = {
     answerSelected:false,
     maxPoints:[],
     layOutState:{
-      logInOpen:false
+      logInOpen:false,
+      optionOpen:false
     },
     submittedPoints:[],
     contents:[],
@@ -59,6 +60,17 @@ var reducer = function(state, action) {
              success: s => ({ ...s, loggedUser:action.payload[0] }),
 
            });
+
+
+           case LOG_OUT:
+
+                return handle(state, action, {
+
+                  failure: s => ({ ...s, callError:action.payload }),
+
+                  success: s => ({ ...s, loggedUser:'' }),
+
+                });
 
 
 
@@ -153,6 +165,9 @@ var reducer = function(state, action) {
         state.maxPoints=maxArray
 
     break
+
+
+
 
     case SET_QUERY:
 
@@ -290,6 +305,12 @@ var reducer = function(state, action) {
             state.layOutState= action.layOutState;
 
                         break
+
+              case CHANGE_MODE:
+
+              state.mode= action.mode;
+
+              break
 
             case actions.NEXT_QUESTION:
 

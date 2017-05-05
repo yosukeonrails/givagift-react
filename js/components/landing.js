@@ -6,6 +6,10 @@ var router = require('react-router');
 var Router = router.Router;
 var Route = router.Route;
 var Link = router.Link;
+import {push} from 'react-router-redux'
+import {hashHistory} from 'react-router'
+
+
 import {connect} from 'react-redux';
 import SignUpContainer from './sign-up.js'
 import SignUpLoginContainer from './signup-login.js'
@@ -15,6 +19,7 @@ import QuizInfoContainer from './quizinfo.js'
 import SignInBoxContainer from './signinbox.js'
 import FeaturedContainer from './featured.js'
 import SignInContainer from './sign-in.js'
+
 var logInOpen=false;
 var view='.tagLine';
 var viewModes=['.tagLine', '.whatwedo', '.loginbox','.affiliate','.giva-sign-up','.givaquiz'];
@@ -122,20 +127,7 @@ componentDidMount(){
 
   goHome(){
 
-        hideSignIn();
-        hideQuiz();
-
-
-        $('.letsparty').css("display", "block");
-        $('.quizcontainer').finish().animate({opacity:'0'},100, function(){
-
-        $('.letsparty').animate({opacity:'1'},100, function(){
-        $('.letsparty').finish().animate({top:'0%'}, 1000);
-        });
-
-        });
-
-          $("html, body").animate({ scrollTop: $(".header").offset().top }, 1000);
+           window.location.href='/';
   }
 
   goToQuiz(){

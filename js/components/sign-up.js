@@ -7,7 +7,7 @@ var Route = router.Route;
 import {connect} from 'react-redux';
 import cssStyle from '../css-variables.js';
 var Link = router.Link;
-import {SignUpUser, LogInUser} from '../actions/index.js';
+import {SignUpUser, LogInUser, changeMode} from '../actions/index.js';
 import {push} from 'react-router-redux';
 import {hashHistory} from 'react-router';
 var alert;
@@ -23,6 +23,20 @@ export class SignUp extends React.Component {
       this.handleChangePassword=this.handleChangePassword.bind(this);
       this.handleChangeConfirmation=this.handleChangeConfirmation.bind(this);
     }
+
+    componentDidMount(){
+      this.props.dispatch(changeMode('signup'));
+      console.log('it went ');
+    }
+
+
+      facebooklogin(){
+        console.log('login in ');
+         window.location.href='/auth/facebook';
+         /*
+         1. if facebook log in successful , redirect to user page
+         2. if fail, sing up page*/
+      }
 
     handleSubmit(event){
 
