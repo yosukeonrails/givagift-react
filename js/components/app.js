@@ -10,10 +10,13 @@
 var signUpMode='block';
 var imageUrl=''
 var username=''
+
 var layOut={
   logInOpen:false,
   optionOpen:false
 }
+
+
 var loggedMode='none';
 var optionMode='none';
 
@@ -65,11 +68,9 @@ export class App extends React.Component{
 
   openOptions(){
 
-
         console.log(this.props);
         var dis=this;
         if(this.props.layOutState.optionOpen === false){
-
 
           $('.profile-option').css("display", "block");
           $('.profile-option').animate({opacity:'1'});
@@ -84,7 +85,7 @@ export class App extends React.Component{
         {
           console.log('hiding log in ');
 
-          $('.profile-option').animate({opacity:'0'}, function(){
+          $('.profile-option').animate({opacity:'0'},  function(){
           $('.profile-option').css("display", "none");
 
           layOut.optionOpen = false;
@@ -176,19 +177,22 @@ export class App extends React.Component{
                 <div  style={{display:loggedMode}} className='logged-header'>
                     <img src={imageUrl}></img>
                     <h1 onClick={this.openOptions} > {username}</h1>
-                    <i onClick={this.openOptions} className="fa fa-caret-down" aria-hidden="true"></i>
+                    <i onClick={this.openOptions}  className="fa fa-caret-down" aria-hidden="true"></i>
 
                 </div>
 
-                <div className="profile-option" >
-                  <h1 onClick={this.goLink} id="/#/dashboard" >Dashboard</h1>
+                <div  onMouseLeave={this.openOptions}  className="profile-option" >
+
+                  <div  className="option-container">
+                <button onClick={this.openOptions}  ><h1 onClick={this.goLink}  id="/#/dashboard" >Dashboard</h1></button>
                   <hr></hr>
-                  <h1 onClick={this.logOut}   ><i className="fa fa-sign-out" aria-hidden="true"></i>Log Out</h1>
+                <button><h1 onClick={this.logOut}   ><i className="fa fa-sign-out" aria-hidden="true"></i>Log Out</h1></button>
+                </div>
                 </div>
 
         </div>
 
-          <div>
+          <div >
             {this.props.children}
           </div>
 

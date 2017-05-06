@@ -11,6 +11,7 @@ var IndexRoute = router.IndexRoute;
 
 
 
+
 import { Provider } from 'react-redux';
 
 import store from './store';
@@ -29,6 +30,8 @@ import LoginContainer from './components/login.js'
 import BubbleAnswerContainer from './components/bubble-answer.js'
 import ResultContainer from './components/result.js'
 import SignUpContainer from './components/sign-up.js'
+import AvatarContainer from './components/avatar.js'
+
 
 var routes = (
     <Router history={hashHistory}>
@@ -48,6 +51,7 @@ var routes = (
                 <Route path="/bubble" component={BubbleAnswerContainer}/>
                 <Route path="/result/:id" component={ResultContainer}/>
                 <Route path="/signup" component={SignUpContainer}/>
+                <Route path="/avatar" component={AvatarContainer}/>
            </Route>
    </Router>
 );
