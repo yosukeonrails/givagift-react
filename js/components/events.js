@@ -15,7 +15,7 @@ export class Events extends React.Component{
 
   constructor(props){
     super(props);
-  
+
   }
 
 
@@ -27,6 +27,15 @@ export class Events extends React.Component{
     return (
 
       <div className="events-coming">
+
+
+        <div>
+              <h2>Need help to find a gift?</h2>
+              <button> <h1>Find a gift now!</h1></button>
+
+        </div>
+
+
 
            <div className="events-coming-head">
            <h1>Events Coming Soon</h1>

@@ -23,7 +23,14 @@ export class Dashboard extends React.Component{
 
      this.props.dispatch(getFacebookUser());
      this.selectNav=this.selectNav.bind(this);
+     this.goLink= this.goLink.bind(this);
 
+  }
+
+  goLink(e){
+        console.log(e.target.id);
+        var link= e.target.id
+         window.location.href="/#/avatar"
   }
 
    selectNav(event){
@@ -130,6 +137,11 @@ export class Dashboard extends React.Component{
 
                     <div className="profile-content">
 
+                      <div className="gift-cta" >
+                            <h2>Need help to find a gift?</h2>
+                            <button  onClick={this.goLink} id="/#/avatar" > <h1>Find a gift now!</h1></button>
+
+                      </div>
                                         <div className="event">
 
                                                     		<div className="event-top">
@@ -166,6 +178,10 @@ export class Dashboard extends React.Component{
 
 
                                         <div className="event">
+
+
+
+
                                                     <div className="event-top">
                                                     <h2>April , Monday</h2>
 
