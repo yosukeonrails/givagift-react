@@ -8,41 +8,6 @@ import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
 import FooterContainer from './footer.js'
 import BubbleContainer from './bubble.js'
-var bubbleArray=[];
-var bubbleData= [{
-name:'Geek',
-chosen:false,
-url:'url(https://source.unsplash.com/YVgOh8w1R4s/1600x900)',
-},
-
-{
-name:'Introvert',
-chosen:false,
-url:'url(https://source.unsplash.com/zvKx6ixUhWQ/1600x900)',
-},
-
-
-{
-name:'Outdoor',
-chosen:false,
-url:'url(https://source.unsplash.com/4F1ijaoCTlg/1600x900)',
-},
-
-
-{
-name:'Fooder',
-chosen:false,
-url:'url(https://source.unsplash.com/TO69trRWlrI/1600x900)',
-},
-
-
-{
-name:'Fooder',
-chosen:false,
-url:'url(https://source.unsplash.com/YVgOh8w1R4s/1600x900)',
-},
-]
-
 
 
 export class Traits extends React.Component{
@@ -54,10 +19,16 @@ super(props);
 
 render () {
 
+  var bubbleData= this.props.bubbleData;
+  var bubbleArray=[];
 
+      console.log(this.props.countData.length);
 
-  console.log(bubbleData);
-  for(var i=0; i<bubbleData.length ; i++){
+      if(this.props.countData.length === 3){
+          console.log('TOO MANY');
+      }
+
+       for(var i=0; i< bubbleData.length ; i++){
 
     var randomWidth=[];
     var randomInterval=[];
@@ -78,10 +49,16 @@ return(
 
     	<div className="avatar-traits">
 
-    		<h1>Choose up to 4 traits</h1>
+      <div className="trait-top">
+    		<h1>Choose <span className="traits-number">4</span> words that most <br></br>relates to that person.</h1>
 
+        <div className="counter">
+        <div className="counter-bar">    <div className="counter-bar-full"></div></div>
+
+    </div>
+
+        </div>
             {bubbleArray}
-
     	 </div>
     </div>
 
@@ -96,6 +73,8 @@ var mapStateToProps= function(state){
 
 console.log(state);
 return {
+  bubbleData:state.bubbleData,
+  countData:state.countData,
  user:state.user,
 
 }

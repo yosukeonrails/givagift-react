@@ -282,6 +282,7 @@ background: linear-gradient(#333261,#1a5a67);
 
       // Avatar
 
+
 .avatar-maker{
 margin-top: 80px;
 background-color: white;
@@ -335,8 +336,8 @@ button{
         h1{
           color: #303030;
       font-family: Montserrat,sans-serif;
-      font-weight: 700;
-      font-size: 30px;
+      font-weight: bold;
+      font-size: 40px;
       text-align: center;
         }
 	}
@@ -519,7 +520,27 @@ button{
 
    //Traits
 
+.avatar-traits{
+  padding: 100px;
+}
+
+.counter-bar{
+  width: 600px;
+  height: 5px;
+  position: relative;
+  margin-left: auto;
+  background-color: #676363;
+  margin-right: auto;
+}
+.counter-bar-full{
+  height: 5px;
+    position: absolute;
+      background-color: #9a87d2;
+    transition: 1s;
+}
     /** bubbles  **/
+
+
 
     .bubbleChosen{
       background: linear-gradient(rgba(128,128,128,.43),rgba(4, 20, 130, 0.85)) !important;
@@ -530,12 +551,13 @@ button{
     }
 
     .bubble-container{
-      float: left;
+        float: left;
         width: 25%;
         position: relative;
         margin-top: 40px;
         padding: 4%;
-        height: 200px;
+        height: 120px;
+
     }
 
     .bubble{
@@ -548,7 +570,12 @@ button{
     position: absolute;
     top: 50%;
     left: 50%;
+    background-size: cover;
     transform: translate(-50%, -50%);
+    h3{
+      text-align: center;
+      color: #ffda90;
+    }
     }
 
     .bubble-outside{
@@ -581,6 +608,12 @@ button{
       margin-top: 50px;
     }
 
+    .traits-number{
+        color: #cc8365;
+        font-size: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 
    	.trait{
    		height: 200px;

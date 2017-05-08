@@ -24,6 +24,16 @@ export var CHANGE_MODE = 'CHANGE_MODE';
     }
  }
 
+
+ export var BUBBLE_COUNT = 'BUBBLE_COUNT';
+
+  export var bubbleCount= function(countData){
+     return {
+        type:BUBBLE_COUNT,
+        countData:countData
+     }
+  }
+
  export var ARROW_LEFT= 'ARROW_LEFT';
 
   export var ArrowLeft= function(id){

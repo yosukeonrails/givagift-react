@@ -1,13 +1,16 @@
 var actions = require('../actions/index');
 var resultsArray = require('../results.js');
 var questionsArray =  require('../questions.js');
-import {INITIALIZE_RESULTS,CHANGE_MODE, LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
+import {INITIALIZE_RESULTS,CHANGE_MODE, BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
 import {handle} from 'redux-pack';
 import cssStyle from '../css-variables.js'
-
+import mainBubbleData from '../components/bubbledata.js'
 
 
 var stateDefault = {
+    countData:[],
+    bubbleCount:'',
+    bubbleData:mainBubbleData,
     selectedAnswerCss:'answerButton',
     answerSelected:false,
     maxPoints:[],
@@ -311,6 +314,13 @@ var reducer = function(state, action) {
               state.mode= action.mode;
 
               break
+
+
+            case BUBBLE_COUNT:
+
+            state.countData= action.countData;
+
+            break
 
             case actions.NEXT_QUESTION:
 
