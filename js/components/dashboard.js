@@ -10,11 +10,7 @@ import {push} from 'react-router-redux';
 import {hashHistory} from 'react-router';
 import {connect} from 'react-redux';
 import EventsContainer from './events.js'
-import UserListsContainer from './user-lists.js'
-var contentArray=['home', 'userlists', 'userquiz']
-import QuizInfoContainer from './quizinfo.js'
 import {getFacebookUser} from '../actions/index.js'
-var listarrayContainerVar;
 var loggedUser;
 export class Dashboard extends React.Component{
 
@@ -22,7 +18,6 @@ export class Dashboard extends React.Component{
     super(props);
 
      this.props.dispatch(getFacebookUser());
-     this.selectNav=this.selectNav.bind(this);
      this.goLink= this.goLink.bind(this);
 
   }
@@ -33,51 +28,6 @@ export class Dashboard extends React.Component{
          window.location.href="/#/avatar"
   }
 
-   selectNav(event){
-
-
-        $('.question').css('color','black');
-
-     for(var i=0 ; i< contentArray.length ; i++){
-
-
-
-       if(event.target.id == contentArray[i]){
-
-              $("."+contentArray[i]).css('display', 'block');
-
-
-              if(event.target.id=== 'userquiz'){
-              $('.quiz-information').animate({opacity:'1'},200 , function(){
-              $('.quiz-content').animate({opacity:"1"}, 200);
-
-              });
-
-            $("html, body").animate({ scrollTop: $(".quiz-information").offset().top }, 1000);
-          }
-       }
-       else
-        {
-
-           $("."+contentArray[i]).css('display', 'none');
-       }
-
-     }
-
-    $('.nav button').css("backgroundColor" , "#ff5a5a");
-      $('.nav button').css("color" , "white");
-
-     var targetElement= $('#'+event.target.id ) ;
-     targetElement.css("backgroundColor" , "white");
-      targetElement.css("color" , "black");
-
-
-                     var element= $("."+event.target.id);
-
-                     element.css('display', 'block');
-
-
-   }
 
   render(){
 
@@ -86,11 +36,9 @@ export class Dashboard extends React.Component{
 
       if(this.props.loggedUser){
           loggedUser=this.props.loggedUser;
-
           imageUrl= "url(https://graph.facebook.com/"+this.props.loggedUser.facebookId+"/picture?width=800&height=800)";
-          console.log(imageUrl);
           userName=loggedUser.first_name;
-          listarrayContainerVar= <UserListsContainer user={loggedUser.facebookId}/>
+
       }
 
 

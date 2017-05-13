@@ -24,6 +24,16 @@ export var CHANGE_MODE = 'CHANGE_MODE';
     }
  }
 
+ export var ADD_BUBBLE = 'ADD_BUBBLE';
+
+  export var addBubble= function(addBubbleData){
+     return {
+        type:ADD_BUBBLE,
+        addBubbleData:addBubbleData
+     }
+  }
+
+
 
  export var BUBBLE_COUNT = 'BUBBLE_COUNT';
 
@@ -33,6 +43,7 @@ export var CHANGE_MODE = 'CHANGE_MODE';
         countData:countData
      }
   }
+
 
  export var ARROW_LEFT= 'ARROW_LEFT';
 

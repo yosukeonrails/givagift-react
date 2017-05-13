@@ -12,17 +12,12 @@ import {hashHistory} from 'react-router'
 
 import {connect} from 'react-redux';
 import SignUpContainer from './sign-up.js'
-import SignUpLoginContainer from './signup-login.js'
-import UserSignUpContainer from './user-signup.js'
-import LoginContainer from './login.js'
-import QuizInfoContainer from './quizinfo.js'
 import SignInBoxContainer from './signinbox.js'
 import FeaturedContainer from './featured.js'
 import SignInContainer from './sign-in.js'
 
 var logInOpen=false;
 var view='.tagLine';
-var viewModes=['.tagLine', '.whatwedo', '.loginbox','.affiliate','.giva-sign-up','.givaquiz'];
 var nomargin= {
   margin:0,
   padding:0
@@ -60,13 +55,6 @@ var showSignIn= function(){
 };
 
 
-var hideQuiz= function(){
-
-  $('.quizcontainer').css("display","none");
-  $('.banner').css("height" , "100vh");
-
-};
-
 export class LandingPage extends React.Component{
 
   constructor(props){
@@ -75,7 +63,6 @@ export class LandingPage extends React.Component{
 
     this.goHome= this.goHome.bind(this);
     this.goTo= this.goTo.bind(this);
-    this.goToQuiz= this.goToQuiz.bind(this);
     this.signIn= this.signIn.bind(this);
     this.facebooklogin= this.facebooklogin.bind(this);
     this.showLogIn = this.showLogIn.bind(this);
@@ -130,31 +117,6 @@ componentDidMount(){
            window.location.href='/';
   }
 
-  goToQuiz(){
-
-        hideSignIn();
-        $('.letsparty').finish().animate({top:'70%'}, 500 , function(){
-        $('.letsparty').finish().animate({opacity:'0'}, 1000);
-        $('.letsparty').css("display", "none");
-
-
-
-
-        $('.quizcontainer').css("display", "block");
-        $('.quizcontainer').animate({opacity:'1'},100);
-        $('.quizcontainer').animate({top:'0%'}, 100);
-
-        $('.quiz-information').animate({opacity:'1'},200 , function(){
-                $('.quiz-content').animate({opacity:"1"}, 200);
-  $("html, body").animate({ scrollTop: $(".quiz-information").offset().top }, 1000);
-        });
-      });
-
-    $('.banner').css("height" , "100vh");
-
-
-    }
-
     goTo(event){
 
           view=event.target.id;
@@ -192,13 +154,6 @@ componentDidMount(){
 
 
     	<div className= "banner">
-
-
-
-        <div  className="quizcontainer">
-          <QuizInfoContainer/>
-        </div>
-
 
 
         <div  className="sign-in-container">

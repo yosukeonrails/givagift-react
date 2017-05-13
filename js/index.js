@@ -18,39 +18,26 @@ import store from './store';
 import MainApp from './components/mainapp.js';
 import AppContainer from './components/app.js'
 import ResultsAppContainer from './components/resultsapp.js'
-import QuizApp from './components/quizapp.js'
-import SignupLogin from './components/signup-login.js'
-import SignUp from './components/sign-up.js'
 import DashboardContainer from './components/dashboard.js'
-import QuizInfoContainer from './components/quizinfo.js'
-import FacebookLoginContainer from './components/facebooklogin.js'
 import LandingPageContainer from './components/landing.js'
-import UserSignUpContainer from './components/user-signup.js'
-import LoginContainer from './components/login.js'
 import ResultContainer from './components/result.js'
 import SignUpContainer from './components/sign-up.js'
 import AvatarContainer from './components/avatar.js'
 import TraitsContainer from './components/traits.js'
-
+import LevelsContainer from './components/levels.js'
 var routes = (
     <Router history={hashHistory}>
        <Route path="/" component={AppContainer}>
 
            <IndexRoute component={MainApp} />
                 <Route path="/results/:id" component={ResultsAppContainer} />
-                <Route path="/quizinfo" component={QuizInfoContainer} />
-                <Route path="/quiz" component={QuizApp} />
-                <Route path="/signup-login" component={SignupLogin}/>
-                <Route path="/signup" component={SignUp}/>
                 <Route path="/dashboard" component={DashboardContainer}/>
-                <Route path="/facebooklogin" component={FacebookLoginContainer}/>
                 <Route path="/home" component={LandingPageContainer}/>
-                <Route path="/login" component={LoginContainer}/>
-                <Route path="/signupuser" component={UserSignUpContainer}/>
                 <Route path="/result/:id" component={ResultContainer}/>
                 <Route path="/signup" component={SignUpContainer}/>
                 <Route path="/avatar" component={AvatarContainer}/>
                 <Route path="/traits" component={TraitsContainer}/>
+                  <Route path="/levels" component={LevelsContainer}/>
            </Route>
    </Router>
 );

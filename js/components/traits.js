@@ -17,29 +17,14 @@ super(props);
 
 }
 
+
+
 render () {
 
-  var bubbleData= this.props.bubbleData;
-  var bubbleArray=[];
+  var bubblesArray= this.props.bubblesArray;
+  var array=[];
 
-      console.log(this.props.countData.length);
-
-      if(this.props.countData.length === 3){
-          console.log('TOO MANY');
-      }
-
-       for(var i=0; i< bubbleData.length ; i++){
-
-    var randomWidth=[];
-    var randomInterval=[];
-
-      for(var   d=0; d<10 ; d++){
-           randomWidth.push( Math.floor(Math.random() * 10) + 1 );
-           randomInterval.push( Math.floor(Math.random() * 200) + 0);
-      }
-
-    bubbleArray.push(  <BubbleContainer chosen={bubbleData[i].chosen} id={i} randomWidth={randomWidth} randomInterval={randomInterval} bubbleData={bubbleData[i]}/> )
-  }
+      var bubblesArrayData= this.props.bubblesArray;
 
 return(
 
@@ -53,12 +38,21 @@ return(
     		<h1>Choose <span className="traits-number">4</span> words that most <br></br>relates to that person.</h1>
 
         <div className="counter">
-        <div className="counter-bar">    <div className="counter-bar-full"></div></div>
+        <div className="counter-bar"><div className="counter-bar-full"></div></div>
+        <div className="couter-ratio"></div>
 
     </div>
 
         </div>
-            {bubbleArray}
+          {
+
+
+            this.props.bubblesArray.map(function(bubble, i){
+
+              return   <BubbleContainer chosen={bubble.chosen}  bubblesArrayData={bubblesArrayData} id={i} bubbleData={bubble}/>
+
+          })
+        }
     	 </div>
     </div>
 
@@ -71,12 +65,12 @@ return(
 
 var mapStateToProps= function(state){
 
-console.log(state);
-return {
-  bubbleData:state.bubbleData,
-  countData:state.countData,
- user:state.user,
 
+console.log(state.bubblesArray);
+
+return {
+  bubblesArray:state.bubblesArray,
+  countData:state.countData,
 }
 }
 
