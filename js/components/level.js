@@ -10,6 +10,26 @@ import FooterContainer from './footer.js'
 
 
 
+var levelContainerLightWordsWidth = function(width){
+
+  console.log($('.level-container-light-words h1').width());
+  var maxWidth=$('.level-container-light-words h1').width();
+  console.log(maxWidth);
+  var levelWidth = width-50;
+
+  if ( levelWidth < 0 ){
+    levelWidth= 0;
+  }
+
+
+  if ( levelWidth > 400 ){
+    levelWidth= 400;
+  }
+
+  return levelWidth;
+
+}
+
 
 export class Level extends React.Component{
 
@@ -30,21 +50,10 @@ lessPercentage(){
 render () {
 
 
+
 var percentage= this.props.percentage;
 
 var width= percentage * 4;
-
-var levelContainerLightWordsWidth = function(width){
-
-  var levelWidth = width-122;
-
-  if ( levelWidth < 0 ){
-    levelWidth= 0;
-  }
-
-  return levelWidth;
-
-}
 
 
 var levelWidthData={
@@ -62,15 +71,17 @@ return(
           <div className="level-container">
 
                 <div  className="level-container-dark">
+                        <div className="level-container-dark-shader">
+                        </div>
                 </div>
 
                 <div className="level-container-dark-words">
-                    <h1>outdoor</h1>
+                    <h1>outdoor 50%</h1>
                 </div>
 
                 <div style={{width:levelWidthData.levelContainerLight}} className="level-container-light">
                       <div style={{width:levelWidthData.levelContainerLightWordsWidth}}  className="level-container-light-words">
-                          <h1>outdoor</h1>
+                          <h1>outdoor 50%</h1>
                       </div>
                 </div>
 

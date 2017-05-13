@@ -2413,8 +2413,6 @@ h1{
   // end of events//
 
 
-
-
 // Levels//
 
 /* LEVELS */
@@ -2424,59 +2422,78 @@ h1{
   background-color: #34ADFF;
   background-image: -webkit-linear-gradient(303deg,#80d9b8 35%,#307da8 103%);
   min-height: 800px;
+
+
+  h1{
+    text-align: center;
+     	font-family: Montserrat,sans-serif;
+      font-weight: bold;
+      margin-bottom: 50px;
+  }
+
 }
 
 	.level-container{
-		background-color: red;
-    position: relative;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 90px;
+      position: relative;
+      width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 80px;
+      box-shadow: 3px 4px 5px 0px rgba(35, 35, 35, 0.36);
+      margin-bottom: 30px;
 	}
 
 	.level-container-light{
-		background-color: rgba(255, 255, 0, 0.91);
-    width: 50%;
-    position: absolute;
-    background-image: url(https://source.unsplash.com/4F1ijaoCTlg/1600x900);
-    background: linear-gradient(rgba(71, 165, 140, 0.43),rgba(15, 31, 109, 0.85));
-    height: 100%;
-    position: absolute;
+
+      background-color: rgba(255,255,0,.91);
+      width: 50%;
+      background-image: url(https://source.unsplash.com/4F1ijaoCTlg/1600x900);
+      background: linear-gradient(rgba(8,255,189,.43),rgba(15,31,109,.85));
+      height: 100%;
+      position: absolute;
+
 	}
 
 
 		.level-container-light-words{
-			color: #000000;
-	    position: absolute;
-	    left: 120px;
-	    overflow: hidden;
-	    width: 40%;
-		    padding-top: 10px;
+      color: #000;
+        position: absolute;
+        left: 50px;
+        overflow: hidden;
+        width: 40%;
+        padding-top: 20px;
 		}
 
 
 		.level-container-light-words h1{
-			font-size: 50px;
-	margin: 0px;
-	color: white;
+      font-size: 40px;
+      margin: 0;
+      white-space: nowrap;
+      color: #fff;
+      text-align: left;
 		}
 
 
 
 
 	.level-container-dark-words{
-		color: #ff4609;
-    position: absolute;
-    left: 30%;
-        padding-top: 10px;
+    color: #ff4609;
+      position: absolute;
+      padding-top: 20px;
+      left: 50px;
 	}
 
+  .level-container-dark-shader{
+    width: 100%;
+    background: linear-gradient(#353535,rgba(10, 10, 10, 0.62));
+  height: 90px;
+  }
 
 	.level-container-dark-words h1{
-		font-size: 50px;
-	margin: 0px;
-	color: #0caf66;
+    font-size: 40px;
+  margin: 0;
+  white-space: nowrap;
+  color: #41f7a5;
 	}
 
 

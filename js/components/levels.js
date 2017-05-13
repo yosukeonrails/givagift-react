@@ -22,14 +22,17 @@ render () {
 return(
   <div className="levels-container">
 
-    <h1> Chooose your Levels</h1>
+    <h1> Chooose your Levels </h1>
 
-      <LevelContainer percentage={60}/>
+      <LevelContainer percentage={30}/>
 
 
     <div className="level-container">
 
           <div className="level-container-dark">
+                <div className="level-container-dark-shader">
+
+                </div>
           </div>
 
           <div className="level-container-dark-words">
