@@ -20,36 +20,26 @@ render () {
 
 
 return(
-  <div className="levels-container">
+<div>
+
 
     <h1> Chooose your Levels </h1>
+    
+  <div className="levels-container">
 
-      <LevelContainer percentage={30}/>
 
+      <LevelContainer percentage={30} name={'musician'} backgroundImage={'url(https://source.unsplash.com/2UuhMZEChdc/1600x900)'}/>
+      <LevelContainer percentage={80} name={'geek'} backgroundImage={'url(https://source.unsplash.com/eIhH7RTlTZA/1600x900)'}/>
 
-    <div className="level-container">
+           <LevelContainer percentage={50} name={'fooder'} backgroundImage={'url(https://source.unsplash.com/TO69trRWlrI/1600x900)'}/>
 
-          <div className="level-container-dark">
-                <div className="level-container-dark-shader">
-
-                </div>
-          </div>
-
-          <div className="level-container-dark-words">
-              <h1>outdoor</h1>
-          </div>
-
-          <div className="level-container-light">
-                <div className="level-container-light-words">
-                    <h1>outdoor</h1>
-                </div>
-          </div>
-
-    </div>
+                 <LevelContainer percentage={20} name={'outdoor'} backgroundImage={'url(https://source.unsplash.com/4F1ijaoCTlg/1600x900)'}/>
 
 
   </div>
 
+
+</div>
 );
 }
 }

@@ -21,40 +21,54 @@ super(props);
 
 render () {
 
-  var bubblesArray= this.props.bubblesArray;
+  console.log('itts working and renderin again!');
+  console.log(this.props);
+  console.log(this.props.bubblesArray);
+
+
   var array=[];
 
-      var bubblesArrayData= this.props.bubblesArray;
+  var arr= this.props.bubblesArray;
+  var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
+
+  console.log(bubblesArrayData);
+  console.log(bubblesArrayData.length);
+  for( var i=0 ; i < bubblesArrayData.length; i++ ){
+    console.log('adding');
+      array.push(<BubbleContainer id={i} bubbleData={bubblesArrayData[i]} />)
+  }
+
 
 return(
 
     <div className="traits">
 
-    <div className="avatar-maker-background">
+                    <div className="avatar-maker-background">
 
-    	<div className="avatar-traits">
+                                  	<div className="avatar-traits">
 
-      <div className="trait-top">
-    		<h1>Choose <span className="traits-number">4</span> words that most <br></br>relates to that person.</h1>
+                                                    <div className="trait-top">
+                                                  		      <h1>Choose <span className="traits-number">4</span> words that most <br></br>relates to that person.</h1>
 
-        <div className="counter">
-        <div className="counter-bar"><div className="counter-bar-full"></div></div>
-        <div className="couter-ratio"></div>
+                                                                      <div className="counter">
+                                                                                <div className="counter-bar">
+                                                                                        <div className="counter-bar-full"></div>
+                                                                                </div>
+                                                                                <div className="couter-ratio"></div>
+                                                                      </div>
 
-    </div>
+                                                      </div>
 
-        </div>
-          {
+                                                      <div className="trait-bottom">
+
+                                                          {array}
+                                                      </div>
 
 
-            this.props.bubblesArray.map(function(bubble, i){
 
-              return   <BubbleContainer chosen={bubble.chosen}  bubblesArrayData={bubblesArrayData} id={i} bubbleData={bubble}/>
 
-          })
-        }
-    	 </div>
-    </div>
+                                  	 </div>
+                    </div>
 
 
     </div>

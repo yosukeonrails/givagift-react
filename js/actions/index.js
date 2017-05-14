@@ -26,10 +26,10 @@ export var CHANGE_MODE = 'CHANGE_MODE';
 
  export var ADD_BUBBLE = 'ADD_BUBBLE';
 
-  export var addBubble= function(addBubbleData){
+  export var addBubble= function(newBubbleArray){
      return {
         type:ADD_BUBBLE,
-        addBubbleData:addBubbleData
+        newBubbleArray:newBubbleArray
      }
   }
 

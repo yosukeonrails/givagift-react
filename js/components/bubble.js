@@ -38,64 +38,63 @@ chooseBubble(e){
 var target=e.target.id;
 var dis=this;
 
+          // Bubble explodes animation//
 
           $('.'+e.target.id ).animate({width:'180px', height:'180px', opacity:0}, function(){
             $('.'+target ).css("opacity","1")
             $('.'+target ).css("width","120px");
             $('.'+target ).css("height","120px");
-
           });
 
-      if(this.state.bubbleChosen === true){
-        // removing already chosen bubbles
+    // removing already chosen bubbles
 
+      if(this.state.bubbleChosen === true){
+
+          var dis=this;
+          var RemovedBubbleCount= this.props.bubbleData.count ;
+
+          // darken bubble
           $('.bubble-inside-'+e.target.id ).css("background", bubbleState.unchosen);
           this.setState({bubbleChosen:false});
-          var dis=this;
 
-
+          // take out one from chosen Bubble array
           function checkBubble(bubble) {
-          return bubble=== dis.props.bubbleData.name;
+              return bubble=== dis.props.bubbleData.name;
           }
-
           var unchosenBubble= chosenBubbleArray.findIndex(checkBubble);
           chosenBubbleArray.splice(unchosenBubble, 1);
+
+            // adjusting the bar to desired levels
           barWidth= (chosenBubbleArray.length*150)+'px'
           $('.counter-bar-full').css("width",barWidth )
 
-          currentBubbleCount--;
-
-          var newBubbleArray= this.props.bubblesArray;
-
-            newBubbleArray.map(function(bubble , i){
-
-                if(i== dis.props.id){
-                  bubble.count =0;
-                }
-
-                if(bubble.count > dis.props.bubbleData.count){
-
-
-                  bubble.count--;
-
-                  var addBubbleData= {
-                      id:i,
-                      count:bubble.count--
-                  }
-
-
-                 dis.props.dispatch(addBubble(addBubbleData));
-
-                }
-
-                else {
 
 
 
+            currentBubbleCount--;
+
+            var arr= this.props.bubblesArray;
+            var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
+
+
+            bubblesArrayData.map(function(bubble , i){
+
+              if( RemovedBubbleCount < bubble.count ){
+
+                console.log(bubble.name);
+                bubble.count--;
+              }
+
+                if(i == dis.props.id){
+                  bubble.count = 0 ;
                 }
 
             })
 
+            var newBubbleArray= Object.assign( {}, bubblesArrayData )
+        
+
+          this.props.dispatch(addBubble(newBubbleArray));
 
       }
 
@@ -111,12 +110,13 @@ var dis=this;
 
         $('.bubble-inside-'+e.target.id ).css("background", bubbleState.chosen);
         this.setState({bubbleChosen:true});
+
         chosenBubbleArray.push(this.props.bubbleData.name)
-        var bubble=this.props.bubbleData.name;
+
+        var bubble = this.props.bubbleData.name;
+
         barWidth= (chosenBubbleArray.length*150)+'px'
         $('.counter-bar-full').css("width",barWidth )
-
-
 
           currentBubbleCount++
 
@@ -125,16 +125,20 @@ var dis=this;
           count:currentBubbleCount
         }
 
-
-        var newBubbleArray= dis.props.bubblesArray;
-
-        newBubbleArray[this.props.id].count = currentBubbleCount;
-
-        var addBubbleData= {
-            id:this.props.id,
-            count: currentBubbleCount
+        var addedBubbleData={
+          name:this.props.bubbleData.name,
+          count:currentBubbleCount,
+          url:this.props.bubbleData.url
         }
-          this.props.dispatch(addBubble(addBubbleData));
+
+
+       var newBubbleArray=  Object.assign( {}, this.props.bubblesArray)
+        console.log(newBubbleArray);
+
+        newBubbleArray[chosenBubble.id].count = currentBubbleCount;
+
+
+        this.props.dispatch(addBubble(newBubbleArray));
 
       }
 
@@ -150,9 +154,6 @@ var bubbleOutsideClass='bubble-outside'+' bubble'+this.props.id;
 var bubbleInsideClass='bubble-inside'+' bubble-inside-bubble'+this.props.id;
 countData= this.props.countData;
 var dis=this
-console.log('new bubble render');
-console.log(this.props.id);
-console.log(this.props.bubbleData.count);
 
 return(
     <div  id={bubbleId} onClick={this.chooseBubble} className="bubble-container">

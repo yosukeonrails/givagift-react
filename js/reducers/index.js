@@ -8,9 +8,12 @@ import mainBubbleData from '../components/bubbledata.js'
 
 
 var stateDefault = {
+
     countData:[],
     bubbleCount:'',
+
     bubblesArray:mainBubbleData,
+
     selectedAnswerCss:'answerButton',
     answerSelected:false,
     maxPoints:[],
@@ -322,11 +325,9 @@ var reducer = function(state, action) {
               break;
 
           case ADD_BUBBLE:
-              console.log(state.bubblesArray[action.addBubbleData.id]);
 
-              state.bubblesArray[action.addBubbleData.id].count =  action.addBubbleData.count;
-              console.log(  state.bubblesArray[action.addBubbleData.id].count );
-              // return  { ...state.bubblesArray , bubblesArray[action.addBubbleData.id].count : action.addBubbleData.count }
+                console.log(action.newBubbleArray);
+                return  { ...state , bubblesArray : action.newBubbleArray }
 
           break;
 
