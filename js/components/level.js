@@ -2,12 +2,18 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 var mouseDown=false;
+import Tappable from 'react-tappable';
 import {connect} from 'react-redux';
 import {getFacebookUser, layOutState, changeMode,logOut } from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
 import FooterContainer from './footer.js'
+var intervalFunction;
+
+function logNumber(){
+  console.log('number');
+}
 
 
 
@@ -33,8 +39,19 @@ constructor(props){
 super(props);
     this.mouseDown=this.mouseDown.bind(this);
     this.mouseUp= this.mouseUp.bind(this);
-    this.morePercentage=this.morePercentage.bind(this);
-    this.lessPercentage=this.lessPercentage.bind(this);
+    this.modifyPercentage=this.modifyPercentage.bind(this);
+    var dis = this;
+    setInterval(() => {
+      if (this.state.mouseDown) {
+        if (this.state.isPlus) {
+          dis.modifyPercentage(1)
+        } else {
+          dis.modifyPercentage(-1)
+        }
+      }
+    }, 20);
+
+
 }
 
 componentWillMount(){
@@ -45,29 +62,54 @@ componentWillMount(){
 }
 
 
-morePercentage(){
-
+modifyPercentage(inc){
       this.setState({
-        percentage: this.state.percentage + 1
+        percentage: this.state.percentage + inc
       })
-
 }
 
-mouseDown(){
-  this.setState({
-    mouseDown:true
-  })
-}
-mouseUp(){
+mouseDown(isPlus){
+  console.log('mouse down');
+  console.log(isPlus);
+  if(!this.state.mouseDown){
 
-  this.setState({
-    mouseDown:false
-  })
+    //console.log('starting function');
+
+    /*  var intervalFunction = setInterval(function(){
+          logNumber();
+
+        }, 100);*/
+
+  } else {
+
+    /*console.log('stopping function');
+    // clear interval and you should be good
+      clearInterval(intervalFunction);*/
+
+  }
+
+    this.setState({
+      mouseDown:true,
+      isPlus,
+    })
+
+
+}
+mouseUp(isPlus){
+  //clearInterval(this.mouseDown());
+
+
+   this.setState({
+     mouseDown:false,
+     isPlus,
+   })
+
 
 }
 
 lessPercentage(){
 
+  console.log('perentage less');
   this.setState({
     percentage: this.state.percentage - 1
   })
@@ -75,6 +117,8 @@ lessPercentage(){
 }
 
 render () {
+
+
 
 
 var percentage= this.state.percentage;
@@ -91,7 +135,8 @@ return(
   <div className="single-level-container">
 
     <div className="minus-button">
-      <button onClick={this.lessPercentage}> - </button>
+      <button  onMouseDown={() => this.mouseDown(false)} onMouseUp={() => this.mouseUp(false)}  > - </button>
+
     </div>
 
                           <div className="middle-level-container">
@@ -117,7 +162,9 @@ return(
                         </div>
 
           <div className="plus-button">
-            <button onMouseDown={this.mouseDown} onMouseUp={this.mouseUp}> + </button>
+
+             <button  onMouseDown={() => this.mouseDown(true)} onMouseUp={() => this.mouseUp(true)}  > + </button>
+
           </div>
 
   </div>

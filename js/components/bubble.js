@@ -63,7 +63,7 @@ var dis=this;
           }
           var unchosenBubble= chosenBubbleArray.findIndex(checkBubble);
           chosenBubbleArray.splice(unchosenBubble, 1);
-
+          console.log(chosenBubbleArray);
             // adjusting the bar to desired levels
           barWidth= (chosenBubbleArray.length*150)+'px'
           $('.counter-bar-full').css("width",barWidth )
@@ -92,7 +92,7 @@ var dis=this;
             })
 
             var newBubbleArray= Object.assign( {}, bubblesArrayData )
-        
+
 
           this.props.dispatch(addBubble(newBubbleArray));
 
@@ -108,17 +108,22 @@ var dis=this;
           return
         }
 
+       // make bubble dark and makes it chosen
         $('.bubble-inside-'+e.target.id ).css("background", bubbleState.chosen);
         this.setState({bubbleChosen:true});
 
+      // pushes it to chosenBubbleArray
         chosenBubbleArray.push(this.props.bubbleData.name)
-
         var bubble = this.props.bubbleData.name;
-
+        console.log(chosenBubbleArray);
+      //  makes the bar raise
         barWidth= (chosenBubbleArray.length*150)+'px'
         $('.counter-bar-full').css("width",barWidth )
+      // makes the 'next' apper when bubbleChosen is 4 //
 
-          currentBubbleCount++
+
+
+        currentBubbleCount++
 
         var chosenBubble={
           id:this.props.id,
@@ -132,9 +137,8 @@ var dis=this;
         }
 
 
-       var newBubbleArray=  Object.assign( {}, this.props.bubblesArray)
-        console.log(newBubbleArray);
-
+        var newBubbleArray=  Object.assign( {}, this.props.bubblesArray)
+        
         newBubbleArray[chosenBubble.id].count = currentBubbleCount;
 
 
@@ -155,6 +159,12 @@ var bubbleInsideClass='bubble-inside'+' bubble-inside-bubble'+this.props.id;
 countData= this.props.countData;
 var dis=this
 
+var renderedCount= this.props.bubbleData.count;
+
+ if(renderedCount ===0){
+   renderedCount="";
+ }
+
 return(
     <div  id={bubbleId} onClick={this.chooseBubble} className="bubble-container">
 
@@ -164,7 +174,7 @@ return(
         <div id={bubbleId} style={{backgroundImage:this.props.bubbleData.url }} className="bubble">
                 <div  id={bubbleId} className= "bubble-inside" style={{background:this.props.bubbleData.background}} className={bubbleInsideClass}>
                       <h2 id={bubbleId}>{ this.props.bubbleData.name}</h2>
-                      <h3>{this.props.bubbleData.count}</h3>
+                      <h3>{renderedCount}</h3>
                 </div>
         </div>
    </div>

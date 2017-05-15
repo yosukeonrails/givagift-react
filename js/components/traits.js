@@ -21,28 +21,39 @@ super(props);
 
 render () {
 
-  console.log('itts working and renderin again!');
-  console.log(this.props);
-  console.log(this.props.bubblesArray);
-
-
   var array=[];
-
+  var chosenBubbleArray=[];
   var arr= this.props.bubblesArray;
   var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
 
-  console.log(bubblesArrayData);
-  console.log(bubblesArrayData.length);
+  bubblesArrayData.map(function( bubble, i){
+        if(bubble.count > 0 ){
+          chosenBubbleArray.push(<BubbleContainer id={i} bubbleData={bubblesArrayData[i]} />)
+        }
+  })
+
+  console.log(chosenBubbleArray);
+
+
   for( var i=0 ; i < bubblesArrayData.length; i++ ){
-    console.log('adding');
       array.push(<BubbleContainer id={i} bubbleData={bubblesArrayData[i]} />)
   }
+
+
 
 
 return(
 
     <div className="traits">
 
+       <div className="traits-result">
+                <h1>Are you sure you want these?</h1>
+         <div className="chosen-bubble-container">
+          {chosenBubbleArray}
+          </div>
+
+
+       </div>
                     <div className="avatar-maker-background">
 
                                   	<div className="avatar-traits">

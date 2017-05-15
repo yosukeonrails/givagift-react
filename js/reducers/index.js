@@ -326,7 +326,7 @@ var reducer = function(state, action) {
 
           case ADD_BUBBLE:
 
-                console.log(action.newBubbleArray);
+
                 return  { ...state , bubblesArray : action.newBubbleArray }
 
           break;
