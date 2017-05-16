@@ -50,6 +50,8 @@ font-family: 'Raleway', sans-serif;
   padding: 0;
 }
 
+
+
 html{
   background-color: black;
 }
@@ -148,6 +150,10 @@ input::-webkit-inner-spin-button {
 
 //////////////
 
+.montFont{
+  font-family: Montserrat,sans-serif;
+  font-weight: bold;
+}
 
 .height {
   height:450px;
@@ -522,19 +528,39 @@ button{
    //Traits
 
 .traits-result{
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      top: 0px;
-      background-color: rgba(0, 0, 0, 0.84);
-      z-index: 5;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  opacity: 0;
+  color: white;
+      padding-top: 100px;
+  background-color: rgba(0, 38, 66, 0.97);
+  z-index: 5;
+  display: none;
+  h1{
+    text-align: center;
+    .montFont
+  }
+  button{
+      background-color: black;
+      padding: 10px;
+      font-size: 25px;
+      width: 150px;
+      .montFont;
+  }
 }
 
 .chosen-bubble-container{
   width: 80%;
 margin-right: auto;
 min-width: 520px;
+    height: 200px;
 margin-left: auto;
+}
+
+.traits-result-buttons{
+      text-align: center;
 }
 
 
@@ -693,6 +719,108 @@ margin-left: auto;
    	}
 
    /// Traits end
+
+
+/// gender
+
+ #lady{
+   background-image: url('https://s10.postimg.org/r154q2ja1/lady.png');
+   float: right;
+    background-color: #ff7f7f;
+ }
+
+ #gentleman{
+   background-image: url('https://s18.postimg.org/5l7jaude1/gentleman.png');
+   float: left;
+       background-color: #398cc7;
+ }
+
+ #robot{
+   background-image: url(https://s2.postimg.org/t57zh5qa1/robot.png);
+   margin-left: auto;
+   width: 150px;
+   height: 150px;
+   margin-right: auto;
+   background-color: #4ba09d;
+
+
+   h2{
+     position: relative;
+     bottom: -90px;
+     text-align: center;
+      font-family: 'Pacifico', cursive;
+
+   }
+ }
+
+ .gender-middle{
+   width: 200px;
+   text-align: center;
+   position: absolute;
+   top: 280px;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   h1{
+     font-family: 'Pacifico', cursive;
+   }
+ }
+
+ .gender-top{
+   width: 70%;
+   margin-left: auto;
+   margin-right: auto;
+   height: 200px;
+   margin-top: 25px;
+   max-width: 650px;
+ }
+
+ .gender-bottom{
+   .centralize;
+   width: 50%;
+ }
+
+ .gender{
+   width: 200px;
+   height: 200px;
+   background-color: white;
+   background-size: contain;
+   background-position: center;
+   background-repeat: no-repeat;
+   padding: 10px;
+   border-radius: 50%;
+   text-align: center;
+   h2{
+     position: relative;
+     bottom: -100px;
+     text-align: center;
+     font-size: 53px;
+     font-family: 'Pacifico', cursive;
+     font-weight: 700;
+     color: #f1f1f1;
+   }
+ }
+
+
+    .gender-page{
+      color: #fff;
+      padding-top: 100px;
+      position: fixed;
+      width: 100%;
+      background-color: rgba(34, 30, 68, 0.79);
+      min-height: 800px;
+    .montFont;
+    h1{
+      text-align: center;
+          .montFont;
+    }
+    }
+
+
+
+
+// gender end
+
+
 
 .profile-option{
   height: 150px;

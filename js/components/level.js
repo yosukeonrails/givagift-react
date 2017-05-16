@@ -69,8 +69,7 @@ modifyPercentage(inc){
 }
 
 mouseDown(isPlus){
-  console.log('mouse down');
-  console.log(isPlus);
+
   if(!this.state.mouseDown){
 
     //console.log('starting function');

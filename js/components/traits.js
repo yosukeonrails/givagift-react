@@ -9,14 +9,31 @@ import {hashHistory} from 'react-router'
 import FooterContainer from './footer.js'
 import BubbleContainer from './bubble.js'
 
+var traitsAction={
+hideResults : () => {$('.traits-result').animate({opacity:0} , function(){ $('.traits-result').css("display" , "none") })   ; console.log('hidding') },
+showResults :() => { $('.traits-result').css("display", "block");  $('.traits-result').animate({opacity:1}) }
+}
+
 
 export class Traits extends React.Component{
 
 constructor(props){
 super(props);
 
+this.hideResults= this.hideResults.bind(this);
+this.goNext = this.goNext.bind(this);
+
 }
 
+hideResults(){
+
+    traitsAction.hideResults();
+
+}
+
+goNext(){
+  console.log('going next');
+}
 
 
 render () {
@@ -26,20 +43,33 @@ render () {
   var arr= this.props.bubblesArray;
   var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
 
+
+
   bubblesArrayData.map(function( bubble, i){
         if(bubble.count > 0 ){
           chosenBubbleArray.push(<BubbleContainer id={i} bubbleData={bubblesArrayData[i]} />)
         }
   })
+  
+  if(chosenBubbleArray > 4){
+      traitsAction.hideResults();
+  }
 
-  console.log(chosenBubbleArray);
+  if(chosenBubbleArray.length === 4 ){
 
+    var showDelay =   setTimeout( function(){
+        traitsAction.showResults();
+      }, 1000);
+  } else {
+
+      console.log('stopiing');
+      traitsAction.hideResults();
+      clearTimeout(showDelay)
+  }
 
   for( var i=0 ; i < bubblesArrayData.length; i++ ){
       array.push(<BubbleContainer id={i} bubbleData={bubblesArrayData[i]} />)
   }
-
-
 
 
 return(
@@ -47,11 +77,13 @@ return(
     <div className="traits">
 
        <div className="traits-result">
-                <h1>Are you sure you want these?</h1>
+                <h1>Alright, are these good?</h1>
+
          <div className="chosen-bubble-container">
           {chosenBubbleArray}
           </div>
 
+          <div className="traits-result-buttons"> <button onClick={this.hideResults} >back</button>  <button onClick={this.goNext} >yep</button> </div>
 
        </div>
                     <div className="avatar-maker-background">

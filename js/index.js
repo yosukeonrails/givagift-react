@@ -25,6 +25,9 @@ import SignUpContainer from './components/sign-up.js'
 import AvatarContainer from './components/avatar.js'
 import TraitsContainer from './components/traits.js'
 import LevelsContainer from './components/levels.js'
+import GenderContainer from './components/gender.js'
+
+
 var routes = (
     <Router history={hashHistory}>
        <Route path="/" component={AppContainer}>
@@ -37,7 +40,8 @@ var routes = (
                 <Route path="/signup" component={SignUpContainer}/>
                 <Route path="/avatar" component={AvatarContainer}/>
                 <Route path="/traits" component={TraitsContainer}/>
-                  <Route path="/levels" component={LevelsContainer}/>
+                <Route path="/levels" component={LevelsContainer}/>
+                <Route path="/gender" component={GenderContainer}/>
            </Route>
    </Router>
 );
