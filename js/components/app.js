@@ -192,6 +192,9 @@ export class App extends React.Component{
 
         </div>
 
+          <div className="progress-tracker"> tracker</div>
+
+
           <div >
             {this.props.children}
           </div>
