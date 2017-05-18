@@ -26,13 +26,14 @@ import AvatarContainer from './components/avatar.js'
 import TraitsContainer from './components/traits.js'
 import LevelsContainer from './components/levels.js'
 import GenderContainer from './components/gender.js'
-
+import HomeContainer from './components/home.js'
 
 var routes = (
     <Router history={hashHistory}>
        <Route path="/" component={AppContainer}>
 
            <IndexRoute component={MainApp} />
+                <Route path="/home" component={HomeContainer}/>
                 <Route path="/results/:id" component={ResultsAppContainer} />
                 <Route path="/dashboard" component={DashboardContainer}/>
                 <Route path="/home" component={LandingPageContainer}/>

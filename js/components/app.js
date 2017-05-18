@@ -166,7 +166,7 @@ export class App extends React.Component{
         </div>
 
         <div className="header">
-        <h2 onClick={this.goLink} id="/">Givagift</h2>
+                <h2 onClick={this.goLink} id="/">Givagift</h2>
 
 
                 <div  style={{display:signUpMode}} className="signin">

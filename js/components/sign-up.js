@@ -102,42 +102,38 @@ export class SignUp extends React.Component {
      	<p>Plese fill in the fields.</p>
      	<div className="sign-up-field-container">
 
-     		<div className="first-name">
-     				<label >First Name</label>
-     				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
-     				</div>
+                   		<div className="first-name">
+                   				<label>First Name</label>
+                   				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+                   				</div>
 
 
-     				<div className="last-name">
-     				<label >Last Name</label>
-     				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
-     				</div>
+                   				<div className="last-name">
+                   				<label >Last Name</label>
+                   				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+                   				</div>
 
-     				<hr></hr>
-     					<div className="email">
-     					<label >Username</label>
-     					<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
-     					</div>
+                   				<hr></hr>
 
-     					<div  className="password">
-     					<label >Password</label>
-     					<input onChange={this.handleChangePassword} type="password" className=""></input>
-     					</div>
+                   					<div className="email">
+                   					<label >Username</label>
+                   					<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+                   					</div>
 
-     					<div  className="password">
-     					<label >Confirm Password</label>
-     					<input onChange={this.handleChangePassword} type="password" className=""></input>
-     					</div>
+                   					<div  className="password">
+                   					<label >Password</label>
+                   					<input onChange={this.handleChangePassword} type="password" className=""></input>
+                   					</div>
 
+                   					<div  className="password">
+                   					<label >Confirm Password</label>
+                   					<input onChange={this.handleChangePassword} type="password" className=""></input>
+                   					</div>
 
+                   					<hr></hr>
+                   					<button  id="submit-button" type="submit"  onClick={this.handleSubmit} name="button"> Submit</button>
 
-
-     					<hr></hr>
-     					<button  id="submit-button" type="submit"  onClick={this.handleSubmit} name="button"> Submit</button>
-
-
-
-     	</div>
+                   	</div>
 
      	</div>
 

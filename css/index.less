@@ -275,6 +275,8 @@ display: inline;
   }
 }
 
+
+
 .header{
 
   padding: 10px;
@@ -283,7 +285,7 @@ display: inline;
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 4;
+    z-index: 10;
     box-shadow: 1px 1px 17px 6px rgba(21,53,72,.78);
 h2{
   font-size: 20px;
@@ -741,8 +743,8 @@ margin-left: auto;
    float: right;
     background-color: #ff7f7f;
     h2{
-      margin-top: 90px;
-       margin-left: 25px;
+      margin-top: 40px;
+    margin-left: 25px;
 
     }
  }
@@ -752,8 +754,8 @@ margin-left: auto;
    float: left;
        background-color: #398cc7;
        h2{
-         margin-top: 90px;
-        margin-left: 25px;
+         margin-top: 40px;
+       margin-left: 25px;
 
        }
  }
@@ -767,8 +769,8 @@ margin-left: auto;
 
    h2{
      position: absolute;
-     margin-top: 110px;
-     margin-left: 10px;
+     margin-top: 120px;
+     margin-left: 5px;
      text-align: center;
      font-family: Pacifico,cursive;
    }
@@ -936,7 +938,7 @@ position: relative;
         background-color: rgba(0, 0, 0, 0.89);
       display: none;
       opacity: 0;
-      z-index: 4;
+      z-index: 8;
 }
 
 .login-window{
@@ -1269,21 +1271,20 @@ font-weight: bold;
 
 
 .whatwedo{
-  border: 1px solid #fff;
   color: #000;
   width: 100%;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 50px;
   min-height: 650px;
 }
 
 .whatwedo-left{
-
-	width: 50%;
-	float: left;
-	padding: 60px;
+  margin: 0px;
+  z-index: 4;
+  width: 100%;
+  position: relative;
+  background-color: #220e3c;
 }
 .whatwedo-left img{
   width: 20%;
@@ -1348,9 +1349,12 @@ text-align: center;
  }
 
 .whatwedo p {
-	font-size: 28px;
-	    font-family: 'Raleway', sans-serif;
-	    text-align: center;
+  font-size: 28px;
+  font-family: Raleway,sans-serif;
+  text-align: center;
+  color: #fff;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .field-container{
@@ -1358,10 +1362,11 @@ text-align: center;
 }
 
 .part1{
-font-family: 'Montserrat', sans-serif;
+  font-family: Montserrat,sans-serif;
   font-size: 40px;
   margin-bottom: 40px;
   text-align: center;
+  color: white;
 }
 .startquiz{
   font-family: Montserrat,sans-serif;
@@ -2236,22 +2241,23 @@ h1{
      */
 
  .profile-top {
- 	width: 20%;
- 	min-width: 210px;
- 	background: #ff6d6d;
- 	background: -webkit-linear-gradient(#ffffff, rgba(255, 255, 255, 0.58));
- 	background: -o-linear-gradient(#ffffff, rgba(255, 255, 255, 0.58));
- 	background: linear-gradient(#ffffff, rgba(255, 255, 255, 0.58));
- 	padding: 0px;
- 	float: left;
- 	position: fixed;
- 	height: 100vh;
- 	box-shadow: 5px -9px 20px 2px rgba(35, 39, 94, 0.66);
+   width: 20%;
+  min-width: 210px;
+  background: #ff6d6d;
+  background: -webkit-linear-gradient(#fff,rgba(255,255,255,.58));
+  background: -o-linear-gradient(#fff,rgba(255,255,255,.58));
+  background: linear-gradient(#fff,rgba(255,255,255,.58));
+  padding: 0;
+  float: left;
+  position: fixed;
+  height: 100vh;
+  box-shadow: 5px -9px 20px 2px rgba(11, 14, 53, 0.66);
  }
 
  .profile-top-welcome{
- 	padding: 30px;
- 	background: linear-gradient(#278878, rgba(18, 48, 125, 0.58));
+   padding: 30px;
+ background-color: rgba(41, 45, 90, 0.96);
+ // 	background: linear-gradient(#278878, rgba(18, 48, 125, 0.58));
  }
 
  .profile-top h1{
@@ -2339,7 +2345,7 @@ h1{
 
 
  .sign-up{
- padding: 100px;
+ padding-top: 50px;
  }
 
  .sign-up h1{
@@ -2810,6 +2816,7 @@ border-radius: 10px;
       font-family: @baloo;
       font-size: 50px;
       text-align: center;
+      .montFont
       }
    h2 {
      font-family: @font3;
@@ -2822,8 +2829,110 @@ padding: 40px;
 width: 75%;
 margin-left: auto;
 margin-right: auto;
+ .montFont
    }
 };
+
+//HOME//
+
+.test-triangle{
+  width: 0;
+height: 0;
+border-style: solid;
+border-width: 0 0 200px 200px;
+border-color: transparent transparent #007bff transparent;
+}
+.diagonal-line-1{
+  width: 100%;
+  position: absolute;
+  height: 500px;
+  top: 32%;
+  background-color: #9a7ba7;
+  -webkit-clip-path: polygon(0 83%,100% 37%,100% 100%,0 100%);
+  clip-path: polygon(0 80%,100% 0,100% 100%,0 100%);
+  z-index: 4;
+}
+
+.diagonal-line-2{
+  width: 100%;
+  position: absolute;
+  height: 500px;
+  top: 36%;
+  background-color: #4a3f6b;
+  -webkit-clip-path: polygon(0 83%,100% 37%,100% 100%,0 100%);
+  clip-path: polygon(0 80%,100% 0,100% 100%,0 100%);
+  z-index: 4;
+}
+
+
+.diagonal-line-3{
+  width: 100%;
+  position: absolute;
+  height: 500px;
+  top: 40%;
+  background-color: #220e3c;
+  -webkit-clip-path: polygon(0 83%,100% 37%,100% 100%,0 100%);
+  clip-path: polygon(0 80%,100% 0,100% 100%,0 100%);
+  z-index: 4;
+}
+
+.welcome-message-container{
+  width: 100%;
+    background-color: #220e3c;
+  height: 800px;
+  text-align: left;
+}
+.welcome-message{
+
+  width: 100%;
+height: 500px;
+background-color: white;
+height: 100vh;
+padding: 6%;
+z-index: 1;
+position: relative;
+
+  h1{
+    .montFont;
+    font-size: 50px;
+    font-weight: bold;
+  }
+      button{
+      font-family: Raleway,sans-serif;
+      background-color: purple;
+      font-size: 20px;
+      width: 200px;
+      height: 30px;
+      margin-top: 30px;
+      color: #fff;
+      }
+}
+
+.welcome-gift-image{
+  background-image: url(https://s23.postimg.org/67rk6cp7f/gift.png);
+  width: 300px;
+  height: 300px;
+  background-size: contain;
+  position: absolute;
+  right: 0;
+  top: 25%;
+  margin-right: 10%;
+  z-index: 5;
+}
+
+.tag-line{
+  color: #656467;
+  font-family: Raleway,sans-serif;
+  h1{
+font-size: 30px;
+      font-family: Raleway,sans-serif;
+        font-weight: lighter;
+
+  }
+}
+.pink-font{
+color: #dc6479;
+}
 
 
 ///LANDING PAGE///
