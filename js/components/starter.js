@@ -104,7 +104,7 @@ return(
 
   <div className="happy-face">
     </div>
-        <button onClick={this.beginForm}> start </button>
+        <button onClick={this.beginForm} className="starter-page-button"> start </button>
 </div>
 );
 

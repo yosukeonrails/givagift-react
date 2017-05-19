@@ -2,7 +2,7 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 import {connect} from 'react-redux';
-import {getFacebookUser, layOutState, changeMode,logOut } from '../actions/index.js'
+import {getFacebookUser, layOutState, changeMode,logOut ,saveGiftForm} from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -40,6 +40,7 @@ super(props);
 
   this.increaseSize= this.increaseSize.bind(this);
   this.decreaseSize= this.decreaseSize.bind(this);
+  this.chooseGender= this.chooseGender.bind(this);
 
   var dis=this;
 
@@ -52,6 +53,16 @@ super(props);
     //
     // }, 100);
 
+}
+
+chooseGender(){
+
+  console.log(this.state.chosenGender);
+
+  var data=  Object.assign({}, this.props.giftFormState ,  {gender:this.state.chosenGender})
+    this.props.dispatch( saveGiftForm(data) ).then(function(){
+      hashHistory.push('/age')
+    });
 }
 
 componentWillMount(){
@@ -80,8 +91,10 @@ increaseSize(e){
   })
 
 if(e.target.id){
-    console.log(e.target.id);
-    increaseWidthHeight(e.target.id)
+
+    increaseWidthHeight(e.target.id);
+    var target=e.target.id;
+    this.setState({chosenGender:target})
 }
 }
 
@@ -98,27 +111,32 @@ return(
 
   <div className="gender-top">
 
-  <div  onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
-    <h2>guy</h2>
-  </div>
+
+  <button  value="male" onClick={this.chooseGender} onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
+
+      <h2 value="male" >guy</h2>
+
+  </button>
+
+
 
     <div className="gender-middle">
   <h1> or </h1>
     </div>
 
 
-    <div   onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
-    <h2>gal</h2>
-    </div>
+    <button value="female" onClick={this.chooseGender}  onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
+    <h2 value="female">gal</h2>
+    </button>
 
     </div>
 
     <div className="gender-bottom">
 
-    <div onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
-    <h2>other</h2>
+    <button value="other" onClick={this.chooseGender} onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
+    <h2 value="other" >other</h2>
 
-    </div>
+    </button>
 
     </div>
 
@@ -135,7 +153,8 @@ return {
  user:state.user,
  layOutState:state.layOutState,
  mode:state.mode,
- loggedUser:state.loggedUser
+ loggedUser:state.loggedUser,
+ giftFormState:state.giftFormState
 }
 }
 
