@@ -87,6 +87,7 @@ var query= {
 }
 
 
+
   var giftFormData= {
 
     $set:{
@@ -415,19 +416,13 @@ app.post('/mockuser', function(req, res){
 
 
   passport.use(new FacebookStrategy({
+
     clientID: config.clientID,
     clientSecret: config.clientSecret,
     callbackURL: config.URL+'auth/facebook/callback',
     profileFields: ['id', 'displayName','birthday', 'picture', 'email' , 'first_name']
   }, function(accessToken, refreshToken, profile, done) {
-    console.log('here is ');
-    console.log(profile.birthday);
-    console.log('here is picture data');
-    console.log(profile._json.picture);
-    console.log('end');
-    console.log(profile);
-    console.log(profile.name);
-    console.log(profile.name.familyName);
+  
 
     let userData= {
       first_name:profile._json.first_name,
@@ -459,7 +454,8 @@ app.post('/mockuser', function(req, res){
      function(req, res) {
        // Successful authentication, redirect home.
        console.log('sucessful login');
-          res.redirect('/#/dashboard');
+
+          res.redirect('/#/');
      });
 
 

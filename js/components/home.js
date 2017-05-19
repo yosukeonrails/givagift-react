@@ -13,13 +13,18 @@ import SignUpContainer from './sign-up.js'
 import SignInBoxContainer from './signinbox.js'
 import FeaturedContainer from './featured.js'
 import SignInContainer from './sign-in.js'
-
+import {layOutState , changeRedirect} from '../actions/index.js'
 var logInOpen=false;
 var view='.tagLine';
 var nomargin= {
   margin:0,
   padding:0
 };
+
+var layOut={
+  logInOpen:false,
+  optionOpen:false
+}
 
 
 
@@ -34,14 +39,7 @@ var hideSignIn= function(){
       });
 };
 
-var showAffiliate= function(){
-  $('.affiliates').css('display', 'block');
-  $('.affiliates').animate({height:'500px'},500, function(){
 
-  $('.affiliates p').css('display' , 'block');
-  $('.affiliates p').animate({opacity:'1'});
-  });
-};
 
 var showSignIn= function(){
         $('.sign-in').css('display', 'block');
@@ -65,27 +63,29 @@ export class Home extends React.Component{
     this.facebooklogin= this.facebooklogin.bind(this);
     this.showLogIn = this.showLogIn.bind(this);
     this.closeLogIn= this.closeLogIn.bind(this);
+    this.validateUser= this.validateUser.bind(this);
   }
 
-componentDidMount(){
 
-  $(function() {
-  	  $('a[href*="#"]:not([href="#"])').click(function() {
-  	    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-  	      var target = $(this.hash);
-  	      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-  	      if (target.length) {
-  	        $('html, body').animate({
-  	          scrollTop: target.offset().top
-  	        }, 1000);
-  	        return false;
-  	      }
-  	    }
-  	  });
-  	});
+  validateUser(){
 
-  $("html, body").animate({ scrollTop: $(".header").offset().top }, 1000);
-}
+    console.log('validating');
+
+      if(this.props.loggedUser){
+
+             window.location.href='/#/starter';
+
+            // this.props.dispatch( postGiftForm(this.props.postGiftForm) );
+
+      } else {
+
+          this.showLogIn()
+          this.props.dispatch( changeRedirect('starter') );
+          this.setState({redirectNow:true})
+
+      }
+
+  }
 
   facebooklogin(){
     console.log('login in ');
@@ -101,6 +101,34 @@ componentDidMount(){
 
   showLogIn(){
 
+    console.log(this.props);
+    var dis=this;
+    if(this.props.layOutState.logInOpen === false){
+      console.log('showing log in ');
+
+      $('.dark-blurr').css("display", "block");
+      $('.dark-blurr').animate({opacity:'1'});
+
+      layOut.logInOpen = true;
+      this.props.dispatch(layOutState(layOut));
+
+    }
+
+    else
+
+    {
+      console.log('hiding log in ');
+
+      $('.dark-blurr').animate({opacity:'0'}, function(){
+      $('.dark-blurr').css("display", "none");
+
+      layOut.logInOpen = false;
+
+      dis.props.dispatch(layOutState(layOut));
+
+    });
+
+  }
 
   }
 
@@ -131,8 +159,6 @@ componentDidMount(){
 
             element=$(viewModes[i]);
             element.css("display", "none");
-
-
         }
 
     }
@@ -161,7 +187,7 @@ componentDidMount(){
               <h1>Looking for a gift?</h1>
                 <h1>We got it.</h1>
 
-                <button>here</button>
+                <button onClick={this.validateUser}> here </button>
 
                 <div className="tag-line">
               <h1><span className="pink-font">#givagift#</span> your go-to gift app.</h1>
@@ -170,13 +196,7 @@ componentDidMount(){
 
         <div className="welcome-gift-image"></div>
 
-
-
-
       </div>
-
-
-
 
 
 <div  className="whatwedo">
@@ -268,7 +288,8 @@ componentDidMount(){
   var mapStateToProps= function(state){
 
         return {
-
+          loggedUser:state.loggedUser,
+          layOutState:state.layOutState,
         }
   }
 

@@ -28,6 +28,9 @@ import LevelsContainer from './components/levels.js'
 import GenderContainer from './components/gender.js'
 import HomeContainer from './components/home.js'
 import AgeContainer from './components/age.js'
+import StarterContainer from './components/starter.js'
+import RedirectContainer from './components/redirect.js'
+
 
 var routes = (
     <Router history={hashHistory}>
@@ -45,6 +48,8 @@ var routes = (
                 <Route path="/levels" component={LevelsContainer}/>
                 <Route path="/gender" component={GenderContainer}/>
                 <Route path="/age" component={AgeContainer}/>
+                <Route path="/starter" component={StarterContainer}/>
+                <Route path="/redirect" component={RedirectContainer}/>
            </Route>
    </Router>
 );

@@ -34,6 +34,17 @@ export var CHANGE_MODE = 'CHANGE_MODE';
   }
 
 
+   export var CHANGE_REDIRECT = 'CHANGE_REDIRECT';
+
+    export var changeRedirect= function(query){
+       return {
+          type:CHANGE_REDIRECT,
+          redirectQuery:query
+       }
+    }
+
+
+
 
  export var BUBBLE_COUNT = 'BUBBLE_COUNT';
 
@@ -346,6 +357,53 @@ export function getGiftLists(facebookId){
 };
 
 }
+
+
+
+
+
+ export var SAVE_GIFT_FORM= 'SAVE_GIFT_FORM';
+
+export function saveGiftForm(data) {
+
+var fetchData={
+method:'POST',
+headers:{
+ 'Content-Type':'application/json'
+},
+body:JSON.stringify({
+
+  facebookId:data.facebookId,
+  id:data.id,
+  bdMonth:data.bdMonth,
+  bdDay:data.bdDay,
+  friendName:data.friendName,
+  gender:data.gender,
+  relationship:data.relationship,
+  age:data.age,
+  date:data.date,
+  month:data.month,
+  StartTime:data.StartTime,
+  EndTime:data.EndTime,
+  lastPage:data.lastPage,
+  traits:data.traits
+
+})
+
+};
+
+return {
+type: SAVE_GIFT_FORM,
+promise: fetch('/giftform', fetchData).then(function(data){
+
+
+return data.json();
+
+})
+};
+}
+
+
 
 
 

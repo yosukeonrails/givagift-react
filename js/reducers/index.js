@@ -1,19 +1,30 @@
 var actions = require('../actions/index');
 var resultsArray = require('../results.js');
 var questionsArray =  require('../questions.js');
-import {INITIALIZE_RESULTS,CHANGE_MODE, ADD_BUBBLE,BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
+import {INITIALIZE_RESULTS,CHANGE_MODE,SAVE_GIFT_FORM, CHANGE_REDIRECT,ADD_BUBBLE,BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
 import {handle} from 'redux-pack';
 import cssStyle from '../css-variables.js'
 import mainBubbleData from '../components/bubbledata.js'
 
+var defaultGiftForm={
+  lastPage: "starter",
+  month: 5,
+  date: 17,
+  age: 27,
+  relationship: "Friend",
+  gender: "Male",
+  friendName: "none",
+  EndTime:'',
+  bdDay: 0,
+  bdMonth: 0,
+  traits: []
+}
 
 var stateDefault = {
-
+    giftFormState:defaultGiftForm,
     countData:[],
     bubbleCount:'',
-
     bubblesArray:mainBubbleData,
-
     selectedAnswerCss:'answerButton',
     answerSelected:false,
     maxPoints:[],
@@ -27,7 +38,8 @@ var stateDefault = {
     currentQuestion:questionsArray[0],
     questions: questionsArray,
     styles:cssStyle,
-    userImageURL:'http://www.safe-collections.com/images/PNG%20Icons/user148.png'
+    userImageURL:'http://www.safe-collections.com/images/PNG%20Icons/user148.png',
+    redirectQuery:''
 };
 
 
@@ -56,8 +68,6 @@ var reducer = function(state, action) {
       });
 
       case LOG_MOCK_USER:
-
-
 
            return handle(state, action, {
 
@@ -151,6 +161,15 @@ var reducer = function(state, action) {
             state.answerSelected=true
             break
 
+
+
+    case CHANGE_REDIRECT:
+
+          state.redirectQuery= action.redirectQuery;
+          console.log('changing redirect');
+          break
+
+     case SELECT_ANSWER:
 
     case SUBMIT_ANSWER_POINT:
 
@@ -290,6 +309,20 @@ var reducer = function(state, action) {
                                  success: s => ({ ...s, resultData:action.payload}),
 
                                });
+
+
+                           case SAVE_GIFT_FORM:
+
+
+
+                                return handle(state, action, {
+
+                                  failure: s => ({ ...s, callError:action.payload }),
+
+                                  success: s => ({ ...s, giftFormState:action.payload}),
+
+                                });
+
 
 
                         case SAVE_LIST_INFO:
