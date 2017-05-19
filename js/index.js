@@ -27,6 +27,7 @@ import TraitsContainer from './components/traits.js'
 import LevelsContainer from './components/levels.js'
 import GenderContainer from './components/gender.js'
 import HomeContainer from './components/home.js'
+import AgeContainer from './components/age.js'
 
 var routes = (
     <Router history={hashHistory}>
@@ -43,6 +44,7 @@ var routes = (
                 <Route path="/traits" component={TraitsContainer}/>
                 <Route path="/levels" component={LevelsContainer}/>
                 <Route path="/gender" component={GenderContainer}/>
+                <Route path="/age" component={AgeContainer}/>
            </Route>
    </Router>
 );

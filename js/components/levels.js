@@ -23,10 +23,12 @@ return(
 <div>
 
 
-    <h1> Chooose your Levels </h1>
-    
+
   <div className="levels-container">
 
+        <h1> Chooose your Levels </h1>
+
+      <button className="done-button">done</button>
 
       <LevelContainer percentage={30} name={'musician'} backgroundImage={'url(https://source.unsplash.com/2UuhMZEChdc/1600x900)'}/>
       <LevelContainer percentage={80} name={'geek'} backgroundImage={'url(https://source.unsplash.com/eIhH7RTlTZA/1600x900)'}/>
@@ -36,7 +38,7 @@ return(
                  <LevelContainer percentage={20} name={'outdoor'} backgroundImage={'url(https://source.unsplash.com/4F1ijaoCTlg/1600x900)'}/>
 
 
-  </div>
+</div>
 
 
 </div>

@@ -11,7 +11,7 @@ var app = express();
 var List= require('./models/lists.js');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
-
+var GiftForm =  require('./models/giftform.js')
 mongoose.Promise = global.Promise;
 // mongoose.createConnection('mongodb://localhost/');
 //
@@ -72,6 +72,42 @@ app.get('/logout', function(req, res){
   console.log('user is logged out');
 });
 
+
+
+app.post('/giftform', function(req, res){
+
+
+var trait= req.body.trait
+
+var query= {
+  facebookId:req.body.facebookId,
+  friendName:req.body.friendName,
+}
+
+
+  var giftFormData= {
+
+    $set:{
+      relationship:req.body.relationship,
+    },
+      $push:{
+        traits: {
+          trait: trait,
+        }
+
+      }
+  };
+
+     GiftForm.findOneAndUpdate( query , giftFormData ,  {
+       upsert:true,
+       new:true
+     }, function(err, data){
+          console.log(err);
+          res.status(201).json(data);
+     });
+
+});
+
 app.post('/amazonlist' , function(req, res){
 
     var listData= {
@@ -86,6 +122,9 @@ app.post('/amazonlist' , function(req, res){
         gender:req.body.gender,
       amazon_results:req.body.amazon_results
     };
+
+
+
 
   List.findOneAndUpdate({ facebookId:req.body.facebookId , friendName:req.body.name}, {$set:listData},{upsert:true, new:true}, function(err, data){
 

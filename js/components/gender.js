@@ -105,7 +105,7 @@ return(
   <h1> or </h1>
     </div>
 
-    
+
     <div   onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
     <h2>gal</h2>
     </div>
