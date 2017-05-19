@@ -74,6 +74,8 @@ app.get('/logout', function(req, res){
 
 
 
+// Add a Gift Form or Update
+
 app.post('/giftform', function(req, res){
 
 
@@ -81,14 +83,24 @@ var trait= req.body.trait
 
 var query= {
   facebookId:req.body.facebookId,
-  friendName:req.body.friendName,
+  id:req.body.id
 }
 
 
   var giftFormData= {
 
     $set:{
+      bdMonth:req.body.bdMonth,
+      bdDay:req.body.bdDay,
+      friendName:req.body.friendName,
+      gender:req.body.gender,
       relationship:req.body.relationship,
+      age:req.body.age,
+      date:req.body.date,
+      month:req.body.month,
+      StartTime:req.body.StartTime,
+      EndTime:req.body.EndTime,
+      lastPage:req.body.lastPage,
     },
       $push:{
         traits: {
@@ -107,6 +119,67 @@ var query= {
      });
 
 });
+
+
+
+// delete Traits
+
+app.post('/deletetraits', function(req, res){
+
+
+  var query= {
+    facebookId:req.body.facebookId,
+    id:req.body.id
+  }
+
+  var update={
+    $set:{
+          traits:[]
+    }
+
+  }
+
+  GiftForm.findOneAndUpdate( query , update ,  {
+    upsert:true,
+    new:true
+  }, function(err, data){
+       console.log(err);
+       res.status(201).json(data);
+  });
+
+
+});
+
+
+//delete group form
+
+app.delete('/giftform', function(req, res) {
+
+
+    var trait= req.body.trait
+
+    var query= {
+      facebookId:req.body.facebookId,
+      id:req.body.id
+    }
+
+    var update = {
+        $pull: {  traits: { _id:req.body.traitId } }
+    };
+
+  GiftForm.findOneAndUpdate(query, update, function(err, data) {
+        console.log('error is ');
+        console.log(err);
+
+        res.status(201).json(data);
+        console.log('it worked?');
+    });
+
+});
+
+
+
+
 
 app.post('/amazonlist' , function(req, res){
 
