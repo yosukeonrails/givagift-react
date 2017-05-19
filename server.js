@@ -73,6 +73,32 @@ app.get('/logout', function(req, res){
 });
 
 
+// gind a GiftForm by Id //
+
+app.get('/giftform/:id/:facebookId', function(req, res){
+
+      var query={
+        facebookId:req.params.facebookId,
+        id:req.params.id
+      }
+
+      console.log(query);
+
+     GiftForm.find( query, function(err, data){
+
+          if(err){
+              console.log(err);
+          }
+
+            console.log('found this');
+          res.json(data);
+
+     })
+
+
+
+})
+
 
 // Add a Gift Form or Update
 
@@ -102,13 +128,17 @@ var query= {
       StartTime:req.body.StartTime,
       EndTime:req.body.EndTime,
       lastPage:req.body.lastPage,
-    },
-      $push:{
-        traits: {
-          trait: trait,
-        }
+      traits:req.body.traits,
+      finished:req.body.finished,
+      lastOpened:req.body.lastOpened
+    }
 
-      }
+      // $push:{
+      //   traits: {
+      //     trait: trait,
+      //   }
+      //
+      // }
   };
 
      GiftForm.findOneAndUpdate( query , giftFormData ,  {
@@ -121,6 +151,47 @@ var query= {
 
 });
 
+// delete one gift form
+
+ app.delete('/deletegiftform/:id' ,  function(req, res){
+
+   var query={
+     id:req.params.id
+   }
+
+   GiftForm.remove( query, function(err, data){
+
+        if(err){
+            console.log(err);
+        }
+
+        res.json(data);
+
+   })
+
+
+ })
+
+// get gift Form
+
+app.get('/lastgiftform/:id', function(req, res){
+
+  var query= {
+      facebookId:req.params.id,
+      lastOpened:true
+  }
+
+  GiftForm.find( query, function(err, data){
+
+    if(err){
+
+    }
+
+    res.json(data);
+  });
+
+
+})
 
 
 // delete Traits
@@ -177,6 +248,7 @@ app.delete('/giftform', function(req, res) {
     });
 
 });
+
 
 
 
@@ -361,6 +433,7 @@ function isLoggedIn(req, res, next) {
     if (process.env.NODE_ENV == 'test') {
 
         req.user = {
+
             '_id': '1',
             'username': 'test',
             'password': 'test'

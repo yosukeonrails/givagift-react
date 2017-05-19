@@ -1,7 +1,7 @@
 var actions = require('../actions/index');
 var resultsArray = require('../results.js');
 var questionsArray =  require('../questions.js');
-import {INITIALIZE_RESULTS,CHANGE_MODE,SAVE_GIFT_FORM, CHANGE_REDIRECT,ADD_BUBBLE,BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
+import {INITIALIZE_RESULTS,CHANGE_MODE,SAVE_GIFT_FORM, FIND_GIFT_FORM_BY_ID, GET_LAST_GIFT_FORM, DELETE_LAST_GIFT_FORM,CHANGE_REDIRECT,ADD_BUBBLE,BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
 import {handle} from 'redux-pack';
 import cssStyle from '../css-variables.js'
 import mainBubbleData from '../components/bubbledata.js'
@@ -17,10 +17,13 @@ var defaultGiftForm={
   EndTime:'',
   bdDay: 0,
   bdMonth: 0,
-  traits:[] 
+  traits:[],
+  finished:false,
+  lastOpened:false
 }
 
 var stateDefault = {
+    lastGiftFormState:'none',
     giftFormState:defaultGiftForm,
     countData:[],
     bubbleCount:'',
@@ -117,6 +120,19 @@ var reducer = function(state, action) {
     });
 
 
+    case DELETE_LAST_GIFT_FORM:
+
+
+
+      return handle(state, action, {
+
+        failure: s => ({ ...s, callError:action.payload }),
+
+        success: s => ({ ...s, giftFormState:defaultGiftForm}),
+
+      });
+
+
     case SET_CURRENT_QUERY:
 
         state.currentQuery=action.currentQuery
@@ -130,8 +146,6 @@ var reducer = function(state, action) {
           break
 
       case CALL_AMAZON:
-
-
 
 
       return handle(state, action, {
@@ -311,8 +325,36 @@ var reducer = function(state, action) {
                                });
 
 
-                           case SAVE_GIFT_FORM:
 
+                               case FIND_GIFT_FORM_BY_ID:
+
+                               console.log(action);
+
+                              return handle(state, action, {
+
+                                failure: s => ({ ...s, callError:action.payload }),
+
+                                success: s => ({ ...s, foundGiftForm: action.payload[0]  }),
+
+                              });
+
+
+
+
+
+                            case GET_LAST_GIFT_FORM:
+
+                            console.log(action);
+
+                           return handle(state, action, {
+
+                             failure: s => ({ ...s, callError:action.payload }),
+
+                             success: s => ({ ...s, lastGiftFormState: action.payload  }),
+
+                           });
+
+                           case SAVE_GIFT_FORM:
 
 
                                 return handle(state, action, {

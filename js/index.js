@@ -44,10 +44,10 @@ var routes = (
                 <Route path="/result/:id" component={ResultContainer}/>
                 <Route path="/signup" component={SignUpContainer}/>
                 <Route path="/avatar" component={AvatarContainer}/>
-                <Route path="/traits" component={TraitsContainer}/>
-                <Route path="/levels" component={LevelsContainer}/>
-                <Route path="/gender" component={GenderContainer}/>
-                <Route path="/age" component={AgeContainer}/>
+                <Route path="/traits/:id" component={TraitsContainer}/>
+                <Route path="/levels/:id" component={LevelsContainer}/>
+                <Route path="/gender/:id" component={GenderContainer}/>
+                <Route path="/age/:id" component={AgeContainer}/>
                 <Route path="/starter" component={StarterContainer}/>
                 <Route path="/redirect" component={RedirectContainer}/>
            </Route>

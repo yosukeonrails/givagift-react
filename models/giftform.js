@@ -18,6 +18,8 @@ var GiftFormSchema = new mongoose.Schema({
   StartTime:String,
   EndTime:String,
   lastPage:String,
+  finished:Boolean,
+  lastOpened:Boolean,
   //$push parameter
   traits:[
     {

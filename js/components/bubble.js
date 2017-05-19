@@ -138,7 +138,7 @@ var dis=this;
 
 
         var newBubbleArray=  Object.assign( {}, this.props.bubblesArray)
-        
+
         newBubbleArray[chosenBubble.id].count = currentBubbleCount;
 
 

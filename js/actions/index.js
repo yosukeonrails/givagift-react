@@ -341,6 +341,68 @@ credentials: 'include'
 
 
 
+export var FIND_GIFT_FORM_BY_ID= 'FIND_GIFT_FORM_BY_ID'
+
+export function findGiftFormById(id, facebookId){
+
+
+    return{
+    type:FIND_GIFT_FORM_BY_ID,
+    promise: fetch('/giftform/'+id+'/'+facebookId).then(function(data){
+
+           return data.json();
+    })
+
+  };
+
+}
+
+
+
+
+
+export var GET_LAST_GIFT_FORM= 'GET_LAST_GIFT_FORM'
+
+export function getLastGiftForm(facebookId){
+
+
+    return{
+    type:GET_LAST_GIFT_FORM,
+    promise: fetch('/lastgiftform/'+facebookId).then(function(data){
+
+           return data.json();
+    })
+
+  };
+
+}
+
+
+
+export var DELETE_LAST_GIFT_FORM="DELETE_LAST_GIFT_FORM"
+
+export var deleteLastGiftForm=function(id){
+
+  var fetchData= {
+    method:'DELETE'
+  };
+
+
+
+  return {
+    type:DELETE_LAST_GIFT_FORM,
+    promise: fetch('/deletegiftform/'+id, fetchData).then(function(data){
+
+
+
+      return data.json();
+
+    })
+};
+};
+
+
+
 
 export var GET_GIFT_LISTS= 'GET_GIFT_LISTS'
 
@@ -357,6 +419,7 @@ export function getGiftLists(facebookId){
 };
 
 }
+
 
 
 
@@ -386,7 +449,9 @@ body:JSON.stringify({
   StartTime:data.StartTime,
   EndTime:data.EndTime,
   lastPage:data.lastPage,
-  traits:data.traits
+  traits:data.traits,
+  finished:data.finished,
+  lastOpened:data.lastOpened
 
 })
 

@@ -2,7 +2,7 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 import {connect} from 'react-redux';
-import {getFacebookUser, layOutState, changeMode,logOut ,saveGiftForm} from '../actions/index.js'
+import {getFacebookUser, layOutState, findGiftFormById,changeMode,logOut ,saveGiftForm} from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -44,6 +44,7 @@ super(props);
 
   var dis=this;
 
+
     // setInterval(() => {
     //   console.log(dis.state.mouseOverIs);
     //
@@ -58,15 +59,50 @@ super(props);
 chooseGender(){
 
   console.log(this.state.chosenGender);
+  var dis=this;
 
   var data=  Object.assign({}, this.props.giftFormState ,  {gender:this.state.chosenGender})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
-      hashHistory.push('/age')
+      hashHistory.push('/age/'+dis.props.giftFormState.id)
+
     });
+
 }
 
 componentWillMount(){
-     this.setState({ mouseOverIs:false})
+
+  var dis=this;
+
+  this.props.dispatch(getFacebookUser()).then(function(){
+    console.log('got user');
+
+      console.log(dis.props.loggedUser);
+
+  })
+
+     this.setState({ mouseOverIs:false});
+
+     if(this.props.loggedUser && this.props.params.id ){
+
+    this.props.dispatch( findGiftFormById( this.props.params.id, this.props.loggedUser.facebookId  ) ).then(function(){
+
+      var data=  Object.assign({}, dis.props.foundGiftForm )
+
+      dis.props.dispatch(saveGiftForm(data));
+
+    })
+
+  }  else {
+
+    console.log('no user ');
+    hashHistory.push('/home')
+
+  }
+
+  //  find logged User or sele redirect to home//
+
+   // find by params.id or else redirect to home //
+
 }
 
 decreaseSize(e){
@@ -100,6 +136,7 @@ if(e.target.id){
 
 
 render () {
+
 
 
 
@@ -154,7 +191,8 @@ return {
  layOutState:state.layOutState,
  mode:state.mode,
  loggedUser:state.loggedUser,
- giftFormState:state.giftFormState
+ giftFormState:state.giftFormState,
+ foundGiftForm:state.foundGiftForm
 }
 }
 
