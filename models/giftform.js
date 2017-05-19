@@ -15,8 +15,8 @@ var GiftFormSchema = new mongoose.Schema({
   age:Number,
   date:Number,
   month:Number,
-  StartTime:Date,
-  EndTime:Date,
+  StartTime:String,
+  EndTime:String,
   lastPage:String,
   //$push parameter
   traits:[

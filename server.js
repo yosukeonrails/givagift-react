@@ -422,7 +422,7 @@ app.post('/mockuser', function(req, res){
     callbackURL: config.URL+'auth/facebook/callback',
     profileFields: ['id', 'displayName','birthday', 'picture', 'email' , 'first_name']
   }, function(accessToken, refreshToken, profile, done) {
-  
+
 
     let userData= {
       first_name:profile._json.first_name,

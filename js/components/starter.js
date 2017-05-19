@@ -48,13 +48,13 @@ super(props);
 
 beginForm(){
 
-
   if(this.props.loggedUser){
 
   var date=new Date();
   var data=  Object.assign({}, this.props.giftFormState , {facebookId:this.props.loggedUser.facebookId}, {id:'232445ffff'} , {startTime:date}, {relationship:'not friends'})
-    this.props.dispatch( saveGiftForm(data) );
-
+    this.props.dispatch( saveGiftForm(data) ).then(function(){
+      hashHistory.push('/gender')
+    });
   }
 
 }

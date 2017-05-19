@@ -17,7 +17,7 @@ var defaultGiftForm={
   EndTime:'',
   bdDay: 0,
   bdMonth: 0,
-  traits: []
+  traits:[] 
 }
 
 var stateDefault = {
