@@ -76,11 +76,28 @@ var dis=this;
 
           var unchosenBubble= this.props.giftFormState.traits.findIndex(checkBubble);
 
-          console.log(unchosenBubble);
+
+
+
 
           var newChosenBubbleArray= this.props.chosenBubbleArray;
           newChosenBubbleArray.splice(unchosenBubble,1);
           chosenBubbleArray.splice(unchosenBubble, 1);
+
+
+
+          newChosenBubbleArray.map(function(bubble, i ){
+
+              console.log(RemovedBubbleCount);
+                   if(bubble.count > RemovedBubbleCount){
+
+                     bubble.count--;
+
+                   }
+
+          })
+
+          console.log(newChosenBubbleArray);
 
             // adjusting the bar to desired levels
 
@@ -91,24 +108,26 @@ var dis=this;
             currentBubbleCount--;
 
 
+            // after removing, needs to take the count down of the ones chosen that have higher count
+            //1. check for all traits.count > this count
+
+
+
 
             var arr= this.props.bubblesArray;
             var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
 
-
             bubblesArrayData.map(function(bubble , i){
-
               if( RemovedBubbleCount < bubble.count ){
-
                 console.log(bubble.name);
                 bubble.count--;
               }
-
                 if(i == dis.props.id){
                   bubble.count = 0 ;
                 }
-
             })
+
+
 
             var newBubbleArray= Object.assign( {}, bubblesArrayData )
 
