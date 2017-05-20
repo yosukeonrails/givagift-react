@@ -42,6 +42,7 @@ componentWillMount(){
 
      if(this.props.loggedUser && this.props.params.id ){
 
+
     this.props.dispatch( findGiftFormById( this.props.params.id, this.props.loggedUser.facebookId  ) ).then(function(){
 
       var data=  Object.assign({}, dis.props.foundGiftForm )
@@ -69,10 +70,13 @@ hideResults(){
 goNext(){
 
   var dis=this;
+  console.log(this.props.chosenBubbleArray);
 
   var data=  Object.assign({}, this.props.giftFormState , {traits:this.props.chosenBubbleArray})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
+
       hashHistory.push('/levels/'+dis.props.giftFormState.id)
+
     });
 
 }
@@ -175,7 +179,8 @@ return {
   newBubbleArray:state.newBubbleArray,
   giftFormState:state.giftFormState,
   foundGiftForm:state.foundGiftForm,
-  loggedUser:state.loggedUser
+  loggedUser:state.loggedUser,
+  chosenBubbleArray:state.chosenBubbleArray
 }
 }
 
