@@ -1,7 +1,7 @@
 var actions = require('../actions/index');
 var resultsArray = require('../results.js');
 var questionsArray =  require('../questions.js');
-import {INITIALIZE_RESULTS,CHANGE_MODE,SAVE_GIFT_FORM, FIND_GIFT_FORM_BY_ID, GET_LAST_GIFT_FORM, DELETE_LAST_GIFT_FORM,CHANGE_REDIRECT,ADD_BUBBLE,BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
+import {INITIALIZE_RESULTS,CHANGE_MODE,SAVE_GIFT_FORM, SAVE_CHOSEN_BUBBLE,FIND_GIFT_FORM_BY_ID, GET_LAST_GIFT_FORM, DELETE_LAST_GIFT_FORM,CHANGE_REDIRECT,ADD_BUBBLE,BUBBLE_COUNT,LAYOUT_STATE ,LOG_OUT,GET_GIFT_LISTS,SET_CURRENT_QUERY, ZERO_QUESTION, SAVE_RESULT_DATA,SAVE_LIST_INFO, ARROW_RIGHT,GET_FACEBOOK_USER, LOG_MOCK_USER, NEXT_QUESTION, LOG_IN, CALL_AMAZON,CALL_AMAZON_CALLS, SET_ANSWER_POINTS, SELECT_ANSWER, SUBMIT_ANSWER_POINT, GET_MAX, SET_QUERY} from '../actions/index';
 import {handle} from 'redux-pack';
 import cssStyle from '../css-variables.js'
 import mainBubbleData from '../components/bubbledata.js'
@@ -23,6 +23,7 @@ var defaultGiftForm={
 }
 
 var stateDefault = {
+  chosenBubbleArray:[],
     lastGiftFormState:'none',
     giftFormState:defaultGiftForm,
     countData:[],
@@ -398,6 +399,14 @@ var reducer = function(state, action) {
                 state.countData= action.countData;
 
               break;
+
+
+              case SAVE_CHOSEN_BUBBLE:
+
+                    return  { ...state , chosenBubbleArray : action.chosenBubbleArray }
+
+              break;
+
 
           case ADD_BUBBLE:
 

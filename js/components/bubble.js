@@ -2,7 +2,7 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 import {connect} from 'react-redux';
-import {getFacebookUser, layOutState, changeMode,logOut, bubbleCount , addBubble} from '../actions/index.js'
+import {getFacebookUser, layOutState, changeMode,logOut, bubbleCount , addBubble, saveChosenBubble} from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -24,9 +24,15 @@ export class Bubble extends React.Component{
 constructor(props){
 super(props);
  this.chooseBubble= this.chooseBubble.bind(this);
+
+
+
 }
 
 componentWillMount(){
+
+
+
   this.setState({
     bubbleChosen:false,
     count:''
@@ -54,6 +60,7 @@ var dis=this;
           var RemovedBubbleCount= this.props.bubbleData.count ;
 
           // darken bubble
+
           $('.bubble-inside-'+e.target.id ).css("background", bubbleState.unchosen);
           this.setState({bubbleChosen:false});
 
@@ -62,16 +69,18 @@ var dis=this;
               return bubble=== dis.props.bubbleData.name;
           }
           var unchosenBubble= chosenBubbleArray.findIndex(checkBubble);
+          var newChosenBubbleArray= this.props.chosenBubbleArray;
+          newChosenBubbleArray.splice(unchosenBubble,1);
           chosenBubbleArray.splice(unchosenBubble, 1);
-          console.log(chosenBubbleArray);
+          
             // adjusting the bar to desired levels
           barWidth= (chosenBubbleArray.length*150)+'px'
           $('.counter-bar-full').css("width",barWidth )
 
 
-
-
             currentBubbleCount--;
+
+
 
             var arr= this.props.bubblesArray;
             var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
@@ -94,7 +103,8 @@ var dis=this;
             var newBubbleArray= Object.assign( {}, bubblesArrayData )
 
 
-          this.props.dispatch(addBubble(newBubbleArray));
+              this.props.dispatch(addBubble(newBubbleArray));
+              this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
 
       }
 
@@ -126,9 +136,14 @@ var dis=this;
         currentBubbleCount++
 
         var chosenBubble={
+          name:this.props.bubbleData.name,
+          url:this.props.bubbleData.url,
           id:this.props.id,
-          count:currentBubbleCount
+          count:currentBubbleCount,
+          percentage:(100-(currentBubbleCount-1)*25)
         }
+
+
 
         var addedBubbleData={
           name:this.props.bubbleData.name,
@@ -138,10 +153,17 @@ var dis=this;
 
 
         var newBubbleArray=  Object.assign( {}, this.props.bubblesArray)
-
         newBubbleArray[chosenBubble.id].count = currentBubbleCount;
 
 
+
+        var newChosenBubbleArray= this.props.chosenBubbleArray;
+        newChosenBubbleArray.push(chosenBubble);
+        console.log(newChosenBubbleArray);
+
+
+
+        this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
         this.props.dispatch(addBubble(newBubbleArray));
 
       }
@@ -191,7 +213,8 @@ return {
  layOutState:state.layOutState,
  mode:state.mode,
  bubblesArray:state.bubblesArray,
- loggedUser:state.loggedUser
+ loggedUser:state.loggedUser,
+ chosenBubbleArray:state.chosenBubbleArray
 }
 }
 

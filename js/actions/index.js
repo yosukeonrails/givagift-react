@@ -27,11 +27,26 @@ export var CHANGE_MODE = 'CHANGE_MODE';
  export var ADD_BUBBLE = 'ADD_BUBBLE';
 
   export var addBubble= function(newBubbleArray){
+
+    console.log(newBubbleArray);
      return {
         type:ADD_BUBBLE,
         newBubbleArray:newBubbleArray
      }
   }
+
+
+  export var SAVE_CHOSEN_BUBBLE = 'SAVE_CHOSEN_BUBBLE';
+
+   export var saveChosenBubble= function(chosenBubbleArray){
+
+
+      return {
+         type:SAVE_CHOSEN_BUBBLE,
+         chosenBubbleArray:chosenBubbleArray
+      }
+   }
+
 
 
    export var CHANGE_REDIRECT = 'CHANGE_REDIRECT';
