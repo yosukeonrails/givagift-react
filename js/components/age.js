@@ -61,7 +61,7 @@ export class Age extends React.Component{
 
         var dis=this;
 
-        var data=  Object.assign({}, this.props.giftFormState , {age:this.state.ageNumber})
+        var data=  Object.assign({}, this.props.giftFormState , {age:this.state.ageNumber}, {lastPage:'traits'})
           this.props.dispatch( saveGiftForm(data) ).then(function(){
             hashHistory.push('/traits/'+dis.props.giftFormState.id)
           });

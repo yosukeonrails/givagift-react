@@ -59,7 +59,7 @@ chooseGender(){
   console.log(this.state.chosenGender);
   var dis=this;
 
-  var data=  Object.assign({}, this.props.giftFormState ,  {gender:this.state.chosenGender})
+  var data=  Object.assign({}, this.props.giftFormState ,  {gender:this.state.chosenGender}, {lastPage:'age'})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
       hashHistory.push('/age/'+dis.props.giftFormState.id)
 

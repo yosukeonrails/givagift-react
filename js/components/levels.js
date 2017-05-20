@@ -27,7 +27,7 @@ render () {
 
 
 
-  var newChosenBubbleArray= this.props.chosenBubbleArray;
+  var newChosenBubbleArray= this.props.giftFormState.traits;
       newChosenBubbleArray.map(function( bubble, i){
            pointSum= pointSum+bubble.percentage;
     })

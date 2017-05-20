@@ -70,6 +70,7 @@ export class App extends React.Component{
 
         console.log(this.props);
         var dis=this;
+
         if(this.props.layOutState.optionOpen === false){
 
           $('.profile-option').css("display", "block");
@@ -181,7 +182,7 @@ export class App extends React.Component{
 
                 </div>
 
-                <div  onMouseLeave={this.openOptions}  className="profile-option" >
+                <div className="profile-option" >
 
                   <div  className="option-container">
                 <button onClick={this.openOptions}  ><h1 onClick={this.goLink}  id="/#/dashboard" >Dashboard</h1></button>

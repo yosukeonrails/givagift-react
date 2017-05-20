@@ -76,7 +76,7 @@ goNext(){
   var dis=this;
   console.log(this.props.chosenBubbleArray);
 
-  var data=  Object.assign({}, this.props.giftFormState , {traits:this.props.chosenBubbleArray})
+  var data=  Object.assign({}, this.props.giftFormState , {traits:this.props.chosenBubbleArray}, {lastPage:'levels'})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
 
       hashHistory.push('/levels/'+dis.props.giftFormState.id)

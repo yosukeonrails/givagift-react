@@ -69,21 +69,24 @@ super(props);
 }
 
 componentWillMount(){
+
   this.setState({
     percentage: this.props.percentage,
     mouseDown: false
   })
+
 }
 
 
 modifyPercentage(inc){
 
-  var newChosenBubbleArray= this.props.chosenBubbleArray
+  var newChosenBubbleArray= this.props.giftFormState.traits
   var dis=this;
 
   var pointSum=0;
 
-  var newChosenBubbleArray= this.props.chosenBubbleArray;
+  var newChosenBubbleArray= this.props.giftFormState.traits;
+  
       newChosenBubbleArray.map(function( bubble, i){
            pointSum= pointSum+bubble.percentage;
       })
@@ -180,15 +183,14 @@ render () {
 
 var pointSum=0;
 
-var newChosenBubbleArray= this.props.chosenBubbleArray;
+var newChosenBubbleArray= this.props.giftFormState.traits;
+
     newChosenBubbleArray.map(function( bubble, i){
          pointSum= pointSum+bubble.percentage;
     })
 
 
-
-
-var percentage= this.state.percentage;
+var percentage= this.props.percentage;
 var width= percentage * 4;
 var levelWidthData={
     levelContainerLight: width,

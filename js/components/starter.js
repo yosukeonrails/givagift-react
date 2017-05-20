@@ -44,6 +44,7 @@ super(props);
   this.toggleChecker= this.toggleChecker.bind(this);
   this.beginNewForm= this.beginNewForm.bind(this);
   this.discartForm= this.discartForm.bind(this);
+  this.continueForm= this.continueForm.bind(this);
   var dis=this;
 
 }
@@ -97,7 +98,7 @@ beginNewForm(){
   var dis=this;
 
   var date=new Date();
-  var data=  Object.assign({}, this.props.giftFormState , {facebookId:this.props.loggedUser.facebookId}, {id:randomId} , {startTime:date},{lastOpened:true}, {relationship:'not friends'})
+  var data=  Object.assign({}, this.props.giftFormState , {facebookId:this.props.loggedUser.facebookId}, {id:randomId} , {startTime:date},{lastOpened:true}, {lastPage:'gender'})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
 
       hashHistory.push('/gender/'+dis.props.giftFormState.id)
@@ -109,10 +110,15 @@ continueForm(){
 
   // copies lastGiftFormState , and assigns to data then posts as giftFormState
 
-  var data=  Object.assign({}, this.props.lastGiftFormState , {facebookId:this.props.loggedUser.facebookId}, {id:this.props.lastGiftFormState.id} , {lastOpened:true}, {relationship:'not friends'})
+  //gets
+   console.log(this.props.lastGiftFormState);
+   var dis=this;
+  var data=  Object.assign({}, this.props.lastGiftFormState)
+  console.log(data[0]);
+    this.props.dispatch( saveGiftForm(data[0]) ).then(function(){
 
-    this.props.dispatch( saveGiftForm(data) ).then(function(){
-      hashHistory.push('/gender')
+      hashHistory.push('/'+dis.props.giftFormState.lastPage+'/'+dis.props.giftFormState.id)
+
     });
 
 }
@@ -209,7 +215,7 @@ return(
               <h2> Would you like to continue<br></br> where you left off? </h2>
 
               <button  onClick={this.discartForm} id="red-button"> discart</button>
-              <button onClick={this.beginForm} > yes ! </button>
+              <button onClick={this.continueForm} > yes ! </button>
           </div>
       </div>
 
