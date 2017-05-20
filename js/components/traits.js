@@ -11,8 +11,8 @@ import BubbleContainer from './bubble.js'
 import defaultBubbleData from './defaultbubbles.js'
 
 var traitsAction={
-hideResults : () => {$('.traits-result').animate({opacity:0} , function(){ $('.traits-result').css("display" , "none") })   ; console.log('hidding') },
-showResults :() => { $('.traits-result').css("display", "block");  $('.traits-result').animate({opacity:1}) }
+hideResults : () => {$('.traits-result').animate({opacity:0} , 20 ,  function(){ $('.traits-result').css("display" , "none") })   ; console.log('hidding') },
+showResults :() => { $('.traits-result').css("display", "block"); console.log('showing results');  $('.traits-result').animate({opacity:1}) }
 }
 
 
@@ -95,7 +95,8 @@ render () {
   var arr= this.props.bubblesArray;
   var bubblesArrayData = Object.keys( arr).map(function (key) { return  arr[key] });
 
-
+  console.log(this.props.chosenBubbleArray.length);
+  console.log(this.props.giftFormState.traits);
 
   bubblesArrayData.map(function( bubble, i){
         if(bubble.count > 0 ){
@@ -103,15 +104,19 @@ render () {
         }
   })
 
-  if(chosenBubbleArray > 4){
+
+  if(this.props.chosenBubbleArray.length > 4){
       traitsAction.hideResults();
   }
 
-  if(chosenBubbleArray.length === 4 ){
-
+  if(this.props.chosenBubbleArray.length  === 4 ){
+    console.log('ITS 4 ');
     var showDelay =   setTimeout( function(){
+
+        console.log('showing ');
         traitsAction.showResults();
-      }, 1000);
+      }, 500 );
+
   } else {
 
       console.log('stopiing');

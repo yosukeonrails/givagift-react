@@ -89,8 +89,10 @@ var dis=this;
           newChosenBubbleArray.map(function(bubble, i ){
 
               console.log(RemovedBubbleCount);
-                   if(bubble.count > RemovedBubbleCount){
 
+                   if(bubble.count > RemovedBubbleCount){
+                     
+                    bubble.percentage = (70-( (bubble.count-1)-1)*20);
                      bubble.count--;
 
                    }
@@ -119,8 +121,11 @@ var dis=this;
 
             bubblesArrayData.map(function(bubble , i){
               if( RemovedBubbleCount < bubble.count ){
-                console.log(bubble.name);
+
+                bubble.percentage = (70-( (bubble.count-1)-1)*20);
+                console.log(bubble.percentage);
                 bubble.count--;
+
               }
                 if(i == dis.props.id){
                   bubble.count = 0 ;
@@ -128,6 +133,8 @@ var dis=this;
             })
 
 
+
+            console.log(bubblesArrayData);
 
             var newBubbleArray= Object.assign( {}, bubblesArrayData )
 
@@ -177,7 +184,7 @@ var dis=this;
           id:this.props.id,
           cssId:bubbleId,
           count:currentBubbleCount,
-          percentage:(100-(currentBubbleCount-1)*25)
+          percentage:(70-(currentBubbleCount-1)*20)
         }
 
 
@@ -241,7 +248,6 @@ $('.bubble-inside-'+bubbleId).css("background", bubbleState.unchosen); // defaul
         chosenBoolean=true;
         }
   })
-
 
 
 

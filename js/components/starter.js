@@ -42,8 +42,8 @@ super(props);
   this.decreaseSize= this.decreaseSize.bind(this);
   this.beginForm= this.beginForm.bind(this);
   this.toggleChecker= this.toggleChecker.bind(this);
-    this.beginNewForm= this.beginNewForm.bind(this);
-    this.discartForm= this.discartForm.bind(this);
+  this.beginNewForm= this.beginNewForm.bind(this);
+  this.discartForm= this.discartForm.bind(this);
   var dis=this;
 
 }
@@ -83,7 +83,7 @@ var dis=this;
 
   this.props.dispatch( deleteLastGiftForm( this.props.lastGiftFormState[0].id ) ).then(function(){
             // delete and then dispatch begginNewForm
-            dis.beginNewForm();
+    dis.beginNewForm();
 
   })
 
@@ -206,7 +206,7 @@ return(
     <div className="dark-shade">
           <div className="checker">
               <h1> Hey , you have some unfinished business!</h1>
-              <h2> Would you like to continue where you left off? </h2>
+              <h2> Would you like to continue<br></br> where you left off? </h2>
 
               <button  onClick={this.discartForm} id="red-button"> discart</button>
               <button onClick={this.beginForm} > yes ! </button>

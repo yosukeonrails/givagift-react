@@ -18,6 +18,30 @@ super(props);
 
 render () {
 
+  var renderedLevels= this.props.giftFormState.traits;
+  var renderedLevelsArray=[];
+
+  var pointSum=0;
+
+
+
+
+
+  var newChosenBubbleArray= this.props.chosenBubbleArray;
+      newChosenBubbleArray.map(function( bubble, i){
+           pointSum= pointSum+bubble.percentage;
+    })
+
+
+  var pointsLeft= 250 - pointSum;
+    console.log(pointsLeft);
+
+  renderedLevels.map(function(level , i ){
+
+    renderedLevelsArray.push( <LevelContainer percentage={level.percentage} id={level.id} name={level.name} backgroundImage={level.url}/> )
+
+  })
+
 
 return(
 <div>
@@ -27,16 +51,10 @@ return(
   <div className="levels-container">
 
         <h1> Chooose your Levels </h1>
-
+        <h1>{pointsLeft} points left</h1>
       <button className="done-button">done</button>
 
-      <LevelContainer percentage={30} name={'musician'} backgroundImage={'url(https://source.unsplash.com/2UuhMZEChdc/1600x900)'}/>
-      <LevelContainer percentage={80} name={'geek'} backgroundImage={'url(https://source.unsplash.com/eIhH7RTlTZA/1600x900)'}/>
-
-           <LevelContainer percentage={50} name={'fooder'} backgroundImage={'url(https://source.unsplash.com/TO69trRWlrI/1600x900)'}/>
-
-                 <LevelContainer percentage={20} name={'outdoor'} backgroundImage={'url(https://source.unsplash.com/4F1ijaoCTlg/1600x900)'}/>
-
+      {renderedLevelsArray}
 
 </div>
 
@@ -53,7 +71,9 @@ console.log(state);
 return {
  user:state.user,
  mode:state.mode,
- loggedUser:state.loggedUser
+ loggedUser:state.loggedUser,
+ giftFormState:state.giftFormState,
+ chosenBubbleArray:state.chosenBubbleArray
 }
 }
 

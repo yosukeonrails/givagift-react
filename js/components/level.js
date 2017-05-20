@@ -4,7 +4,7 @@ var orange='#ff7733';
 var mouseDown=false;
 import Tappable from 'react-tappable';
 import {connect} from 'react-redux';
-import {getFacebookUser, layOutState, changeMode,logOut } from '../actions/index.js'
+import {getFacebookUser, layOutState, changeMode,logOut , saveChosenBubble, saveGiftForm} from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -41,15 +41,29 @@ super(props);
     this.mouseUp= this.mouseUp.bind(this);
     this.modifyPercentage=this.modifyPercentage.bind(this);
     var dis = this;
+
+
+
     setInterval(() => {
       if (this.state.mouseDown) {
+
+
+
         if (this.state.isPlus) {
-          dis.modifyPercentage(1)
+
+          if(this.state.percentage >= 100){
+              return;
+          }
+
+          dis.modifyPercentage(10)
+
         } else {
-          dis.modifyPercentage(-1)
+
+          dis.modifyPercentage(-10)
+
         }
       }
-    }, 20);
+    }, 100);
 
 
 }
@@ -63,9 +77,56 @@ componentWillMount(){
 
 
 modifyPercentage(inc){
-      this.setState({
-        percentage: this.state.percentage + inc
+
+  var newChosenBubbleArray= this.props.chosenBubbleArray
+  var dis=this;
+
+  var pointSum=0;
+
+  var newChosenBubbleArray= this.props.chosenBubbleArray;
+      newChosenBubbleArray.map(function( bubble, i){
+           pointSum= pointSum+bubble.percentage;
       })
+
+
+
+  if(inc > 0){
+
+    if(this.state.percentage >= 100 || pointSum >= 250 ){
+
+        return;
+    }
+
+  } else {
+
+    if(this.state.percentage <= 0 ){
+
+        return;
+    }
+
+  }
+
+
+  newChosenBubbleArray.map(function(bubble , i ){
+
+          if(bubble.id === dis.props.id){
+                bubble.percentage = dis.state.percentage+inc
+          }
+
+  })
+
+      this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
+
+      var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray})
+      this.props.dispatch( saveGiftForm(data) ).then(function(){
+        console.log('dispatched bubble remove');
+        });
+
+
+        this.setState({
+          percentage: this.state.percentage + inc
+        })
+
 }
 
 mouseDown(isPlus){
@@ -117,6 +178,13 @@ lessPercentage(){
 
 render () {
 
+var pointSum=0;
+
+var newChosenBubbleArray= this.props.chosenBubbleArray;
+    newChosenBubbleArray.map(function( bubble, i){
+         pointSum= pointSum+bubble.percentage;
+    })
+
 
 
 
@@ -134,7 +202,7 @@ return(
   <div className="single-level-container">
 
     <div className="minus-button">
-      <button  onMouseDown={() => this.mouseDown(false)} onMouseUp={() => this.mouseUp(false)}  > - </button>
+      <button  onClick={()=> this.modifyPercentage(-10)} onMouseDown={() => this.mouseDown(false)} onMouseUp={() => this.mouseUp(false)}  > - </button>
 
     </div>
 
@@ -146,13 +214,15 @@ return(
                                               </div>
                                       </div>
 
+
+
                                       <div className="level-container-dark-words">
-                                          <h1> {this.props.name} {percentage}% </h1>
+                                          <h1> {this.props.name} {percentage} <span className="level-pts" >pts</span> </h1>
                                       </div>
 
                                       <div style={{width:levelWidthData.levelContainerLight , backgroundImage:this.props.backgroundImage}} className="level-container-light">
                                             <div style={{width:levelWidthData.levelContainerLightWordsWidth}}  className="level-container-light-words">
-                                                <h1> {this.props.name} {percentage}%   </h1>
+                                                <h1> {this.props.name} {percentage} <span className="level-pts">pts</span>  </h1>
                                             </div>
                                             <div className="level-container-light-shader">
                                             </div>
@@ -162,7 +232,7 @@ return(
 
           <div className="plus-button">
 
-             <button  onMouseDown={() => this.mouseDown(true)} onMouseUp={() => this.mouseUp(true)}  > + </button>
+             <button onClick={()=> this.modifyPercentage(+10)} onMouseDown={() => this.mouseDown(true)} onMouseUp={() => this.mouseUp(true)}  > + </button>
 
           </div>
 
@@ -183,7 +253,9 @@ return {
  user:state.user,
  layOutState:state.layOutState,
  mode:state.mode,
- loggedUser:state.loggedUser
+ loggedUser:state.loggedUser,
+ chosenBubbleArray:state.chosenBubbleArray,
+ giftFormState:state.giftFormState
 }
 }
 

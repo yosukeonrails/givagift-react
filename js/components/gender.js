@@ -17,12 +17,10 @@ import FooterContainer from './footer.js'
 
  function increaseWidthHeight(e){
 
-      var element= $('#'+e)
-      element.stop()
-   element.animate({height:'200px', width: '200px'}, 300 , function(){
-
-
-   })
+  //     var element= $('#'+e)
+  //     element.stop()
+  //  element.animate({height:'200px', width: '200px'}, 300 , function(){
+  //  })
  }
 
 
