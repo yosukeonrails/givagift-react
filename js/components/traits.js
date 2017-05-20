@@ -28,14 +28,16 @@ this.goNext = this.goNext.bind(this);
 
 componentWillMount(){
 
-  console.log('component will mount default bubble ');
-  console.log(defaultBubbleData);
-  this.props.dispatch(addBubble(defaultBubbleData))
+  // console.log('component will mount default bubble ');
+  // console.log(defaultBubbleData);
+  // this.props.dispatch(addBubble(defaultBubbleData))
 
 
   var dis=this;
 
   this.props.dispatch(getFacebookUser()).then(function(){
+
+        console.log(dis.props.loggedUser);
 
           })
 
@@ -54,6 +56,8 @@ componentWillMount(){
   }  else {
 
     console.log('no user ');
+    console.log(this.props.loggedUser);
+    console.log(this.props.params.id);
     hashHistory.push('/home')
 
   }

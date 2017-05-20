@@ -2,7 +2,7 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 import {connect} from 'react-redux';
-import {getFacebookUser, layOutState, changeMode,logOut, bubbleCount , addBubble, saveChosenBubble} from '../actions/index.js'
+import {getFacebookUser, layOutState, changeMode,logOut,saveGiftForm, bubbleCount , addBubble, saveChosenBubble} from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -31,6 +31,13 @@ super(props);
 
 componentWillMount(){
 
+  // when rendering, check the database inside the gifFormArray chosen Bubble look one with same id//
+  // if found, setState bubblChosen true
+  // if not, setState bubbleChosen false
+
+
+  // later, inside render function, get a conditional
+      //if state.bubbleChosen true , darkened bubble csss, and what number.
 
 
   this.setState({
@@ -39,14 +46,15 @@ componentWillMount(){
   })
 }
 
-chooseBubble(e){
-
-var target=e.target.id;
+chooseBubble(chosenBoolean, bubbleId ){
+  console.log(chosenBoolean);
+  console.log(bubbleId);
+var target=bubbleId;
 var dis=this;
 
           // Bubble explodes animation//
 
-          $('.'+e.target.id ).animate({width:'180px', height:'180px', opacity:0}, function(){
+          $('.'+bubbleId ).animate({width:'180px', height:'180px', opacity:0}, function(){
             $('.'+target ).css("opacity","1")
             $('.'+target ).css("width","120px");
             $('.'+target ).css("height","120px");
@@ -54,26 +62,28 @@ var dis=this;
 
     // removing already chosen bubbles
 
-      if(this.state.bubbleChosen === true){
+      if(chosenBoolean === true){
 
           var dis=this;
           var RemovedBubbleCount= this.props.bubbleData.count ;
 
-          // darken bubble
-
-          $('.bubble-inside-'+e.target.id ).css("background", bubbleState.unchosen);
-          this.setState({bubbleChosen:false});
-
           // take out one from chosen Bubble array
           function checkBubble(bubble) {
-              return bubble=== dis.props.bubbleData.name;
+            console.log(bubble.id);
+            console.log(dis.props.id);
+              return bubble.id=== dis.props.id;
           }
-          var unchosenBubble= chosenBubbleArray.findIndex(checkBubble);
+
+          var unchosenBubble= this.props.giftFormState.traits.findIndex(checkBubble);
+
+          console.log(unchosenBubble);
+
           var newChosenBubbleArray= this.props.chosenBubbleArray;
           newChosenBubbleArray.splice(unchosenBubble,1);
           chosenBubbleArray.splice(unchosenBubble, 1);
-          
+
             // adjusting the bar to desired levels
+
           barWidth= (chosenBubbleArray.length*150)+'px'
           $('.counter-bar-full').css("width",barWidth )
 
@@ -106,20 +116,27 @@ var dis=this;
               this.props.dispatch(addBubble(newBubbleArray));
               this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
 
+              var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray})
+              this.props.dispatch( saveGiftForm(data) ).then(function(){
+                console.log('dispatched bubble remove');
+                });
+
       }
 
       else
 
       {
 
-        // choonse and add a bubble
+        // CHOOSE A BUBBLE
 
         if(chosenBubbleArray.length>= 4){
+          console.log('more than 4 mate');
           return
         }
 
        // make bubble dark and makes it chosen
-        $('.bubble-inside-'+e.target.id ).css("background", bubbleState.chosen);
+        // $('.bubble-inside-'+bubbleId ).css("background", bubbleState.chosen);
+
         this.setState({bubbleChosen:true});
 
       // pushes it to chosenBubbleArray
@@ -139,6 +156,7 @@ var dis=this;
           name:this.props.bubbleData.name,
           url:this.props.bubbleData.url,
           id:this.props.id,
+          cssId:bubbleId,
           count:currentBubbleCount,
           percentage:(100-(currentBubbleCount-1)*25)
         }
@@ -164,7 +182,16 @@ var dis=this;
 
 
         this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
+
+        var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray})
+
+          this.props.dispatch( saveGiftForm(data) ).then(function(){
+          console.log('dispatched');
+          });
+
+
         this.props.dispatch(addBubble(newBubbleArray));
+
 
       }
 
@@ -180,15 +207,31 @@ var bubbleOutsideClass='bubble-outside'+' bubble'+this.props.id;
 var bubbleInsideClass='bubble-inside'+' bubble-inside-bubble'+this.props.id;
 countData= this.props.countData;
 var dis=this
-
 var renderedCount= this.props.bubbleData.count;
+var chosenBoolean=false;
+$('.bubble-inside-'+bubbleId).css("background", bubbleState.unchosen); // default bubble color
+
+
+// find bubble that is chosen and see if its equal to this bubble;
+  this.props.giftFormState.traits.map(function(chosenBubble, i ){
+
+        if( chosenBubble.id=== dis.props.id){
+
+        $('.bubble-inside-'+chosenBubble.cssId).css("background", bubbleState.chosen);
+        renderedCount=chosenBubble.count;
+        chosenBoolean=true;
+        }
+  })
+
+
+
 
  if(renderedCount ===0){
    renderedCount="";
  }
 
 return(
-    <div  id={bubbleId} onClick={this.chooseBubble} className="bubble-container">
+    <div  id={bubbleId} onClick={ ()=> this.chooseBubble(chosenBoolean, bubbleId)} className="bubble-container">
 
         <div id={bubbleId} className={bubbleOutsideClass} >
         </div>
@@ -214,7 +257,8 @@ return {
  mode:state.mode,
  bubblesArray:state.bubblesArray,
  loggedUser:state.loggedUser,
- chosenBubbleArray:state.chosenBubbleArray
+ chosenBubbleArray:state.chosenBubbleArray,
+ giftFormState:state.giftFormState
 }
 }
 
