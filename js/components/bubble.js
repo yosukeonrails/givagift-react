@@ -91,7 +91,7 @@ var dis=this;
               console.log(RemovedBubbleCount);
 
                    if(bubble.count > RemovedBubbleCount){
-                     
+
                     bubble.percentage = (70-( (bubble.count-1)-1)*20);
                      bubble.count--;
 
