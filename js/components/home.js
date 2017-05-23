@@ -198,6 +198,36 @@ export class Home extends React.Component{
 
       </div>
 
+      <div className="home-instruction-1">
+
+          <div className="home-instruction-text">
+            <h1>#1 Tell Us About Your Friend.</h1>
+
+          <p> We find the best fitting gift by , asking you exactly how that person is like.</p>
+          </div>
+
+          <div className="home-instruction-image" id="givagift-example-1">
+          </div>
+
+      </div>
+
+
+      <div className="home-instruction-2">
+
+        <div className="home-instruction-image" id="givagift-example-2">
+        </div>
+
+          <div className="home-instruction-text">
+
+            <h1>#2 We bring you the best results!</h1>
+
+          <p> Choose from over 200 million selection from the great Amazon store.</p>
+          </div>
+
+
+
+      </div>
+
 
 <div  className="whatwedo">
 
@@ -230,13 +260,11 @@ export class Home extends React.Component{
 
 
         <div className="affiliate-section">
-
             <h1>Choose from over 200 million products from the great Amazon store.</h1>
 
             <p> By participating in the Amazon Services LLC Associates Program , Givagift is able to provide an immense variety of products to choose from!</p>
 
             <div className="products">
-
         </div>
 
 

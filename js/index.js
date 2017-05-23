@@ -10,8 +10,6 @@ var hashHistory = router.hashHistory;
 var IndexRoute = router.IndexRoute;
 
 
-
-
 import { Provider } from 'react-redux';
 
 import store from './store';
@@ -30,6 +28,7 @@ import HomeContainer from './components/home.js'
 import AgeContainer from './components/age.js'
 import StarterContainer from './components/starter.js'
 import RedirectContainer from './components/redirect.js'
+import GiftResultsContainer from './components/gift-results.js'
 
 
 var routes = (
@@ -38,7 +37,6 @@ var routes = (
 
            <IndexRoute component={MainApp} />
                 <Route path="/home" component={HomeContainer}/>
-                <Route path="/results/:id" component={ResultsAppContainer} />
                 <Route path="/dashboard" component={DashboardContainer}/>
                 <Route path="/home" component={LandingPageContainer}/>
                 <Route path="/result/:id" component={ResultContainer}/>
@@ -50,6 +48,7 @@ var routes = (
                 <Route path="/age/:id" component={AgeContainer}/>
                 <Route path="/starter" component={StarterContainer}/>
                 <Route path="/redirect" component={RedirectContainer}/>
+                <Route path="/results" component={GiftResultsContainer}/>
            </Route>
    </Router>
 );
