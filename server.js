@@ -148,7 +148,10 @@ var query= {
        new:true
      }, function(err, data){
           console.log(err);
+          console.log('here is the data')
+          console.log(data)
           res.status(201).json(data);
+
      });
 
 });

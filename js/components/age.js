@@ -20,7 +20,7 @@ var ageIndex=[
   {name:"elder", firstN:60 , lastN:100 , traits:["elder","adult","young-adult"] }
 ]
 
-
+var relationshipIndex=["friend" , "dad" , "mom", "relative", "boyfriend" , "girlfriend"];
 
 export class Age extends React.Component{
 
@@ -31,6 +31,7 @@ export class Age extends React.Component{
         this.handleMonth= this.handleMonth.bind(this);
         this.handleDay= this.handleDay.bind(this);
         this.next= this.next.bind(this);
+        this.chooseRelationship= this.chooseRelationship.bind(this);
       }
 
       componentWillMount(){
@@ -63,8 +64,31 @@ export class Age extends React.Component{
       componentDidMount(){
 
         this.setState({
-          ageNumber:25
+          ageNumber:25,
+          relationship:{
+            name:"friend",
+            traits:["friend"]
+          }
         })
+
+      }
+
+      chooseRelationship(e){
+
+           var index= relationshipIndex.indexOf(e.target.value);
+
+           var relationshipInfoArray=[
+
+                 {name:'friend' , traits:["friend"] },
+                 {name:'dad' , traits:["dad","friend"] },
+                 {name:'mom' , traits:["mom", "friend"]},
+                 {name:'relative' , traits:["relative","friend"] },
+                 {name:'boyfriend' , traits:["boyfriend","friend"] },
+                 {name:'girlfriend' , traits:["girlfriend","friend"] }
+
+            ]
+
+         this.setState({relationship: relationshipInfoArray[index] }) ;
 
       }
 
@@ -73,6 +97,7 @@ export class Age extends React.Component{
         var dis=this;
         var x= this.state.ageNumber;
         var chosenAge;
+
 
         for( var i=0 ; i < ageIndex.length ; i++){
 
@@ -86,15 +111,25 @@ export class Age extends React.Component{
                 }
         }
 
-          console.log(chosenAge)
+    
 
-        var data=  Object.assign({}, this.props.giftFormState , {age:chosenAge}, {lastPage:'traits'})
+        var data=  Object.assign({}, this.props.giftFormState ,{age:chosenAge}, {lastPage:'traits'}, {relationship:this.state.relationship});
+          // data=  Object.assign({}, this.props.giftFormState , {relationship:chosenRelationship})
+          // data=  Object.assign({}, this.props.giftFormState , {lastPage:'traits'})
+
+        console.log('here is data')
+
+        console.log(data)
           this.props.dispatch( saveGiftForm(data) ).then(function(){
+
             hashHistory.push('/traits/'+dis.props.giftFormState.id)
+
           });
 
 
       }
+
+
 
       handleMonth(e){
 
@@ -139,15 +174,15 @@ export class Age extends React.Component{
         return(
         <div className="age-page">
 
-            <div className="age-question">
+            <div onChange={this.chooseRelationship} className="age-question">
               <h1>How young is your</h1>
                     <select>
                     <option value="friend">Friend ?</option>
                     <option value="relative">Relative ?</option>
                     <option value="girlfriend">Girlfriend ?</option>
                     <option value="boyfriend">Boyfriend ?</option>
-                      <option value="Mom">Mom ?</option>
-                      <option value="Dad">Dad  ?</option>
+                      <option value="mom">Mom ?</option>
+                      <option value="dad">Dad  ?</option>
                   </select>
 
 

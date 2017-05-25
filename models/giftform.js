@@ -11,7 +11,7 @@ var GiftFormSchema = new mongoose.Schema({
   bdDay:Number,
   friendName:String,
   gender:Object,
-  relationship:String,
+  relationship:Object,
   age:Object,
   date:Number,
   month:Number,
