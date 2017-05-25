@@ -57,25 +57,14 @@ super(props);
 chooseGender(){
 
   var genders=["gentleman", "lady","robot"];
-  console.log('gender')
-  console.log(this.state.chosenGender)
-
-
   var genderIndex= genders.indexOf(this.state.chosenGender);
-  console.log('index')
-  console.log(genderIndex)
-
   var genderInfoArray=[{name:'male' , traits:["male", "male-other"]}, {name:'female' , traits:["female", "female-other"]}, {name:'other' , traits:["female-other", "male-other"] }]
-
   var chosenGenderObject= genderInfoArray[genderIndex]
-
-   console.log(chosenGenderObject);
 
   var dis=this;
   var data=  Object.assign({}, this.props.giftFormState ,  {gender:chosenGenderObject}, {lastPage:'age'})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
       hashHistory.push('/age/'+dis.props.giftFormState.id)
-
     });
 
 }

@@ -9,6 +9,17 @@ import {hashHistory} from 'react-router'
 import FooterContainer from './footer.js'
 var age= 25;
 
+var ageIndex=[
+
+  {name:"baby", firstN:0 , lastN: 3 , traits:["baby","todler"] } ,
+  {name:"kids", firstN:3 , lastN: 10 , traits:["todler","kids"] } ,
+  {name:"preteen", firstN:10 , lastN:12, traits:["preteen","teen","kids"] } ,
+  {name:"teen", firstN:13 , lastN: 19, traits:["teen","preteen","young-adult"] } ,
+  {name:"young-adult", firstN:20 , lastN:30 , traits:["young-adult","adult","teen"] } ,
+  {name:"adult", firstN:30 , lastN:60 , traits:["adult","young-adult","elder"] } ,
+  {name:"elder", firstN:60 , lastN:100 , traits:["elder","adult","young-adult"] }
+]
+
 
 
 export class Age extends React.Component{
@@ -60,8 +71,24 @@ export class Age extends React.Component{
       next(){
 
         var dis=this;
+        var x= this.state.ageNumber;
+        var chosenAge;
 
-        var data=  Object.assign({}, this.props.giftFormState , {age:this.state.ageNumber}, {lastPage:'traits'})
+        for( var i=0 ; i < ageIndex.length ; i++){
+
+            var firstN= ageIndex[i].firstN;
+            var lastN= ageIndex[i].lastN;
+
+            if(x==firstN){ chosenAge= ageIndex[i] };
+              if(x==lastN){ chosenAge= ageIndex[i] }
+                if(x > firstN){
+                      if(x < lastN){ chosenAge= ageIndex[i] }
+                }
+        }
+
+          console.log(chosenAge)
+
+        var data=  Object.assign({}, this.props.giftFormState , {age:chosenAge}, {lastPage:'traits'})
           this.props.dispatch( saveGiftForm(data) ).then(function(){
             hashHistory.push('/traits/'+dis.props.giftFormState.id)
           });
