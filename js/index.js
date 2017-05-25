@@ -29,6 +29,7 @@ import AgeContainer from './components/age.js'
 import StarterContainer from './components/starter.js'
 import RedirectContainer from './components/redirect.js'
 import GiftResultsContainer from './components/gift-results.js'
+import QueryPosterContainer from './components/query-poster.js'
 
 
 var routes = (
@@ -49,6 +50,7 @@ var routes = (
                 <Route path="/starter" component={StarterContainer}/>
                 <Route path="/redirect" component={RedirectContainer}/>
                 <Route path="/results" component={GiftResultsContainer}/>
+                  <Route path="/queryposter" component={QueryPosterContainer}/>
            </Route>
    </Router>
 );

@@ -11,7 +11,9 @@ var app = express();
 var List= require('./models/lists.js');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
-var GiftForm =  require('./models/giftform.js')
+var GiftForm =  require('./models/giftform.js');
+var Query= require('./models/query.js');
+
 mongoose.Promise = global.Promise;
 // mongoose.createConnection('mongodb://localhost/');
 //
@@ -248,6 +250,41 @@ app.delete('/giftform', function(req, res) {
     });
 
 });
+
+
+
+/// Query Post //
+
+app.post('/query', function(req, res){
+
+      var query={
+        id:req.body.id
+      }
+
+
+      var update= {
+
+        $set:{
+          name:req.body.gender,
+          gender:req.body.gender,
+          relationship:req.body.relationship,
+          StartTime:req.body.StartTime,
+          holiday:req.body.holiday,
+          traits:req.body.traits
+        }
+
+      }
+
+      Query.findOneAndUpdate( query , update ,  {
+        upsert:true,
+        new:true
+      }, function(err, data){
+           console.log(err);
+           res.status(201).json(data);
+      });
+
+})
+
 
 
 
