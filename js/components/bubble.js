@@ -199,17 +199,20 @@ var dis=this;
         var newBubbleArray=  Object.assign( {}, this.props.bubblesArray)
         newBubbleArray[chosenBubble.id].count = currentBubbleCount;
 
-
+        var queryArray=[];
 
         var newChosenBubbleArray= this.props.chosenBubbleArray;
         newChosenBubbleArray.push(chosenBubble);
         console.log(newChosenBubbleArray);
 
+        newChosenBubbleArray.map(function(bubble){
+              queryArray.push(bubble.name);
+        })
 
 
         this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
 
-        var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray})
+        var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray} , {personality:queryArray})
 
           this.props.dispatch( saveGiftForm(data) ).then(function(){
           console.log('dispatched');

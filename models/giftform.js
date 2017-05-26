@@ -21,7 +21,8 @@ var GiftFormSchema = new mongoose.Schema({
   finished:Boolean,
   lastOpened:Boolean,
   //$push parameter
-  traits:Object
+  traits:Object,
+  personality:Object
 
 });
 

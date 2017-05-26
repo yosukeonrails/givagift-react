@@ -132,7 +132,8 @@ var query= {
       lastPage:req.body.lastPage,
       traits:req.body.traits,
       finished:req.body.finished,
-      lastOpened:req.body.lastOpened
+      lastOpened:req.body.lastOpened,
+      personality:req.body.personality
     }
 
       // $push:{
@@ -172,9 +173,7 @@ var query= {
 
         res.json(data);
 
-   })
-
-
+      })
  })
 
 // get gift Form

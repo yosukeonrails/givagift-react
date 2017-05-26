@@ -19,7 +19,8 @@ var defaultGiftForm={
   bdMonth: 0,
   traits:[],
   finished:false,
-  lastOpened:false
+  lastOpened:false,
+  personality:'none'
 }
 
 var stateDefault = {

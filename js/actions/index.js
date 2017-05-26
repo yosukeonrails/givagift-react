@@ -466,7 +466,8 @@ body:JSON.stringify({
   lastPage:data.lastPage,
   traits:data.traits,
   finished:data.finished,
-  lastOpened:data.lastOpened
+  lastOpened:data.lastOpened,
+  personality:data.personality
 
 })
 

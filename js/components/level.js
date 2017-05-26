@@ -86,11 +86,10 @@ modifyPercentage(inc){
   var pointSum=0;
 
   var newChosenBubbleArray= this.props.giftFormState.traits;
-  
+
       newChosenBubbleArray.map(function( bubble, i){
            pointSum= pointSum+bubble.percentage;
       })
-
 
 
   if(inc > 0){
@@ -109,6 +108,7 @@ modifyPercentage(inc){
 
   }
 
+  var percentageArray=[];
 
   newChosenBubbleArray.map(function(bubble , i ){
 
@@ -116,11 +116,69 @@ modifyPercentage(inc){
                 bubble.percentage = dis.state.percentage+inc
           }
 
+          percentageArray.push(bubble.percentage);
+
   })
+
+          percentageArray.sort(function(a, b){return a-b});
+          percentageArray.reverse();
+          
+var sortedPercentageArray=[];
+
+  var sortedQuery=[];
+
+        function sortPercentageArray(queryArray ,  sortedArray , v, sortedPercentageArray){
+
+             if(v=== sortedArray.length){
+                  return sortedPercentageArray;
+             }
+
+             var notEqualArray=[];
+
+
+                  function findEqualNumber (sortedArray , queryArray, v){
+
+                        for(var i=0 ; i < queryArray.length ; i ++ ){
+
+                            if(queryArray[i].percentage === sortedArray[v]){
+
+                                 var foundEqualNumber= queryArray[i];
+
+                                            for(var j=0 ; j < queryArray.length ; j ++){
+                                                  // push everything else except i //
+                                                  if(i !== j){
+                                                     notEqualArray.push(queryArray[j])
+
+                                                  }
+
+                                            }
+
+                                return foundEqualNumber;
+                            }
+                      }
+
+                }
+
+                var equalNumber= findEqualNumber(sortedArray , queryArray , v);
+
+                sortedPercentageArray.push(equalNumber);
+                  sortedQuery.push(equalNumber.name);
+
+                  sortPercentageArray( notEqualArray,  sortedArray , v+1, sortedPercentageArray);
+
+        }
+
+
+        sortPercentageArray(newChosenBubbleArray ,  percentageArray, 0, sortedPercentageArray);
+
+
+          var newChosenBubbleArrayRef= newChosenBubbleArray;
+
 
       this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
 
-      var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray})
+
+      var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray} , {personality:sortedQuery})
       this.props.dispatch( saveGiftForm(data) ).then(function(){
         console.log('dispatched bubble remove');
         });
@@ -158,6 +216,7 @@ mouseDown(isPlus){
 
 
 }
+
 mouseUp(isPlus){
   //clearInterval(this.mouseDown());
 
