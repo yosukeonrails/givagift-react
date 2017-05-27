@@ -5,6 +5,10 @@
 
                 var itemInfo=[
                     {
+                      array: ["other","male","female"],
+                      x: 2
+                    },
+                    {
                        array:["friend" ,"dad" , "mom", "relative", "boyfriend" , "girlfriend"],
                        x: 1
                      },
@@ -16,11 +20,8 @@
                        array:
                       ["Geek" , "Introvert" , "Outdoor" , "Sporty" , "Musician" , "Cute" , "Foody" , "Decoration" , "Fashion"],
                        x:4
-                     },
-                     {
-                       array: ["other","male","female"],
-                       x: 2
                      }
+
                 ]
 
 
@@ -67,7 +68,7 @@
                                          match2:0,
                                          match3:0,
                                          inclusion:0,
-                                         randomId:item.randomId
+                                         id:item.id
                                        }
 
 
@@ -131,7 +132,7 @@
              var randomN=Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5);
              var randomId= randomC+randomN
 
-               queryArray.push(generateQuery(itemInfo , 0 , { queries:[], randomId:randomId }  ))
+               queryArray.push(generateQuery(itemInfo , 0 , { queries:[], id:randomId }  ))
 
              }
 

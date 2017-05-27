@@ -5,13 +5,12 @@
             //req parameters
             id:String,
             // $set parameters
-            gender:String,
             name:String,
-            relationship:String,
             StartTime:String,
             holiday:Object,
             //$push parameter
-            traits:Object
+            queries:Object,
+  
     });
 
     var Query= module.exports = mongoose.model('Query', QuerySchema);

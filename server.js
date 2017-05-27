@@ -266,16 +266,20 @@ app.post('/query', function(req, res){
 
       var update= {
 
+
+
         $set:{
-          name:req.body.gender,
-          gender:req.body.gender,
-          relationship:req.body.relationship,
-          StartTime:req.body.StartTime,
-          holiday:req.body.holiday,
-          traits:req.body.traits
+
+        name:req.body.name,
+        StartTime:req.body.StartTime,
+        holiday:req.body.holiday,
+        //$push parameter
+        queries:req.body.queries,
+
         }
 
       }
+
 
       Query.findOneAndUpdate( query , update ,  {
         upsert:true,
@@ -289,7 +293,21 @@ app.post('/query', function(req, res){
 
 
 
+app.get('/query' , function(req, res){
 
+
+    Query.find({}, function(err, data){
+
+      if(err){
+
+      }
+
+
+      res.json(data);
+  });
+
+
+})
 
 
 

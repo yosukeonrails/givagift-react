@@ -335,6 +335,26 @@ credentials: 'include'
 
 
 
+export var GET_ALL_QUERY= 'GET_ALL_QUERY'
+
+export function getAllQuery(){
+
+  return{
+  type:GET_ALL_QUERY,
+  promise: fetch('/query',
+  {
+method: 'GET',
+credentials: 'include'
+}).then(function(data){
+
+         return data.json();
+  })
+
+};
+
+}
+
+
 
 export var LOG_OUT= 'LOG_OUT'
 

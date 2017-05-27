@@ -2,7 +2,7 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 import {connect} from 'react-redux';
-import {getFacebookUser, layOutState, changeMode,logOut } from '../actions/index.js'
+import {getFacebookUser, getAllQuery, layOutState, changeMode,logOut } from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -28,50 +28,69 @@ super(props);
 
 
 
-      var resultObject= [giftFormState.relationship.traits,
+      var resultObject= [
+       giftFormState.gender.traits ,
+        giftFormState.relationship.traits,
         giftFormState.age.traits,
-        giftFormState.personality.traits,
-        giftFormState.gender.traits  ]
-
-        console.log(resultObject);
-
-          var queryArray= queryGenerator();
-          var toBeFiltered=[];
-
-          function queryFormator(queryArray , c ){
-
-               queryArray.map(function(q){
-
-                    toBeFiltered.push( q.queries[c])
-
-               })
-              }
+        giftFormState.personality.traits
+       ]
 
 
-           var importance=1
-            queryFormator(queryArray , 0);
-            bigFilter(resultObject[0] , toBeFiltered , importance);
+       var dis= this;
 
-            toBeFiltered=[];
-             importance=1
-            queryFormator(queryArray , 1);
-            bigFilter(resultObject[1] , toBeFiltered , importance);
-
-              toBeFiltered=[];
-               importance=2
-            queryFormator(queryArray , 2);
-            bigFilter(resultObject[2] , toBeFiltered , importance);
-
-              toBeFiltered=[];
-               importance=1
-
-            queryFormator(queryArray , 3);
-            bigFilter(resultObject[3] , toBeFiltered , importance);
+        this.props.dispatch(getAllQuery()).then(function(){
+                console.log('dispatched get all query')
 
 
+                          var queryArray= dis.props.queryArray;
+                          console.log(queryGenerator());
+                          console.log(queryArray);
+                          // this can be replaced by query from the database wit this.props.queryData ;
 
-          var correlatedArray= correlationSorter(queryArray);
-            console.log(correlatedArray);
+                          var toBeFiltered=[];
+
+                          function queryFormator(queryArray , c ){
+
+                               queryArray.map(function(q){
+
+                                toBeFiltered.push( q.queries[c])
+
+                               })
+                              }
+
+                              // gender
+                           var importance=1
+                            queryFormator(queryArray , 0);
+                            bigFilter(resultObject[0] , toBeFiltered , importance);
+                            console.log(toBeFiltered)
+
+                            // relationship
+                            toBeFiltered=[];
+                             importance=1
+                            queryFormator(queryArray , 1);
+                            bigFilter(resultObject[1] , toBeFiltered , importance);
+
+                            //age
+                              toBeFiltered=[];
+                               importance=1
+                            queryFormator(queryArray , 2);
+                            bigFilter(resultObject[2] , toBeFiltered , importance);
+
+                            // personality
+                              toBeFiltered=[];
+                               importance=2
+                            queryFormator(queryArray , 3);
+                            bigFilter(resultObject[3] , toBeFiltered , importance);
+
+
+
+                          var correlatedArray= correlationSorter(queryArray);
+                            console.log(correlatedArray);
+        });
+
+
+
+
 
   }
 
@@ -132,7 +151,8 @@ return {
  mode:state.mode,
  loggedUser:state.loggedUser,
  giftFormState:state.giftFormState,
- chosenBubbleArray:state.chosenBubbleArray
+ chosenBubbleArray:state.chosenBubbleArray,
+ queryArray: state.queryArray
 }
 }
 
