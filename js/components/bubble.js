@@ -168,7 +168,7 @@ var dis=this;
       // pushes it to chosenBubbleArray
         chosenBubbleArray.push(this.props.bubbleData.name)
         var bubble = this.props.bubbleData.name;
-        console.log(chosenBubbleArray);
+    
       //  makes the bar raise
         barWidth= (chosenBubbleArray.length*150)+'px'
         $('.counter-bar-full').css("width",barWidth )
@@ -203,7 +203,7 @@ var dis=this;
 
         var newChosenBubbleArray= this.props.chosenBubbleArray;
         newChosenBubbleArray.push(chosenBubble);
-        console.log(newChosenBubbleArray);
+
 
         newChosenBubbleArray.map(function(bubble){
               queryArray.push(bubble.name);

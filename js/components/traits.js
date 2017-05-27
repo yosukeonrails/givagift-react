@@ -76,7 +76,18 @@ goNext(){
   var dis=this;
   console.log(this.props.chosenBubbleArray);
 
-  var data=  Object.assign({}, this.props.giftFormState , {traits:this.props.chosenBubbleArray}, {lastPage:'levels'})
+ var personalityArray=[];
+
+  this.props.chosenBubbleArray.map(function(bubble){
+      personalityArray.push(bubble.name);
+  })
+
+
+  var personalityData={
+    traits: personalityArray
+  }
+
+  var data=  Object.assign({}, this.props.giftFormState , {traits:this.props.chosenBubbleArray}, {lastPage:'levels'}, {personality:personalityData})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
 
       hashHistory.push('/levels/'+dis.props.giftFormState.id)

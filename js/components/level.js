@@ -122,7 +122,7 @@ modifyPercentage(inc){
 
           percentageArray.sort(function(a, b){return a-b});
           percentageArray.reverse();
-          
+
 var sortedPercentageArray=[];
 
   var sortedQuery=[];
@@ -173,12 +173,14 @@ var sortedPercentageArray=[];
 
 
           var newChosenBubbleArrayRef= newChosenBubbleArray;
-
+            var personalityData={
+              traits: sortedQuery
+            }
 
       this.props.dispatch(saveChosenBubble(newChosenBubbleArray));
+          console.log(personalityData);
 
-
-      var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray} , {personality:sortedQuery})
+      var data=  Object.assign({}, this.props.giftFormState ,  {traits:newChosenBubbleArray} , {personality: personalityData})
       this.props.dispatch( saveGiftForm(data) ).then(function(){
         console.log('dispatched bubble remove');
         });

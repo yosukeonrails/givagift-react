@@ -58,7 +58,7 @@ chooseGender(){
 
   var genders=["gentleman", "lady","robot"];
   var genderIndex= genders.indexOf(this.state.chosenGender);
-  var genderInfoArray=[{name:'male' , traits:["male", "male-other"]}, {name:'female' , traits:["female", "female-other"]}, {name:'other' , traits:["female-other", "male-other"] }]
+  var genderInfoArray=[{name:'male' , traits:["other","male"]}, {name:'female' , traits:["other",  "female"]}, {name:'other' , traits:["other","other"] }]
   var chosenGenderObject= genderInfoArray[genderIndex]
 
   var dis=this;
@@ -149,9 +149,9 @@ return(
   <div className="gender-top">
 
 
-  <button  value="male" onClick={this.chooseGender} onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
+  <button  value="gentleman" onClick={this.chooseGender} onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
 
-      <h2 value="male" >guy</h2>
+      <h2 value="gentleman" >guy</h2>
 
   </button>
 
@@ -162,16 +162,16 @@ return(
     </div>
 
 
-    <button value="female" onClick={this.chooseGender}  onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
-    <h2 value="female">gal</h2>
+    <button value="lady" onClick={this.chooseGender}  onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
+    <h2 value="lady">gal</h2>
     </button>
 
     </div>
 
     <div className="gender-bottom">
 
-    <button value="other" onClick={this.chooseGender} onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
-    <h2 value="other" >other</h2>
+    <button value="robot" onClick={this.chooseGender} onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
+    <h2 value="robot" >other</h2>
 
     </button>
 

@@ -1,157 +1,247 @@
 
+function bigFilter(result, query , importance){
+
+
+  var notSelectedArray=[];
+
+   function findBySection(result, v , query , notSelectedArray ){
+        console.log(result);
+             if( v == result.length){
+
+
+               query.map(function(chosen){
+                 notSelectedArray.unshift(chosen);
+               })
+
+               return notSelectedArray
+             }
 
 
 
-     function bigItemFilter(result, query){
+             function findById(result , i , v , query, selectedArray ,notSelectedArray){
+
+               if( i == query.length ){
+
+                 return
+               }
+
+               if(result[v] == query[i].traits[v]){
+
+                  var matchPoint= Math.abs(-4 + v ) + query[i].match1;
+
+                 query[i].match1 = matchPoint * importance ;
+
+                 selectedArray.unshift(query[i])
+
+               }
+
+               else {
+                 notSelectedArray.unshift(query[i])
+               }
+
+               findById(result, i+1 , v , query    ,selectedArray, notSelectedArray)
+             };
+
+             var selectedArray=[];
 
 
-                    var notSelectedArray=[];
-
-                    function findBySection(result, v , query , notSelectedArray ){
-
-                    if( v == result.length){
+             findById(result, 0 , v , query, selectedArray , notSelectedArray);
 
 
-                    query.map(function(chosen){
-                    notSelectedArray.unshift(chosen);
+             findBySection(result , v+1 , selectedArray, notSelectedArray );
+
+             return notSelectedArray
+
+           }
+
+
+           var matchedArray= findBySection(result, 0 , query, [] , notSelectedArray);
+
+////////// FIND BY INCLUSION ////////
+
+          function findByInclusion( matchedArray , result ,  i  ){
+
+               if(matchedArray.length === i ){
+               return matchedArray;
+               }
+
+              function checkEquality( matchedArray , result, v ){
+
+                                 if(result.length=== v){
+                                    return matchedArray
+                                 }
+
+                                 if( matchedArray[i].match2 && matchedArray[i].match3 ){
+
+                                 }
+
+
+                                var repeatedCount=0;
+
+                                 matchedArray[i].traits.map(function(trait){
+
+                                  // for each trait inside query
+                                 // check if its === to current V
+
+
+                                     if(trait== result[v]){
+
+                                         repeatedCount++
+
+                                         if(repeatedCount==2){
+
+                                              matchedArray.splice(i,1);
+                                            repeatedCount=0;
+                                         }
+                                     }
+
+                                       if(trait === result[v]){
+
+                             var matchPoint= Math.abs(-4 + v ) + matchedArray[i].inclusion;
+                                           matchedArray[i].inclusion = matchPoint * importance ;
+                                       }
+
+                                 })
+
+               checkEquality(matchedArray , result , v+1)
+                 }
+
+
+
+
+              checkEquality(matchedArray , result, 0);
+
+
+            findByInclusion( matchedArray , result ,  i+1 );
+
+         return matchedArray;
+
+
+          }
+
+
+   var inclusionArray= findByInclusion( matchedArray , result ,  0);
+
+
+
+ /////////////////////   SECOND MATCH /////////////////////////
+
+ function  findBySecondMatch( matchedArray, result){
+
+        matchedArray.map(function(query){
+
+                         if(query.traits[1]  !== query.traits[0]){
+
+                                             if(query.traits[1] === result[0]){
+                                                 // if the second trait is same with first
+                                                   query.match2=query.match2+5 * importance
+
+
+
+                                            }
+
+                                            if(query.traits[0]=== result[1]){
+                                            // if the first trait is the same as the result second
+                                                  query.match2=query.match2+5 * importance
+
+                                            }
+
+
+                                             if(query.traits[0] === result[0]){
+                                                 // if the second trait is same with first
+                                                 query.match2=query.match2+5 * importance
+
+
+                                            }
+
+                                            if(query.traits[1]=== result[1]){
+                                            // if the first trait is the same as the result second
+                                                query.match3=query.match3+5 * importance
+
+                                            }
+
+                         }
+
+
+        })
+
+       return matchedArray;
+ }
+
+
+ var secondMatchedArray= findBySecondMatch( inclusionArray ,result);
+
+
+
+     secondMatchedArray.map(function(query){
+
+           if(query.match2 > 0){
+
+                     if(query.match3 > 0){
+
+                     }
+
+           }
+     })
+
+
+ var biggestCorrelation={
+     correlation:0
+ }
+
+           /////////// Collect Correlation Points ///////// .
+           function findCorrelationPoint(secondMatchedArray, result){
+
+                    secondMatchedArray.map(function(query){
+
+                       var correlationPoint=  query.match1 + query.match2 + query.match3 + query.inclusion
+                         query.correlation= correlationPoint
+
+                            if(biggestCorrelation.correlation <= query.correlation){
+                                biggestCorrelation= query;
+                            }
+
                     })
 
-                    return notSelectedArray
-                    }
+           }
 
 
+           findCorrelationPoint(secondMatchedArray, result);
 
-                    function findById(result , i , v , query, selectedArray ,notSelectedArray){
 
-                    if( i == query.length ){
 
-                    return
-                    }
+  /////// sort By correlation //////
 
-                    if(result[v] == query[i].traits[v]){
-                    query[i].match++
-                    query[i].inclusion++
-                    selectedArray.unshift(query[i])
 
-                    }  else {
-                    notSelectedArray.unshift(query[i])
-                    }
 
-                    findById(result, i+1 , v , query    ,selectedArray, notSelectedArray)
-                    };
+              function sortByCorrelation(secondMatchedArray , result , v, sortedArray){
 
-                    var selectedArray=[];
+                       if(v === biggestCorrelation.correlation+1){
 
 
-                    findById(result, 0 , v , query, selectedArray , notSelectedArray);
+                          return sortedArray
+                       }
 
+                     secondMatchedArray.map(function(query){
+                         if(query.correlation === v ){
+                             sortedArray.unshift(query);
+                         }
+                     })
 
-                    findBySection(result , v+1 , selectedArray, notSelectedArray );
 
-                    return notSelectedArray
+                     sortByCorrelation(secondMatchedArray , result , v+1 , sortedArray)
+                     return sortedArray;
+              }
 
-                    }
 
 
-                    var inOrderArray= findBySection(result, 0 , query, [] , notSelectedArray);
+            var sortedCorrelationArray=  sortByCorrelation(secondMatchedArray , result , 0, [] );
 
 
-                    var matchedArray=[];
-                    var inclusionArray=[];
 
+            return sortedCorrelationArray;
 
+}
 
-                    function arrayDivider(inOrderArray ){
 
-                    inOrderArray.map(function(query){
-
-                    if(query.match >= 2){
-                    matchedArray.push(query)
-
-                    } else {
-                    query.inclusion= 0;
-                    inclusionArray.push(query)
-
-                    }
-
-                    })
-                    }
-
-                    arrayDivider(inOrderArray);
-                    console.log('after array divider')
-                    console.log(matchedArray);
-
-                    function filterInclusionArray(inclusionArray , v  , result){
-
-                    if(v===result.length){
-                    return inclusionArray
-                    }
-
-                    inclusionArray.map(function(query , queryIndex){
-
-                    var traits= query.traits;
-
-                    traits.map(function(trait){
-                    if(trait === result[v]){
-
-                      query.inclusion++
-
-                    }
-                    })
-
-                    })
-
-                    filterInclusionArray(inclusionArray, v+1 , result);
-
-                    }
-
-
-                    filterInclusionArray(inclusionArray, 1 , result)
-
-                    var filteredArray=[];
-
-                    function filterByInclusionLevel(inclusionArray , result , v , filteredArray ){
-
-                    if(v == result.length){
-
-                    return  filteredArray;
-                    }
-
-                    var unfilteredArray=[];
-
-                    inclusionArray.map(function(query, queryIndex){
-
-                    if(query.inclusion === v ){
-
-                    filteredArray.unshift(query);
-
-                    } else {
-
-                    unfilteredArray.unshift(query);
-
-                    }
-                    })
-
-                    filterByInclusionLevel(unfilteredArray , result , v+1 , filteredArray)
-                    }
-
-
-                    filterByInclusionLevel(inclusionArray , result , 1 ,filteredArray );
-
-                    var arrayFilteredByInclusion=[];
-
-                    inclusionArray= filteredArray;
-
-
-                    inclusionArray.map(function(query){
-
-                    matchedArray.push(query);
-                    })
-
-                    return matchedArray;
-
-     }
-
-
-
-     export default bigItemFilter;
+export default bigFilter;
