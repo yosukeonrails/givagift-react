@@ -7,20 +7,99 @@ import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
 import FooterContainer from './footer.js'
+import AmazonItem from './amazon-item.js'
 
 export class GiftResults extends React.Component{
 
 constructor(props){
 super(props);
 
+  this.next= this.next.bind(this);
+
 }
+
+next(){
+
+  var resultStart= this.state.resultStart + 9;
+  var resultEnd = this.state.resultEnd + 9;
+
+  this.setState({
+       resultStart:resultStart,
+       resultEnd:resultEnd
+  })
+
+
+}
+
+
+componentWillMount(){
+  this.setState({
+       resultStart:0,
+       resultEnd:8
+  })
+}
+
+
 
 render () {
 
+  var queryArray=[];
+
+    this.props.callArray.map(function(array){
+
+            array.map(function(query){
+                 queryArray.push(query)
+            })
+
+    })
+
+    var renderedResults=[];
+
+      for( var i= this.state.resultStart ; i < this.state.resultEnd ; i++ ){
+
+            renderedResults.push(queryArray[i]);
+
+      }
+
+
+        var renderedArray=[];
+
+      renderedResults.map(function(item){
+
+
+
+        var price;
+
+        if( typeof item.OfferSummary[0].LowestNewPrice == 'undefined') {
+
+
+        price=  item.OfferSummary[0].LowestUsedPrice[0].FormattedPrice[0];
+
+        } else {
+
+        price= item.OfferSummary[0].LowestNewPrice[0].FormattedPrice[0];
+        }
+
+          var picLink;
+
+
+        if( !item.LargeImage){
+                picLink='';
+        } else{
+           picLink= item.LargeImage[0].URL[0];
+        }
+
+
+            renderedArray.push(<AmazonItem name={item.ItemAttributes[0].Title[0]}  price={price} pictureUrl={picLink} buyLink={item.DetailPageURL[0]} />);
+
+      })
+
+
+            // for each query 0-9
 
 return(
 
-  <div>
+  <div >
 
             <div className="header">
                  <h2  id="/">Givagift</h2>
@@ -34,125 +113,15 @@ return(
             </div>
 
 
-                          <div className="amazon-item" >
+                      <div className="result-container" >
 
-                                    <div className="item-image" id="toaster">
-                                    </div>
+                              {renderedArray}
 
-                                    <div className="amazon-item-info">
-                                            <h1>Blue Toaster </h1>
-                                            <h2> 19.99  $  </h2>
-                                    </div>
-                          </div>
+                      </div>
 
 
 
-                        <div className="amazon-item" >
-
-                                  <div className="item-image" id="couch">
-                                  </div>
-
-                                  <div className="amazon-item-info">
-                                          <h1>Yellow Couch</h1>
-                                          <h2> 24.99 $  </h2>
-                                  </div>
-                        </div>
-
-
-
-                        <div className="amazon-item" >
-
-                                  <div className="item-image" id="fit-bit">
-                                  </div>
-
-                                  <div className="amazon-item-info">
-                                          <h1>Fit Bit </h1>
-                                          <h2> 7.99 $ </h2>
-                                  </div>
-                        </div>
-
-
-
-                        
-                  <div className="amazon-item" >
-
-                            <div className="item-image"  id="bottle">
-                            </div>
-
-                            <div className="amazon-item-info">
-                                    <h1>Contigo AUTOSEAL  </h1>
-                                    <h2> 19.99  $ </h2>
-                            </div>
-                  </div>
-
-
-
-
-                  <div className="amazon-item" >
-
-                            <div className="item-image" id="stand">
-                            </div>
-
-                            <div className="amazon-item-info">
-                                    <h1> Catchall. A handmade stand </h1>
-                                    <h2> 34.99 $ </h2>
-                            </div>
-                  </div>
-
-
-
-
-                <div className="amazon-item" >
-
-                          <div className="item-image" id="spinner">
-                          </div>
-
-                          <div className="amazon-item-info">
-                                  <h1> Fidget Spinner </h1>
-                                  <h2> 3.99 $ </h2>
-                          </div>
-                </div>
-
-
-
-
-
-                <div className="amazon-item" >
-
-                          <div className="item-image" id="fit-bit">
-                          </div>
-
-                          <div className="amazon-item-info">
-                                  <h1>Fit Bit </h1>
-                                  <h2> 7.99 $ </h2>
-                          </div>
-                </div>
-
-
-
-
-                  <div className="amazon-item" >
-
-                            <div className="item-image" id="couch">
-                            </div>
-
-                            <div className="amazon-item-info">
-                                    <h1>Blue Toaster </h1>
-                                    <h2> 19.99 $ </h2>
-                            </div>
-                  </div>
-
-
-              <div className="amazon-item" >
-
-                            <div className="item-image" id="mac">
-                            </div>
-
-                            <div className="amazon-item-info">
-                                    <h1>Blue Toaster </h1>
-                                    <h2> 19.99  $ </h2>
-                            </div>
-              </div>
+                <button  onClick={this.next} className="result-next"> Next </button>
 
   </div>
 
@@ -169,7 +138,8 @@ return {
  user:state.user,
  layOutState:state.layOutState,
  mode:state.mode,
- loggedUser:state.loggedUser
+ loggedUser:state.loggedUser,
+ callArray:state.callArray
 }
 }
 

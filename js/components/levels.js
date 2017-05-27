@@ -89,8 +89,8 @@ super(props);
                     var callQueryArray=[];
 
                       for(var i=0 ; i< 4 ; i++){
-                          callQueryArray.push(correlatedArray[i].name);
 
+                          callQueryArray.push(correlatedArray[i].name);
                       }
 
                       var callArray=[];
@@ -104,15 +104,13 @@ super(props);
 
                                        dis.props.dispatch(CallAmazonCalls(callArray));
 
+                                       if(dis.props.callArray.length=== 4){
+                                         console.log('redirecting');
+                                          hashHistory.push('/results')
+                                       }
                               });
 
                       })
-
-
-
-
-
-
 
 
 
@@ -184,7 +182,8 @@ return {
  giftFormState:state.giftFormState,
  chosenBubbleArray:state.chosenBubbleArray,
  queryArray: state.queryArray,
- amazonData:state.amazonData
+ amazonData:state.amazonData,
+ callArray:state.callArray
 }
 }
 
