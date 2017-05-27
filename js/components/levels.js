@@ -2,7 +2,7 @@ var React = require('react');
 import cssStyle from '../css-variables.js';
 var orange='#ff7733';
 import {connect} from 'react-redux';
-import {getFacebookUser, getAllQuery, layOutState, changeMode,logOut } from '../actions/index.js'
+import {getFacebookUser, getAllQuery, CallAmazon , layOutState, changeMode,logOut, CallAmazonCalls } from '../actions/index.js'
 import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
@@ -29,7 +29,7 @@ super(props);
 
 
       var resultObject= [
-       giftFormState.gender.traits ,
+        giftFormState.gender.traits ,
         giftFormState.relationship.traits,
         giftFormState.age.traits,
         giftFormState.personality.traits
@@ -86,6 +86,37 @@ super(props);
 
                           var correlatedArray= correlationSorter(queryArray);
                             console.log(correlatedArray);
+                    var callQueryArray=[];
+
+                      for(var i=0 ; i< 4 ; i++){
+                          callQueryArray.push(correlatedArray[i].name);
+
+                      }
+
+                      var callArray=[];
+
+                      callQueryArray.map(function(query){
+
+                              dis.props.dispatch(CallAmazon(query)).then(function(){
+
+                                      console.log('pushing', dis.props.amazonData)
+                                       callArray.push(dis.props.amazonData);
+
+                                       dis.props.dispatch(CallAmazonCalls(callArray));
+
+                              });
+
+                      })
+
+
+
+
+
+
+
+
+
+
         });
 
 
@@ -152,7 +183,8 @@ return {
  loggedUser:state.loggedUser,
  giftFormState:state.giftFormState,
  chosenBubbleArray:state.chosenBubbleArray,
- queryArray: state.queryArray
+ queryArray: state.queryArray,
+ amazonData:state.amazonData
 }
 }
 

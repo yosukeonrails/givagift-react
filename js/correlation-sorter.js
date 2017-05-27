@@ -39,7 +39,7 @@
                   queryArray.map(function(query){
 
                        if(query.correlation == i ){
-                       		  sortedQueryArray.push(query);
+                       		  sortedQueryArray.unshift(query);
                        }
 
                   })

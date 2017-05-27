@@ -109,7 +109,7 @@ function bigFilter(result, query , importance){
 
 
 
-              checkEquality(matchedArray , result, 0);
+          
 
 
             findByInclusion( matchedArray , result ,  i+1 );
