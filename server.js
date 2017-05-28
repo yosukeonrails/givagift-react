@@ -15,11 +15,13 @@ var GiftForm =  require('./models/giftform.js');
 var Query= require('./models/query.js');
 
 mongoose.Promise = global.Promise;
-// mongoose.createConnection('mongodb://localhost/');
-//
-// mongoose.connection.on('error', function(err) {
-//     console.error('Could not connect.  Error:', err);
-// });
+
+
+mongoose.createConnection('mongodb://localhost/');
+
+mongoose.connection.on('error', function(err) {
+    console.error('Could not connect.  Error:', err);
+});
 
 
 
