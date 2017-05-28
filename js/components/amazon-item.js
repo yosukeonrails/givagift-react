@@ -13,11 +13,18 @@ export class AmazonItem extends React.Component{
 constructor(props){
 super(props);
 
+  this.goTo= this.goTo.bind(this);
 
 
 }
 
 componentWillMount(){
+
+}
+
+goTo(link){
+
+    window.open(link);
 
 }
 
@@ -36,7 +43,7 @@ return(
                         </div>
 
                         <div className="amazon-item-info">
-                                <h1>{newTitleOfItem}</h1>
+                                <button><h1 onClick={ ()=>{this.goTo(this.props.buyLink) } }>{newTitleOfItem}</h1></button>
                                 <h2> {this.props.price} </h2>
                         </div>
               </div>

@@ -26,7 +26,7 @@ super(props);
 
       var giftFormState= this.props.giftFormState;
 
-
+      $('.loading-screen1').css("display", "block")
 
       var resultObject= [
         giftFormState.gender.traits ,
@@ -106,6 +106,7 @@ super(props);
 
                                        if(dis.props.callArray.length=== 4){
                                          console.log('redirecting');
+                                           $('.loading-screen1').css("display", "none")
                                           hashHistory.push('/results')
                                        }
                               });
@@ -133,7 +134,6 @@ render () {
 
 
 
-
   var newChosenBubbleArray= this.props.giftFormState.traits;
       newChosenBubbleArray.map(function( bubble, i){
            pointSum= pointSum+bubble.percentage;
@@ -153,7 +153,17 @@ render () {
 return(
 <div>
 
+  <div className="loading-screen1">
 
+    <div className="loading-screen1-text">
+
+          <h1>loading . . .</h1>
+
+        <div><img src="https://www.ufairfax.edu/resources/images/forms/loading-transparent.gif"></img></div>
+    </div>
+
+
+  </div>
 
   <div className="levels-container">
 

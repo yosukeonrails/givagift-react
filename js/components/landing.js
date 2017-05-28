@@ -187,7 +187,7 @@ componentDidMount(){
                   <br></br>
                   <p>We have put together for you the best gift selection so you don't need to worry about what to get for your friend's birthday!</p>
                   <br></br>
-                  <button type="button" name="button">		<h3>Take a look!</h3></button>
+                  <button type="button" href="/starter"name="button">		<h3>Find a gift now!</h3></button>
 
                   </div>
 

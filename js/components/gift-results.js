@@ -15,6 +15,7 @@ constructor(props){
 super(props);
 
   this.next= this.next.bind(this);
+  this.previous= this.previous.bind(this);
 
 }
 
@@ -27,6 +28,23 @@ next(){
        resultStart:resultStart,
        resultEnd:resultEnd
   })
+
+
+}
+
+
+previous(){
+
+
+
+  var resultStart= this.state.resultStart - 9;
+  var resultEnd = this.state.resultEnd - 9;
+
+  this.setState({
+       resultStart:resultStart,
+       resultEnd:resultEnd
+  })
+
 
 
 }
@@ -94,23 +112,36 @@ render () {
 
       })
 
+         $('.next-result').css("display", "block");
+         $('.previous-result').css("display", "block");
 
+
+      if(this.state.resultStart === 0 ){
+
+           $('.previous-result').css("display", "none");
+           $('.next-result').css("display", "block");
+
+      } else {
+
+            $('.previous-result').css("display", "block");
+      }
+
+        console.log(queryArray.length)
+        console.log(this.state.resultEnd)
+      if(this.state.resultEnd > 27 ){
+
+           $('.next-result').css("display", "none");
+
+      } else {
+
+        $('.next-result').css("display", "block");
+
+      }
             // for each query 0-9
 
 return(
 
-  <div >
-
-            <div className="header">
-                 <h2  id="/">Givagift</h2>
-
-
-                         <div   className="signin">
-                         <button ><h3>Log In</h3></button>
-                         <button ><h3>Sign Up</h3></button>
-                         </div>
-
-            </div>
+  <div className="result-div">
 
 
                       <div className="result-container" >
@@ -121,7 +152,16 @@ return(
 
 
 
-                <button  onClick={this.next} className="result-next"> Next </button>
+
+                <div className="result-bottom-nav">
+                      <div className="button-container">
+                        <button  onClick={this.next} className="next-result"> Next </button>
+                        <button  onClick={this.previous} className="previous-result"> Previous </button>
+                        </div>
+              </div>
+
+
+
 
   </div>
 

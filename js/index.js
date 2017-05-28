@@ -50,7 +50,8 @@ var routes = (
                 <Route path="/starter" component={StarterContainer}/>
                 <Route path="/redirect" component={RedirectContainer}/>
                 <Route path="/results" component={GiftResultsContainer}/>
-                  <Route path="/queryposter" component={QueryPosterContainer}/>
+                <Route path="/queryposter" component={QueryPosterContainer}/>
+
            </Route>
    </Router>
 );

@@ -980,6 +980,7 @@ margin-left: auto;
    background-position: center;
    background-repeat: no-repeat;
    padding: 10px;
+   margin-bottom: 80px;
    border-radius: 50%;
    text-align: center;
    h2{
@@ -1001,9 +1002,9 @@ margin-left: auto;
     position: relative;
     width: 100%;
     background-color: rgb(34, 30, 68);
-    min-height: 800px;
     font-family: Montserrat,sans-serif;
     font-weight: 700;
+    height: 100vh;
 
     h1{
       text-align: center;
@@ -2957,8 +2958,84 @@ border-radius: 5px;
 //Levels end//
 
 
+//LOADING SCREEN //
+
+.loading-screen1{
+  display: none;
+      width: 100%;
+      position: absolute;
+      height: 100vh;
+      background-color: #231a54;
+      z-index: 4;
+      color: white;
+    img{
+        width: 50px;
+        padding-top: 50px;
+    }
+
+}
+
+
+.loading-screen1-text{
+  width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      position: relative;
+      top: 30%;
+  h1{
+    font-size: 40px;
+  }
+}
+
+
 // AMAZON RESULTS//
 
+
+.result-div{
+  padding-top: 100px;
+}
+.next-result{
+  float: right;
+  background-color: rgba(255, 0, 0, 0);
+  width: 100px;
+  border-radius: 5px;
+  color: #fff;
+  height: 40px;
+  font-size: 20px;
+}
+
+.previous-result{
+  float: left;
+  background-color: rgba(255, 0, 0, 0);
+  width: 100px;
+  border-radius: 5px;
+  color: #fff;
+  height: 40px;
+  font-size: 20px;
+}
+
+.result-container{
+min-height: 1080px;
+
+}
+
+.result-bottom-nav{
+  position: fixed;
+  background-color: #060c3a;
+  width: 100%;
+  padding-top: 40px;
+  height: 100px;
+  bottom: 0;
+  font-family: Raleway,sans-serif;
+}
+
+.button-container{
+  display: block;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .amazon-item{
   background-color: #fff;
@@ -2986,6 +3063,13 @@ border-radius: 5px;
 	padding: 12px;
 color: white;
 background-color: #2d1858;
+button{
+  background-color: rgba(255, 0, 0, 0);
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+
+}
 }
 
 .item-image{

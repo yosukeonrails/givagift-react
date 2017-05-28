@@ -64,6 +64,7 @@ export class Home extends React.Component{
     this.showLogIn = this.showLogIn.bind(this);
     this.closeLogIn= this.closeLogIn.bind(this);
     this.validateUser= this.validateUser.bind(this);
+
   }
 
 
@@ -143,34 +144,14 @@ export class Home extends React.Component{
            window.location.href='/';
   }
 
-    goTo(event){
+    goTo(link){
 
-          view=event.target.id;
-          var element;
-
-    for(var i=0 ; i<viewModes.length; i++){
-
-        if(view == viewModes[i]){
-          element=$(viewModes[i]);
-
-              element.css("display", "block");
-
-        }  else {
-
-            element=$(viewModes[i]);
-            element.css("display", "none");
-        }
-
-    }
-
-      this.setState({
-        random:'random'
-      });
+        hashHistory.push(link)
     }
 
     render () {
   var element;
-
+$(document).scrollTop()
       return(
 
 
@@ -239,7 +220,7 @@ export class Home extends React.Component{
                   <br></br>
                   <p>We have put together for you the best gift selection so you don't need to worry about what to get for your friend's birthday!</p>
                   <br></br>
-                  <button type="button" name="button">		<h3>Take a look!</h3></button>
+                  <button type="button" name="button"  onClick={()=>{this.goTo('/starter')}}>		<h3>Find Gift Now!</h3></button>
 
                   </div>
 

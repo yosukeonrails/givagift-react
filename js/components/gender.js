@@ -54,14 +54,22 @@ super(props);
 
 }
 
-chooseGender(){
+chooseGender(genderId){
+
+    console.log(this.state.chosenGender)
 
   var genders=["gentleman", "lady","robot"];
-  var genderIndex= genders.indexOf(this.state.chosenGender);
+  var genderIndex= genders.indexOf(genderId);
   var genderInfoArray=[{name:'male' , traits:["other","male"]}, {name:'female' , traits:["other",  "female"]}, {name:'other' , traits:["other","other"] }]
   var chosenGenderObject= genderInfoArray[genderIndex]
 
   var dis=this;
+
+  if(chosenGenderObject === undefined){
+      console.log('ERROR')
+    return
+  }
+
   var data=  Object.assign({}, this.props.giftFormState ,  {gender:chosenGenderObject}, {lastPage:'age'})
     this.props.dispatch( saveGiftForm(data) ).then(function(){
       hashHistory.push('/age/'+dis.props.giftFormState.id)
@@ -120,6 +128,7 @@ decreaseSize(e){
 }
 
 increaseSize(e){
+    console.log(e.target.id);
 
   this.setState({
     mouseOverIs:true,
@@ -149,7 +158,7 @@ return(
   <div className="gender-top">
 
 
-  <button  value="gentleman" onClick={this.chooseGender} onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
+  <button  value="gentleman" onClick={()=>{this.chooseGender('gentleman')} }   onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
 
       <h2 value="gentleman" >guy</h2>
 
@@ -162,7 +171,7 @@ return(
     </div>
 
 
-    <button value="lady" onClick={this.chooseGender}  onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
+    <button value="lady" onClick={()=>{this.chooseGender('lady')} }   onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
     <h2 value="lady">gal</h2>
     </button>
 
@@ -170,10 +179,11 @@ return(
 
     <div className="gender-bottom">
 
-    <button value="robot" onClick={this.chooseGender} onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
+    <button value="robot" onClick={()=>{this.chooseGender('robot')} } onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
     <h2 value="robot" >other</h2>
 
     </button>
+
 
     </div>
 
