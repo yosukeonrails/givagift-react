@@ -158,22 +158,35 @@ $(document).scrollTop()
     <div className="landing-page">
 
 
-   <div className="diagonal-line-1"></div>
-     <div className="diagonal-line-2"></div>
-      <div className="diagonal-line-3"></div>
+
 
     	<div className="welcome-message-container">
 
-        <div className="welcome-message">
-              <h1>Looking for a gift?</h1>
-                <h1>We got it.</h1>
 
-                <button onClick={this.validateUser}> here </button>
 
-                <div className="tag-line">
-              <h1><span className="pink-font">#givagift#</span> your go-to gift app.</h1>
-                </div>
-        </div>
+                  <div className="welcome-message">
+
+                      <div className="welcome-message-text">
+
+                        <h1>Looking for a gift?</h1>
+                          <h1>We got it.</h1>
+
+                          <button onClick={this.validateUser}> here </button>
+
+                            <div className="tag-line">
+                          <h1><span className="pink-font">#givagift#</span> your go-to gift app.</h1>
+                            </div>
+
+
+                      </div>
+
+
+
+                                  <div className="diagonal-line-1"></div>
+                                  <div className="diagonal-line-2"></div>
+                                  <div className="diagonal-line-3"></div>
+
+                  </div>
 
         <div className="welcome-gift-image"></div>
 
@@ -235,6 +248,13 @@ $(document).scrollTop()
               </div>
  </div>
 
+        <div className="bottom-diagonal-container">
+
+
+                                             <div className="bottom-diagonal-line-1"></div>
+                                             <div className="bottom-diagonal-line-2"></div>
+                                             <div className="bottom-diagonal-line-3"></div>
+        </div>
 
 
 
