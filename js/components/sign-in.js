@@ -72,7 +72,7 @@ export class SignIn extends React.Component {
                   <hr></hr>
                   <button  id="submit-button" type="submit"  onClick={this.handleSubmit} name="button"> Submit</button>
 
-                  <button  id="facebook-button" onClick={this.facebooklogin}  name="button"><a href="/auth/facebook">Log in with Facebook</a> </button>
+                  <button  id="facebook-button"   name="button"><a>Log in with Facebook</a> </button>
 
           </div>
 
