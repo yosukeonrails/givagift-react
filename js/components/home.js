@@ -169,7 +169,7 @@ $(document).scrollTop()
                       <div className="welcome-message-text">
 
                         <h1>Looking for a gift?</h1>
-                          <h1>We got it.</h1>
+                          <h1>we got it.</h1>
 
                           <button onClick={this.validateUser}> here </button>
 
