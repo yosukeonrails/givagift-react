@@ -534,7 +534,10 @@ app.post('/mockuser', function(req, res){
     username:req.body.username,
     facebookId:req.body.facebookId,
     token:req.body.token,
-    email:req.body.email
+    email:req.body.email,
+    firstName:req.body.firstName,
+    lastName:req.body.lastName
+
   };
       User.findOneAndUpdate({facebookId:req.body.facebookId}, {$set:mockData},{upsert:true, new:true}, function(err, data){
 

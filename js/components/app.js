@@ -172,7 +172,7 @@ export class App extends React.Component{
 
                 <div  style={{display:signUpMode}} className="signin">
                 <button onClick={this.showLogIn} ><h3>Log In</h3></button>
-                <button onClick={this.goToSignup}><h3>Sign Up</h3></button>
+                <button  id="signin-signup"onClick={this.goToSignup}><h3>Sign Up</h3></button>
                 </div>
 
                 <div  style={{display:loggedMode}} className='logged-header'>

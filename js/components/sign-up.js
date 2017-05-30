@@ -19,14 +19,30 @@ export class SignUp extends React.Component {
       super(props);
 
       this.handleSubmit=this.handleSubmit.bind(this);
-      this.handleChangeEmail=this.handleChangeEmail.bind(this);
-      this.handleChangePassword=this.handleChangePassword.bind(this);
-      this.handleChangeConfirmation=this.handleChangeConfirmation.bind(this);
-    }
+      this.handleChange= this.handleChange.bind(this);
 
+    }
+    componentWillMount(){
+      this.setState({
+        usernameWarning:'none',
+        username:'',
+         firstNameWarning:'none',
+         firstName:'',
+          lastNameWarning:'none',
+          lastName:'',
+           passwordWarning:'none',
+           password:'',
+            rePasswordWarning:'none',
+            confirmation:''
+      })
+    }
     componentDidMount(){
       this.props.dispatch(changeMode('signup'));
       console.log('it went ');
+      this.setState({
+        same:true
+       });
+
     }
 
 
@@ -42,9 +58,55 @@ export class SignUp extends React.Component {
 
       event.preventDefault();
 
+
+
+        if(this.state.firstName.length <= 1 ){
+
+            console.log(this.state)
+
+              this.setState({
+                 firstNameWarning:'block'
+              })
+        }
+        if(this.state.lastName.length <= 1 ){
+
+              console.log(this.state)
+
+              this.setState({
+                 lastNameWarning:'block'
+              })
+        }
+        if(this.state.username.length <= 1 ){
+
+              console.log(this.state)
+
+              this.setState({
+                 usernameWarning:'block'
+              })
+        }
+        if(this.state.password.length <= 1 ){
+
+              console.log(this.state)
+
+              this.setState({
+                 passwordWarning:'block'
+              })
+        }
+        if(this.state.confirmation.length <= 1 ){
+
+              console.log(this.state)
+
+              this.setState({
+                 rePasswordWarning:'block'
+              })
+        }
+
+
         if( this.state.password !== this.state.confirmation){
 
           this.setState({same:false});
+
+           return;
 
         } else {
 
@@ -58,8 +120,6 @@ export class SignUp extends React.Component {
 
                   if(signUpData.state.username){
 
-
-
                         hashHistory.push('/userdashboard');
 
                   }
@@ -70,73 +130,105 @@ export class SignUp extends React.Component {
         }
     }
 
-    handleChangeEmail(event){
-      this.setState({username:event.target.value});
+    handleChange( event ){
+
+       console.log(event.target.id)
+
+      this.setState({
+        usernameWarning:'none',
+         firstNameWarning:'none',
+          lastNameWarning:'none',
+           passwordWarning:'none',
+            rePasswordWarning:'none'
+      })
+
+
+            if(event.target.id==='firstNameInput'){  this.setState({firstName:event.target.value}) }
+              if(event.target.id==='lastNameInput'){   this.setState({lastName:event.target.value}) }
+                if(event.target.id==='usernameInput'){   this.setState({username:event.target.value}); }
+                  if(event.target.id==='passwordInput'){     this.setState({password:event.target.value}); }
+                    if(event.target.id==='confirmationInput'){   this.setState({confirmation:event.target.value}); }
+
+                    console.log(this.state)
+    }
+
+    selectInput(element){
+
+        this.setState({selectedInput:element})
 
     }
-    handleChangePassword(event){
-      this.setState({password:event.target.value});
 
-    }
-    handleChangeConfirmation(event){
-      this.setState({confirmation:event.target.value});
-
-    }
 
       render(){
 
-
         return(
 
-       <div>
-
-
+   <div className="sign-up-container">
      	<div className="sign-up">
 
-     	<h1> Sign Up</h1>
-     	<hr></hr>
-     					<button  id="facebook-button" onClick={this.facebooklogin}  name="button">Sign Up with Facebook</button>
+        <div className="signup-left">
 
-     	<h1>or</h1>
+           	<h1> Sign Up</h1>
+           	<hr></hr>
+           					<button  id="facebook-button" onClick={this.facebooklogin}  name="button">Sign Up with Facebook</button>
 
-     	<p>Plese fill in the fields.</p>
+           	<h1>or</h1>
+
+           	<p>Plese fill in the fields.</p>
+        </div>
+
+
+    <div className="signup-right">
      	<div className="sign-up-field-container">
-
+            <form>
                    		<div className="first-name">
                    				<label>First Name</label>
-                   				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+                   				<input  onChange={ this.handleChange } id="firstNameInput" onClick={()=> this.selectInput('firstName')}  type="username" className="" required></input>
                    				</div>
+                                    <div style={{ display:this.state.firstNameWarning}} className="alert alert-danger">
+                                    <strong>Sorry</strong> You must fill this field before submitting.
+                                    </div>
 
 
                    				<div className="last-name">
                    				<label >Last Name</label>
-                   				<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+                   				<input  onChange={ this.handleChange } id="lastNameInput"  onClick={()=> this.selectInput('lastName')}   type="username" className=""></input>
                    				</div>
-
-                   				<hr></hr>
+                                    <div style={{ display:this.state.lastNameWarning}} className="alert alert-danger">
+                                    <strong>Sorry</strong> You must fill this field before submitting.
+                                    </div>
 
                    					<div className="email">
                    					<label >Username</label>
-                   					<input  onChange={this.handleChangeUsername}  type="username" className=""></input>
+                   					<input  onChange={ this.handleChange }  id="usernameInput"  onClick={()=> this.selectInput('username')}    type="username" className=""></input>
                    					</div>
+                                    <div style={{ display:this.state.usernameWarning}} className="alert alert-danger">
+                                    <strong>Sorry</strong> You must fill this field before submitting.
+                                    </div>
 
                    					<div  className="password">
                    					<label >Password</label>
-                   					<input onChange={this.handleChangePassword} type="password" className=""></input>
+                   					<input onChange={ this.handleChange }  id="passwordInput"   onClick={()=> this.selectInput('password')}   type="password" className=""></input>
                    					</div>
+                                  <div style={{ display:this.state.passwordWarning}} className="alert alert-danger">
+                                  <strong>Sorry</strong> You must fill this field before submitting.
+                                  </div>
 
                    					<div  className="password">
                    					<label >Confirm Password</label>
-                   					<input onChange={this.handleChangePassword} type="password" className=""></input>
+                   					<input onChange={ this.handleChange }  id="confirmationInput"  onClick={()=> this.selectInput('confirmation')}  type="password" className=""></input>
                    					</div>
+                                  <div style={{ display:this.state.rePasswordWarning}} className="alert alert-danger">
+                                  <strong>Sorry</strong> You must fill this field before submitting.
+                                  </div>
 
-                   					<hr></hr>
-                   					<button  id="submit-button" type="submit"  onClick={this.handleSubmit} name="button"> Submit</button>
 
-                   	</div>
+                   					<button  id="submit-button" type="submit"  onClick={this.handleSubmit}> Submit</button>
+                        </form>
+                   	 </div>
+                  </div>
 
-     	</div>
-
+               	</div>
        </div>
         );
       }
