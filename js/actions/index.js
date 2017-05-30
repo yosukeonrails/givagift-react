@@ -131,9 +131,9 @@ export var CHANGE_MODE = 'CHANGE_MODE';
 
 
 
-       export var LOG_IN='LOG_IN';
+ export var LOG_IN='LOG_IN';
 
-       export function LogInUser(data) {
+ export function LogInUser(data) {
 
    var fetchData={
       method:'POST',
@@ -148,7 +148,7 @@ export var CHANGE_MODE = 'CHANGE_MODE';
       })
    };
 
-  return {
+   return {
     type: LOG_IN,
 
     promise: fetch('/login', fetchData).then(function(data){

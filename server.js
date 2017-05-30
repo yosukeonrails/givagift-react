@@ -420,22 +420,25 @@ app.post('/user', function(req, res) {
     var newUser = new User({
         username: username,
         password: password,
+        first_name:req.body.first_name,
+        last_name:req.body.last_name,
+        facebookId:req.body.facebookId
     });
 
     console.log(req.body);
 
-    newUser.save(function(err){
-         if(err) throw err;
+    // newUser.save(function(err){
+    //      if(err) throw err;
+    //
+    //      res.json(newUser);
+    // })
 
-         res.json(newUser);
-    })
-
-    // User.createUser(newUser, function(err, user) {
-    //     if (err) throw err;
-    //     console.log(user);
-    //     console.log('user was CREATED!');
-    //     res.json(user);
-    // });
+    User.createUser(newUser, function(err, user) {
+        if (err) throw err;
+        console.log(user);
+        console.log('user was CREATED!');
+        res.json(user);
+    });
 
 });
 
@@ -466,7 +469,8 @@ passport.use(new LocalStrategy(
                 if (isMatch) {
 
                     console.log('You are Loggeeeeed in');
-
+                    console.log(user)
+                    
                     return done(null, user);
 
 

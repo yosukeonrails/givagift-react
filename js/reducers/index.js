@@ -69,8 +69,10 @@ var reducer = function(state, action) {
              }),
         finish: s => ({ ...s, isLoading: false }),
         failure: s => ({ ...s, userError: action.payload }),
-        success: s => ({ ...s, user: action.payload  }),
+        success: s => ({ ...s, loggedUser: action.payload  }),
+        
       });
+
 
       case LOG_MOCK_USER:
 
