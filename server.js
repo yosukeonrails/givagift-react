@@ -362,7 +362,7 @@ app.get('/mockuser/:id', function(req, res){
 /* user sign up start*////// LOCAL STRATEGY
 
 
-app.post('/users', function(req, res) {
+app.post('/user', function(req, res) {
 
     if (!req.body) {
         return res.status(400).json({
@@ -422,12 +422,20 @@ app.post('/users', function(req, res) {
         password: password,
     });
 
-    User.createUser(newUser, function(err, user) {
-        if (err) throw err;
-        console.log(user);
-        console.log('user was CREATED!');
-        res.json(user);
-    });
+    console.log(req.body);
+
+    newUser.save(function(err){
+         if(err) throw err;
+
+         res.json(newUser);
+    })
+
+    // User.createUser(newUser, function(err, user) {
+    //     if (err) throw err;
+    //     console.log(user);
+    //     console.log('user was CREATED!');
+    //     res.json(user);
+    // });
 
 });
 
@@ -553,15 +561,15 @@ app.post('/mockuser', function(req, res){
     clientID: config.clientID,
     clientSecret: config.clientSecret,
     callbackURL: config.URL+'auth/facebook/callback',
-    profileFields: ['id', 'displayName','birthday', 'picture', 'email' , 'first_name']
+    profileFields: ['id', 'displayName', 'first_name']
   }, function(accessToken, refreshToken, profile, done) {
 
 
     let userData= {
-      first_Name:profile._json.first_name,
+      first_name:profile._json.first_name,
       username:profile.displayName,
       facebookId:profile.id,
-      // token:profile.accessToken,
+      token:profile.accessToken,
       // email:profile.email
     };
 
