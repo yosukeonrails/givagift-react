@@ -6,13 +6,14 @@ var mongoose = require('mongoose');
 var config= require('./config');
 var passport= require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var User= require('./models/facebookuser.js');
+var FacebookUser= require('./models/facebookuser.js');
 var app = express();
 var List= require('./models/lists.js');
 var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var GiftForm =  require('./models/giftform.js');
 var Query= require('./models/query.js');
+var User= require('./models/user.js');
 
 mongoose.Promise = global.Promise;
 
@@ -49,7 +50,7 @@ passport.serializeUser(function(user, done) {
 // used to deserialize the user
 passport.deserializeUser(function(id, done) {
 
-    User.findById(id, function(err, user) {
+    FacebookUser.findById(id, function(err, user) {
             console.log(user);
         done(err, user);
     });
@@ -344,7 +345,7 @@ app.post('/amazonlist' , function(req, res){
 
 app.get('/mockuser/:id', function(req, res){
 
-  User.find({ facebookId:req.params.id}, function(err, data){
+  FacebookUser.find({ facebookId:req.params.id}, function(err, data){
 
     if(err){
 
@@ -356,7 +357,9 @@ app.get('/mockuser/:id', function(req, res){
 
 });
 
-/* user sign up start*/
+
+
+/* user sign up start*////// LOCAL STRATEGY
 
 
 app.post('/users', function(req, res) {
@@ -415,10 +418,8 @@ app.post('/users', function(req, res) {
     }
 
     var newUser = new User({
-
         username: username,
         password: password,
-        email:req.body.email
     });
 
     User.createUser(newUser, function(err, user) {
@@ -528,18 +529,16 @@ app.get('/hidden', function(req, res) {
 
 
 
+
 app.post('/mockuser', function(req, res){
 
   let mockData= {
-    username:req.body.username,
-    facebookId:req.body.facebookId,
-    token:req.body.token,
-    email:req.body.email,
-    firstName:req.body.firstName,
-    lastName:req.body.lastName
-
+          username:req.body.username,
+          facebookId:req.body.facebookId,
+          token:req.body.token,
+          email:req.body.email
   };
-      User.findOneAndUpdate({facebookId:req.body.facebookId}, {$set:mockData},{upsert:true, new:true}, function(err, data){
+      FacebookUser.findOneAndUpdate({facebookId:req.body.facebookId}, {$set:mockData},{upsert:true, new:true}, function(err, data){
 
           if(err){
           }
@@ -547,7 +546,6 @@ app.post('/mockuser', function(req, res){
           res.json(data);
       });
 });
-
 
 
   passport.use(new FacebookStrategy({
@@ -560,15 +558,15 @@ app.post('/mockuser', function(req, res){
 
 
     let userData= {
-      first_name:profile._json.first_name,
+      first_Name:profile._json.first_name,
       username:profile.displayName,
       facebookId:profile.id,
-      token:profile.accessToken,
-      email:profile.email
+      // token:profile.accessToken,
+      // email:profile.email
     };
 
 
-    User.findOneAndUpdate({ facebookId: profile.id },{$set:userData}, { upsert: true, new: true } , function (err, user) {
+    FacebookUser.findOneAndUpdate({ facebookId: profile.id },{$set:userData}, { upsert: true, new: true } , function (err, user) {
 
           return done(err, user);
 

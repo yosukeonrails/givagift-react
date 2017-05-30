@@ -24,8 +24,8 @@ export class SignUp extends React.Component {
     }
     componentWillMount(){
       this.setState({
-        usernameWarning:'none',
-        username:'',
+        emailWarning:'none',
+        email:'',
          firstNameWarning:'none',
          firstName:'',
           lastNameWarning:'none',
@@ -76,12 +76,12 @@ export class SignUp extends React.Component {
                  lastNameWarning:'block'
               })
         }
-        if(this.state.username.length <= 1 ){
+        if(this.state.email.length <= 1 ){
 
               console.log(this.state)
 
               this.setState({
-                 usernameWarning:'block'
+                 emailWarning:'block'
               })
         }
         if(this.state.password.length <= 1 ){
@@ -105,6 +105,7 @@ export class SignUp extends React.Component {
         if( this.state.password !== this.state.confirmation){
 
           this.setState({same:false});
+          console.log(this.state.same)
 
            return;
 
@@ -112,20 +113,21 @@ export class SignUp extends React.Component {
 
           this.setState({same:true});
 
-           let signUpData=this;
-          this.props.dispatch(SignUpUser(this.state)).then(function(){
+            var userData={
+              firstName:this.state.firstName,
+              lastName:this.state.lastName,
+              password:this.state.password,
+              email:this.state.email,
+              token:'randomToken',
+              facebookId:'guest'
+            }
 
-            signUpData.props.dispatch(LogInUser(signUpData.state)).then(function(){
+            var dis=this;
+           this.props.dispatch(SignUpUser(userData)).then(function(){
 
+               console.log('succesful sign up')
 
-                  if(signUpData.state.username){
-
-                        hashHistory.push('/userdashboard');
-
-                  }
-            });
-          });
-
+           })
 
         }
     }
@@ -135,7 +137,7 @@ export class SignUp extends React.Component {
        console.log(event.target.id)
 
       this.setState({
-        usernameWarning:'none',
+        emailWarning:'none',
          firstNameWarning:'none',
           lastNameWarning:'none',
            passwordWarning:'none',
@@ -145,9 +147,19 @@ export class SignUp extends React.Component {
 
             if(event.target.id==='firstNameInput'){  this.setState({firstName:event.target.value}) }
               if(event.target.id==='lastNameInput'){   this.setState({lastName:event.target.value}) }
-                if(event.target.id==='usernameInput'){   this.setState({username:event.target.value}); }
-                  if(event.target.id==='passwordInput'){     this.setState({password:event.target.value}); }
-                    if(event.target.id==='confirmationInput'){   this.setState({confirmation:event.target.value}); }
+                if(event.target.id==='emailInput'){   this.setState({email:event.target.value}); }
+                  if(event.target.id==='passwordInput'){
+
+                      this.setState({same:true});
+                    this.setState({password:event.target.value});
+                   }
+                    if(event.target.id==='confirmationInput'){
+
+                          this.setState({same:true});
+
+                       this.setState({confirmation:event.target.value});
+
+                     }
 
                     console.log(this.state)
     }
@@ -159,7 +171,19 @@ export class SignUp extends React.Component {
     }
 
 
+
       render(){
+
+        var sameOrNot='none';
+
+        if(this.state.same === false){
+
+            sameOrNot='block';
+
+
+        } else {
+           sameOrNot='none';
+        }
 
         return(
 
@@ -199,10 +223,10 @@ export class SignUp extends React.Component {
                                     </div>
 
                    					<div className="email">
-                   					<label >Username</label>
-                   					<input  onChange={ this.handleChange }  id="usernameInput"  onClick={()=> this.selectInput('username')}    type="username" className=""></input>
+                   					<label >Email</label>
+                   					<input  onChange={ this.handleChange }  id="emailInput"  onClick={()=> this.selectInput('email')}    type="username" className=""></input>
                    					</div>
-                                    <div style={{ display:this.state.usernameWarning}} className="alert alert-danger">
+                                    <div style={{ display:this.state.emailWarning}} className="alert alert-danger">
                                     <strong>Sorry</strong> You must fill this field before submitting.
                                     </div>
 
@@ -222,6 +246,10 @@ export class SignUp extends React.Component {
                                   <strong>Sorry</strong> You must fill this field before submitting.
                                   </div>
 
+                                  <div style={{ display:sameOrNot}} className="alert alert-danger">
+                                  <strong>Sorry</strong> The confirmation password does not match.
+                                  </div>
+
 
                    					<button  id="submit-button" type="submit"  onClick={this.handleSubmit}> Submit</button>
                         </form>
@@ -238,7 +266,8 @@ var mapStateToProps= function(state){
   return {
   contents:state.contents,
   styles:state.cssStyle,
-  user:state.user
+  user:state.user,
+  signedUpedUser:state.signedUpedUser
   }
 }
 

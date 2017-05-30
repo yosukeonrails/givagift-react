@@ -173,15 +173,19 @@ headers:{
 },
 body:JSON.stringify({
 
-  username:data.username,
-  password:data.password
+  first_name:data.firstName,
+  lastName:data.lastName,
+  email:data.email,
+  password:data.password,
+  facebookId:data.facebookId,
+  token:data.token
 
 })
 };
 
 return {
 type: SIGN_UP_USER,
-promise: fetch('/users', fetchData).then(function(data){
+promise: fetch('/mockuser', fetchData).then(function(data){
 
 
 return data.json();
@@ -269,6 +273,8 @@ export function GetMax(maxpoint){
        maxpoint:maxpoint
   };
 }
+
+
 
 
 export var LOG_MOCK_USER= 'LOG_MOCK_USER'

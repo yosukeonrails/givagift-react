@@ -1,7 +1,8 @@
 
 function bigFilter(result, query , importance){
 
-
+    console.log(query);
+    console.log(result);
   var notSelectedArray=[];
 
    function findBySection(result, v , query , notSelectedArray ){
@@ -109,7 +110,7 @@ function bigFilter(result, query , importance){
 
 
 
-          
+
 
 
             findByInclusion( matchedArray , result ,  i+1 );
