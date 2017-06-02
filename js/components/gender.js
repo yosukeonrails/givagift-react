@@ -7,7 +7,8 @@ import SignInContainer from './sign-in.js'
 import {push} from 'react-router-redux'
 import {hashHistory} from 'react-router'
 import FooterContainer from './footer.js'
-
+import GenderCardContainer from './gender-card.js'
+var elementArray=['lady-card', 'gentleman-card' , 'other-card']
 // function pulse(e){
 //  var element= $('#'+e)
 //         element.animate({height:'200px', width: '200px'});
@@ -39,7 +40,10 @@ super(props);
   this.increaseSize= this.increaseSize.bind(this);
   this.decreaseSize= this.decreaseSize.bind(this);
   this.chooseGender= this.chooseGender.bind(this);
-
+  this.hoverCard = this.hoverCard.bind(this);
+  this.outOfCard= this.outOfCard.bind(this);
+  this.selectCard= this.selectCard.bind(this);
+  this.closeAllCards= this.closeAllCards.bind(this);
   var dis=this;
 
 
@@ -53,6 +57,128 @@ super(props);
     // }, 100);
 
 }
+
+closeAllCards(){
+
+    $('#lady-card').stop();
+    $('#gentleman-card').stop();
+    $('#other-card').stop();
+    $('.white-card-layer').stop();
+    $('.gender-card').stop();
+
+    var dis= this;
+
+    elementArray.map(function(currentCard){
+
+         var element=$('#'+currentCard);
+         var blurredElement= $('#'+currentCard+"-blurred")
+         var whiteCard= $('white-'+currentCard);
+
+          whiteCard.stop();
+          element.stop();
+          blurredElement.stop();
+
+
+          console.log(currentCard)
+          console.log(dis.state.chosenGenderId)
+
+          if(currentCard === dis.state.chosenGenderId){
+
+                blurredElement.css("display" , "none");
+
+                element.css("display", "block");
+                element.animate({opacity:'1'});
+
+                $('.white-card-layer').css("display" , "block");
+                $('.white-card-layer').animate({opacity:"1"});
+
+
+          } else {
+
+                    element.css("display", "none");
+                    element.css("opacity" , "0");
+
+                    $('.white-card-layer').css("display" , "none");
+                    $('.white-card-layer').css("opacity" , "0");
+
+                    element.css("display", "block");
+                    element.animate({opacity:'1'});
+
+                    $('.white-card-layer').css("display" , "block");
+                    $('.white-card-layer').animate({opacity:"1"});
+
+          }
+
+
+          // whiteCard.css("display" , "block");
+
+
+    })
+
+}
+
+
+selectCard(card, gender){
+
+      this.setState({chosenGender:gender , chosenGenderId:card });
+        var elementCard=card;
+
+
+   elementArray.map(function(currentCard){
+
+     if(currentCard === elementCard){
+
+                    var element=$('#'+currentCard);
+
+                    element.css("display", "none")
+                    $('.white-card-layer').stop();
+                    $('.white-card-layer').css("display", "block");
+                    $('.white-card-layer').css("opacity", "1");
+
+                    var blurredElement= $('#'+card+"-blurred")
+                    blurredElement.css("display","block")
+
+     }  else {
+
+             var element=$('#'+currentCard);
+
+              $('.white-card-layer').stop();
+              $('.white-card-layer').animate({opacity:0}, function(){
+              element.css("display", "none")
+              })
+
+
+              element.animate({opacity:"0"}, 200 , function(){
+              element.css("display", "none")
+              })
+
+
+     }
+
+   })
+
+
+}
+
+outOfCard(card){
+
+
+  $('#'+card).stop();
+
+  var element=$('#'+card)
+  element.animate({opacity:'0.7'});
+
+}
+
+hoverCard(card){
+  $('#'+card).stop();
+
+     var element=$('#'+card)
+     element.animate({opacity:'1'});
+
+}
+
+
 
 chooseGender(genderId){
 
@@ -155,37 +281,91 @@ return(
 <div className="gender-page">
   <h1>This gift is for a... </h1>
 
-  <div className="gender-top">
+  <div className="gender-row">
 
 
-  <button  value="gentleman" onClick={()=>{this.chooseGender('gentleman')} }   onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
+    <div className="gender-card-holder">
 
-      <h2 value="gentleman" >guy</h2>
+                    <div className="white-card-layer white-lady-card">
+                       <button  onClick={()=> this.selectCard('lady-card' , 'lady')} onMouseOut={()=> this.outOfCard('lady-card') } onMouseOver={ ()=> this.hoverCard('lady-card') } className="gender-card" id="lady-card">
 
-  </button>
+                         <h1>Lady</h1>
+                         <h2>Gal</h2>
+                         <h3>Girl</h3>
+
+                       </button>
+                    </div>
+
+         <button  className="gender-card" id="lady-card-blurred">
+
+                    <div className="blurred-card-content">
+                      <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
+                        <button  onClick={()=>this.chooseGender('lady')} >next</button>
+                    </div>
+
+                    <div className="lady-card-blurred-inside">
 
 
+                    </div>
+         </button>
 
-    <div className="gender-middle">
-  <h1> or </h1>
+
     </div>
 
 
-    <button value="lady" onClick={()=>{this.chooseGender('lady')} }   onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
-    <h2 value="lady">gal</h2>
-    </button>
+     <div className="gender-card-holder">
 
-    </div>
-
-    <div className="gender-bottom">
-
-    <button value="robot" onClick={()=>{this.chooseGender('robot')} } onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
-    <h2 value="robot" >other</h2>
-
-    </button>
+               <div className="white-card-layer white-other-card">
+                       <button  onClick={()=> this.selectCard('other-card', 'robot')}  onMouseOut={()=> this.outOfCard('other-card') } onMouseOver={ ()=> this.hoverCard('other-card') }  className="gender-card" id="other-card">
+                               <h1>Other</h1>
+                       </button>
+              </div>
 
 
-    </div>
+              <button  className="gender-card" id="other-card-blurred">
+
+                <div className="blurred-card-content">
+                  <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
+                    <button  onClick={()=>this.chooseGender('robot')} >next</button>
+                </div>
+
+                 <div className="other-card-blurred-inside">
+
+                 </div>
+
+              </button>
+
+     </div>
+
+
+
+                   <div className="gender-card-holder">
+
+                              <div className="white-card-layer white-gentleman-card">
+                                         <button onClick={()=> this.selectCard('gentleman-card' , 'gentleman')}    onMouseOut={()=> this.outOfCard('gentleman-card') } onMouseOver={ ()=> this.hoverCard('gentleman-card') }  className="gender-card" id="gentleman-card">
+
+                                               <h1>Man</h1>
+                                               <h2>Guy</h2>
+                                               <h3>Boy</h3>
+
+                                         </button>
+                               </div>
+
+                                   <button  className="gender-card" id="gentleman-card-blurred">
+
+                                     <div className="blurred-card-content">
+                                       <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
+                                         <button  onClick={()=>this.chooseGender('gentleman')} >next</button>
+                                     </div>
+
+                                      <div className="gentleman-card-blurred-inside">
+                                      </div>
+
+                                   </button>
+
+                 </div>
+
+  </div>
 
 </div>
 );
@@ -209,3 +389,45 @@ return {
 var GenderContainer= connect(mapStateToProps)(Gender)
 
 module.exports = GenderContainer;
+
+
+
+
+
+
+
+  // <div className="gender-top">
+  //
+  // //
+  // // <button  value="gentleman" onClick={()=>{this.chooseGender('gentleman')} }   onMouseEnter={this.increaseSize}  onMouseLeave={this.decreaseSize}  className="gender gentleman" id="gentleman">
+  // //
+  // //     <h2 value="gentleman" >guy</h2>
+  // //
+  // // </button>
+  //
+  //
+  //
+  //   <div className="gender-middle">
+  // <h1> or </h1>
+  //   </div>
+  //
+  //
+  //   <button value="lady" onClick={()=>{this.chooseGender('lady')} }   onMouseEnter={this.increaseSize}   onMouseLeave={this.decreaseSize} className="gender lady" id="lady">
+  //   <h2 value="lady">gal</h2>
+  //   </button>
+  //
+  //   </div>
+  //
+  //   <div className="gender-bottom">
+  //
+  //   <button value="robot" onClick={()=>{this.chooseGender('robot')} } onMouseEnter={this.increaseSize} onMouseLeave={this.decreaseSize}     className="gender robot" id="robot">
+  //   <h2 value="robot" >other</h2>
+  //
+  //   </button>
+  //
+  //
+  //   </div>
+
+
+
+     ///gender card

@@ -21,6 +21,8 @@ font-family: 'Raleway', sans-serif;
  */
 
 
+
+
 @light-black: #262626;
 @dark-grey:#333333;
 @white: #f4f2fc;
@@ -44,6 +46,22 @@ font-family: 'Raleway', sans-serif;
 @blue: #7599d1;
 @mont:'Montserrat', sans-serif;
 @darkpurple: #130921;
+
+@girl1:'Parisienne', cursive;;
+@girl2:'League Script', cursive;
+@girl3:'Lora', serif;
+///
+
+@man1:'Exo', sans-serif;
+@man2:'Montserrat Subrayada', sans-serif;
+@man3:'Audiowide', cursive;
+//
+
+@other1:'Josefin Sans', sans-serif;
+@other2: 'Quicksand', sans-serif;
+@other3: 'Orbitron', sans-serif;
+//
+
 
 ////  codepen for animated hamburger////
 * {
@@ -905,6 +923,234 @@ margin-left: auto;
 
 /// gender
 
+
+/// gender alt
+
+#lady-card{
+  background: linear-gradient(rgba(113, 111, 111, 0.65),rgba(167, 22, 22, 0.32)),url(https://source.unsplash.com/s1ihVBg5tbI/1600x900);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  h1{
+        font-family: Parisienne,cursive;
+        color: rgba(255, 255, 255, 0.97);
+        margin: 0;
+        font-size: 70px;
+        position: relative;
+        top: 40%;
+  }
+  h2{
+        font-family: 'League Script',cursive;
+        color: #6b1f2b;
+        margin: 0;
+        position: relative;
+        font-size: 70px;
+  }
+  h3{
+    font-family: Lora,serif;
+      color: #69363c;
+      margin: 0;
+      font-size: 40px;
+      position: relative;
+      top: 24%;
+  }
+}
+
+#gentleman-card{
+  background: linear-gradient(rgba(14, 39, 58, 0.68),rgba(86, 191, 177, 0.32)),url(https://source.unsplash.com/F4rsECbuNDw/1600x900);
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7;
+  h1{
+    font-family: Exo,sans-serif;
+color: rgba(255,255,255,.97);
+margin: 0;
+font-size: 70px;
+position: relative;
+top: 40%;
+  }
+  h2{
+    font-family: 'Montserrat Subrayada',sans-serif;
+  color: #24224e;
+  margin: 0;
+  position: relative;
+  font-size: 70px;
+  }
+  h3{
+    font-family: Audiowide,cursive;
+  color: rgb(87, 155, 177);
+  margin: 0;
+  font-size: 40px;
+  position: relative;
+  top: 24%;
+  }
+
+}
+
+#other-card{
+
+    background: linear-gradient(rgba(44, 117, 104, 0.95),rgba(0, 0, 0, 0.56)),url(https://source.unsplash.com/2EJCSULRwC8/1600x900);
+    background-size: cover;
+    //position: relative;
+    background-position: center;
+    opacity: 0.7;
+    //top: 50px;
+
+  h1{
+        font-family: @other1;
+        color: rgba(255, 255, 255, 0.97);
+        margin: 0;
+        font-size: 70px;
+        position: relative;
+        top: 40%;
+  }
+
+}
+
+.gender-row{
+  width: 70%;
+  margin-left: auto;
+  position: relative;
+  margin-right: auto;
+  top: 10%;
+
+}
+
+.gender-card-holder{
+  width: 33%;
+  float: left;
+  padding: 1%;
+
+  button{
+    border:0;
+    margin: 0;
+
+  }
+
+}
+
+.white-card-layer{
+  background-color: #3a3a3a;
+  border-radius: 10px;
+  max-width: 225px;
+}
+#lady-card-blurred{
+  background-color: rgba(70, 70, 70, 0.8);
+overflow: hidden;
+display: none;
+}
+
+
+#gentleman-card-blurred{
+  background-color: rgba(70, 70, 70, 0.8);
+overflow: hidden;
+display: none;
+}
+
+#other-card-blurred{
+  background-color: rgba(70, 70, 70, 0.8);
+overflow: hidden;
+display: none;
+}
+
+.blurred-card-content{
+  background-color: rgba(255,0,0,0);
+  position: absolute;
+  height: 60vh;
+  z-index: 3;
+  max-width: 225px;
+  width: 31%;
+  padding-top: 200px;
+
+    i{
+        position: absolute;
+        font-size: 30px;
+        top: 0%;
+        right: 0%;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+      button{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid white;
+            background: linear-gradient(#cc4d4d,rgb(169, 95, 138));
+      }
+}
+
+.lady-card-blurred-inside{
+  z-index: 2;
+  left: 0;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(2px);
+  height: 60vh;
+  border-radius: 10px;
+  width: 100%;
+  background: linear-gradient(rgba(103, 36, 36, 0.64),rgba(132,132,132,.94)),url(https://source.unsplash.com/s1ihVBg5tbI/1600x900);
+  background-size: cover;
+  background-position: center;
+}
+
+
+
+.gentleman-card-blurred-inside{
+  z-index: 2;
+  left: 0;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+  height: 60vh;
+  border-radius: 10px;
+  width: 100%;
+  background: linear-gradient(rgba(110, 158, 191, 0.72),rgba(90,90,90,.94)),url(https://source.unsplash.com/F4rsECbuNDw/1600x900);
+  background-size: cover;
+  background-position: 62%;
+}
+
+
+
+.other-card-blurred-inside{
+  z-index: 2;
+  left: 0;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(4px);
+  height: 60vh;
+  border-radius: 10px;
+  width: 100%;
+  background: linear-gradient(rgba(23,49,34,.64),rgba(35, 78, 66, 0.94)),url(https://source.unsplash.com/2EJCSULRwC8/1600x900);
+  background-size: cover;
+  background-position: center;
+}
+
+
+    .gender-card{
+      background-color: rgba(253,156,156,.8);
+      margin-bottom: 10px;
+      background-size: cover;
+      height: 60vh;
+      margin-left: auto;
+      max-width: 225px;
+      margin-right: auto;
+      width: 100%;
+      background-position: center;
+      border-radius: 10px;
+      box-shadow: 6px 8px 17px rgba(21, 16, 16, 0.91);
+
+    }
+
+//
+
+
  #lady{
    background-image: url('https://s10.postimg.org/r154q2ja1/lady.png');
    float: right;
@@ -1002,10 +1248,11 @@ margin-left: auto;
     padding-top: 50px;
     position: relative;
     width: 100%;
-    background-color: rgb(34, 30, 68);
+    background-color: #130921;
     font-family: Montserrat,sans-serif;
     font-weight: 700;
     height: 100vh;
+
 
     h1{
       text-align: center;
@@ -1137,6 +1384,9 @@ float: right;
 margin-top: 5vh;
   }
 }
+
+
+
 
 .banner{
   height: 100vh;
