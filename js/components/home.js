@@ -27,7 +27,6 @@ var layOut={
 }
 
 
-
 var hideSignIn= function(){
       $('.field-container').animate({opacity:'0'}, 300, function(){
           $('.sign-in').animate({height:'0px'}, 500 , function(){
@@ -40,7 +39,6 @@ var hideSignIn= function(){
 };
 
 
-
 var showSignIn= function(){
         $('.sign-in').css('display', 'block');
         $('.sign-in').animate({height:'500px'},500, function(){
@@ -50,27 +48,18 @@ var showSignIn= function(){
     });
 };
 
-
 export class Home extends React.Component{
 
   constructor(props){
     super(props)
 
-
-    this.goHome= this.goHome.bind(this);
     this.goTo= this.goTo.bind(this);
-    this.signIn= this.signIn.bind(this);
-    this.facebooklogin= this.facebooklogin.bind(this);
     this.showLogIn = this.showLogIn.bind(this);
-    this.closeLogIn= this.closeLogIn.bind(this);
     this.validateUser= this.validateUser.bind(this);
-
   }
 
 
   validateUser(){
-
-    console.log('validating');
 
       if(this.props.loggedUser){
 
@@ -88,81 +77,45 @@ export class Home extends React.Component{
 
   }
 
-  facebooklogin(){
-    console.log('login in ');
-     window.location.href='/auth/facebook';
-     /*
-     1. if facebook log in successful , redirect to user page
-     2. if fail, sing up page*/
-  }
+    showLogIn(){
 
-  closeLogIn(){
+        var dis=this;
 
-  }
+          if(this.props.layOutState.logInOpen === false){
 
-  showLogIn(){
+                $('.dark-blurr').css("display", "block");
+                $('.dark-blurr').animate({opacity:'1'});
 
-    console.log(this.props);
-    var dis=this;
-    if(this.props.layOutState.logInOpen === false){
-      console.log('showing log in ');
+                layOut.logInOpen = true;
+                this.props.dispatch(layOutState(layOut));
+          }
 
-      $('.dark-blurr').css("display", "block");
-      $('.dark-blurr').animate({opacity:'1'});
+        else  {
+                  $('.dark-blurr').animate({opacity:'0'}, function(){
+                  $('.dark-blurr').css("display", "none");
+                  layOut.logInOpen = false;
+                  dis.props.dispatch(layOutState(layOut));
+                    });
+                }
 
-      layOut.logInOpen = true;
-      this.props.dispatch(layOutState(layOut));
+        }
 
-    }
+          goTo(link){
 
-    else
-
-    {
-      console.log('hiding log in ');
-
-      $('.dark-blurr').animate({opacity:'0'}, function(){
-      $('.dark-blurr').css("display", "none");
-
-      layOut.logInOpen = false;
-
-      dis.props.dispatch(layOutState(layOut));
-
-    });
-
-  }
-
-  }
-
-  signIn(){
-
-      hideQuiz();
-      showSignIn();
-  }
-
-  goHome(){
-
-           window.location.href='/';
-  }
-
-    goTo(link){
-
-        hashHistory.push(link)
-    }
+              hashHistory.push(link)
+          }
 
     render () {
-  var element;
-$(document).scrollTop()
+
+      var element;
+      $(document).scrollTop();
+
       return(
 
 
     <div className="landing-page">
 
-
-
-
     	<div className="welcome-message-container">
-
-
 
                   <div className="welcome-message">
 
@@ -211,42 +164,39 @@ $(document).scrollTop()
         <div className="home-instruction-image" id="givagift-example-2">
         </div>
 
-          <div className="home-instruction-text">
+                <div className="home-instruction-text">
 
-            <h1>#2 We bring you the best results!</h1>
+                <h1>#2 We bring you the best results!</h1>
 
-          <p> Choose from over 200 million selection from the great Amazon store.</p>
-          </div>
-
-
-
+                <p> Choose from over 200 million selection from the great Amazon store.</p>
+                </div>
       </div>
 
 
-<div  className="whatwedo">
+                <div  className="whatwedo">
 
 
-						<div className="whatwedo-left">
+                						<div className="whatwedo-left">
 
-                  <div className="part1">Say GoodBye to Akward!  </div>
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Emoji_u1f601.svg/2000px-Emoji_u1f601.svg.png"></img>
-                  <br></br>
-                  <p>We have put together for you the best gift selection so you don't need to worry about what to get for your friend's birthday!</p>
-                  <br></br>
-                  <button type="button" name="button"  onClick={()=>{this.goTo('/starter')}}>		<h3>Find Gift Now!</h3></button>
+                                  <div className="part1">Say GoodBye to Akward!  </div>
+                                  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Emoji_u1f601.svg/2000px-Emoji_u1f601.svg.png"></img>
+                                  <br></br>
+                                  <p>We have put together for you the best gift selection so you don't need to worry about what to get for your friend's birthday!</p>
+                                  <br></br>
+                                  <button type="button" name="button"  onClick={()=>{this.goTo('/starter')}}>		<h3>Find Gift Now!</h3></button>
 
-                  </div>
+                                  </div>
 
 
-                  <div className="whatwedo-right">
+                                  <div className="whatwedo-right">
 
-                  <div className="field" id="#login">
+                                  <div className="field" id="#login">
 
-                  <SignInContainer/>
+                                  <SignInContainer/>
 
-							</div>
-              </div>
- </div>
+                							</div>
+                              </div>
+                 </div>
 
         <div className="bottom-diagonal-container">
 
@@ -269,44 +219,7 @@ $(document).scrollTop()
         </div>
 
 
-</div>
-
-
-
-{/**
- *
-
-     <div className="firstRow">
-
-                 <div className="startquiz">
-
-                       <i className="fa fa-check-square-o" aria-hidden="true"></i>
-                       <h1>
-                       Take this short quiz and let us help you find an awesome gift!
-                       </h1>
-
-
-
-                       <button onClick={this.goToQuiz} >Start GivaQuiz</button>
-                 </div>
-   </div>
-
-
- <div id="affiliates" className="affiliates">
- <i className="fa fa-amazon" aria-hidden="true"></i>
-   <p>
-
-   Givagifts is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to amazon.com. Amazon, the Amazon logo, AmazonSupply, and the AmazonSupply logo are trademarks of Amazon.com, Inc. or its affiliates.
-   If you require any more information or have any questions about our site&#x27;s disclaimer, please feel free to contact us at givagifts-support@gmail.com .
-   </p>
-
- </div>
-
- */}
-
-
-
-
+      </div>
 
   </div>
     );

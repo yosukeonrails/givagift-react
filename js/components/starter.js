@@ -20,8 +20,6 @@ import FooterContainer from './footer.js'
       var element= $('#'+e)
       element.stop()
    element.animate({height:'200px', width: '200px'}, 300 , function(){
-
-
    })
  }
 
@@ -38,14 +36,15 @@ export class Starter extends React.Component{
 constructor(props){
 super(props);
 
-  this.increaseSize= this.increaseSize.bind(this);
-  this.decreaseSize= this.decreaseSize.bind(this);
   this.beginForm= this.beginForm.bind(this);
   this.toggleChecker= this.toggleChecker.bind(this);
   this.beginNewForm= this.beginNewForm.bind(this);
   this.discartForm= this.discartForm.bind(this);
   this.continueForm= this.continueForm.bind(this);
+
   var dis=this;
+
+
 
 }
 
@@ -56,20 +55,20 @@ componentDidMount(){
 toggleChecker(){
 
   if(this.state.checkerOn === false ){
-    console.log('showing chcker');
-    $('.checker').css("display" , "block")
-    $('.checker').animate({opacity:1})
 
-    $('.dark-shade').css("display" , "block")
-      $('.dark-shade').animate({opacity:1})
+    $('.happy-face').css("display", "none");
+
+    $('.checker').css("display" , "block"); $('.checker').animate({opacity:1})
+    $('.dark-shade').css("display" , "block") ;$('.dark-shade').animate({opacity:1})
 
     this.setState({checkerOn:true})
 
   } else {
 
-  console.log('hide chcker');
-    $('.checker').animate({opacity:0}, function(){
-        $('.checker').css("display" , "block")
+      $('.happy-face').css("display", "block");
+      $('.checker').animate({opacity:0}, function(){
+      $('.checker').css("display" , "block")
+
     })
     this.setState({checkerOn:false})
 
@@ -136,32 +135,13 @@ beginForm(){
 
   this.props.dispatch( getLastGiftForm(this.props.loggedUser.facebookId) ).then(function(){
 
-
-       console.log(dis.props);
-         console.log(dis.props.lastGiftFormState);
-            console.log(dis.props.lastGiftFormState.length);
-        //if found ,
         if(dis.props.lastGiftFormState.length === 0){
 
           dis.beginNewForm();
         } else {
                  dis.toggleChecker();
         }
-                // startover >> if not , descart that one by deleting , then make it so it creates a new one set lastOpened:false
-                // this will show a form to check if the user wants to open the last unfinshed form.
-                // open last >> if yes , open the last one, in the page that it last opnene
-      // if not found begin new form
-
-
   })
-
-
-
-  // if found , ask if the person wants to open the one last opened ,
-
-
-  //if not found one, create a new one
-
 
   }
 
@@ -172,37 +152,14 @@ componentWillMount(){
      this.setState({ mouseOverIs:false})
 }
 
-decreaseSize(e){
-
-  this.setState({
-    mouseOverIs:false
-  })
-
-  if(e.target.id){
-
-      decreaseWidthHeight(e.target.id)
-  }
-
-
-}
-
-increaseSize(e){
-
-  this.setState({
-    mouseOverIs:true,
-    pulseElement:e.target.id
-  })
-
-if(e.target.id){
-    console.log(e.target.id);
-    increaseWidthHeight(e.target.id)
-}
-}
-
 
 render () {
 
 var giftFormState=this.props.giftFormState
+
+$('.happy-face').animate({width:'200px', height:'200px'});
+$('.gender-page h3').animate({paddingTop:'0px'});
+
 
 $(document).scrollTop()
 return(
@@ -221,9 +178,11 @@ return(
 
   <h3>Let us find you the best gift!</h3>
 
+      <div className="happy-face-container">
+        <div className="happy-face">
+        </div>
+      </div>
 
-  <div className="happy-face">
-    </div>
         <button onClick={this.beginForm} className="starter-page-button"> start </button>
 </div>
 );

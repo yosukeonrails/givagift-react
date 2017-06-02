@@ -10,12 +10,14 @@ var MainApp= function(){
 
   return(
        <div>
-      <HomePageContainer/>
 
-        <div className="footer-container">
-        <FooterContainer/>
 
-        </div>
+              <HomePageContainer/>
+
+              <div className="footer-container">
+              <FooterContainer/>
+
+              </div>
 
       </div>
   );

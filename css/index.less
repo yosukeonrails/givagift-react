@@ -913,14 +913,22 @@ margin-left: auto;
 
 }
 
+.happy-face-container{
+      height: 200px;
+      width: 100%;
+}
+
+
 .happy-face{
   background-image: url(https://s3.postimg.org/muqjvrdar/happy_1.png);
-  width: 200px;
-  height: 200px;
   background-size: contain;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 50px;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
 }
 
 /// gender
@@ -1033,12 +1041,13 @@ margin-left: auto;
 
 .gender-row-container{
   width: 80%;
-height: 600px;
-margin-right: auto;
-margin-left: auto;
-border-radius: 10px;
-padding-top: 20px;
-background-color: #d2d2d2;
+  height: 80vh;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  min-height: 600px;
+  padding-top: 20px;
+  background-color: #d2d2d2;
 }
 
 
@@ -1096,19 +1105,18 @@ height: 80px;
 }
 
 .blurred-card-content{
-  background-color: rgba(255,0,0,0);
+  background-color: rgba(110, 117, 171, 0);
   position: absolute;
-  height: 60vh;
   z-index: 3;
   max-width: 225px;
   width: 31%;
-  padding-top: 200px;
+  padding-top: 120px;
+  min-height: 400px;
 
 
 
   h1{
       position: relative;
-      bottom: 40%;
       color: white !important;
       overflow: hidden;
       height: 60px ;
@@ -1124,16 +1132,12 @@ height: 80px;
     }
 
       button{
-            width: 10px;
-            height: 10px;
-            font-size: 0px;
-            border-radius: 50%;
-            border: 1px solid white;
-            background: linear-gradient(#cc4d4d,rgb(169, 95, 138));
-            position: absolute;
-            top: 83%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+          width: 10px;
+          height: 10px;
+          font-size: 0;
+          border-radius: 50%;
+          border: 1px solid #fff;
+          background: linear-gradient(#cc4d4d,#a95f8a);
       }
 }
 
@@ -1310,11 +1314,14 @@ height: 80px;
     height: 100vh;
 
     h3{
-      text-align: center;
-      font-family: Montserrat,sans-serif;
-      color:white;
-      font-weight: 700;
-      font-size: 45px;
+        text-align: center;
+        font-family: Montserrat,sans-serif;
+        color: #fff;
+        font-weight: 700;
+        overflow: hidden;
+        font-size: 45px;
+        height: 60px;
+        padding-top:60px;
     }
 
     h1{
@@ -1323,6 +1330,7 @@ height: 80px;
         color: #a54343;
         font-weight: 700;
         font-size: 45px;
+
     }
 
 

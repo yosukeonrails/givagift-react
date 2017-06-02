@@ -127,28 +127,26 @@ export class App extends React.Component{
       dis.props.dispatch(layOutState(layOut));
 
     });
-
   }
 }
   render () {
 
-    if(this.props.mode==='signup'){
-        signUpMode='none';
-    }
+              if(this.props.mode==='signup'){
+                  signUpMode='none';
+              }
 
+              if(this.props.loggedUser){
+              imageUrl= "https://graph.facebook.com/"+this.props.loggedUser.facebookId+"/picture?width=800&height=800";
+              username= this.props.loggedUser.username
+                  signUpMode='none';
+                  loggedMode='block';
+              }
 
-    if(this.props.loggedUser){
-    imageUrl= "https://graph.facebook.com/"+this.props.loggedUser.facebookId+"/picture?width=800&height=800";
-    username= this.props.loggedUser.username
-        signUpMode='none';
-        loggedMode='block';
-    }
-
-    if(this.props.user || this.props.loggedUser){
-          console.log('now with user!');
-            signUpMode='none';
-              loggedMode='block';
-    }
+              if(this.props.user || this.props.loggedUser){
+                    console.log('now with user!');
+                      signUpMode='none';
+                        loggedMode='block';
+              }
 
 
     return(
@@ -156,53 +154,49 @@ export class App extends React.Component{
       <div className='main'>
 
 
-        <div className="dark-blurr">
-
-          <div className="login-window">
-
-          <i  onClick={this.closeLogIn} className="fa fa-times-circle-o" aria-hidden="true"></i>
-            <SignInContainer/>
-          </div>
-
-        </div>
-
-        <div className="header">
-                <h2 onClick={this.goLink} id="/">Givagift</h2>
+                    <div className="dark-blurr">
+                      <div className="login-window">
+                        <i  onClick={this.closeLogIn} className="fa fa-times-circle-o" aria-hidden="true"></i>
+                        <SignInContainer/>
+                      </div>
+                    </div>
 
 
-                <div  style={{display:signUpMode}} className="signin">
-                <button onClick={this.showLogIn} ><h3>Log In</h3></button>
-                <button  id="signin-signup"onClick={this.goToSignup}><h3>Sign Up</h3></button>
-                </div>
+              <div className="header">
+                        <h2 onClick={this.goLink} id="/">Givagift</h2>
 
-                <div  style={{display:loggedMode}} className='logged-header'>
-                    <img src={imageUrl}></img>
-                    <h1 onClick={this.openOptions} > {username}</h1>
-                    <i onClick={this.openOptions}  className="fa fa-caret-down" aria-hidden="true"></i>
+                        <div  style={{display:signUpMode}} className="signin">
 
-                </div>
+                                <button onClick={this.showLogIn} ><h3>Log In</h3></button>
+                                <button  id="signin-signup"onClick={this.goToSignup}><h3>Sign Up</h3></button>
+                        </div>
 
-                <div className="profile-option" >
+                                <div  style={{display:loggedMode}} className='logged-header'>
+                                  <img src={imageUrl}></img>
+                                  <h1 onClick={this.openOptions} > {username}</h1>
+                                  <i onClick={this.openOptions}  className="fa fa-caret-down" aria-hidden="true"></i>
+                               </div>
 
-                  <div  className="option-container">
-                <button onClick={this.openOptions}  ><h1 onClick={this.goLink}  id="/#/dashboard" >Dashboard</h1></button>
-                  <hr></hr>
-                <button><h1 onClick={this.logOut}   ><i className="fa fa-sign-out" aria-hidden="true"></i>Log Out</h1></button>
-                </div>
-                </div>
 
-        </div>
+                         <div className="profile-option" >
+
+                                <div  className="option-container">
+                                <button onClick={this.openOptions}  ><h1 onClick={this.goLink}  id="/#/dashboard" >Dashboard</h1></button>
+                                  <hr></hr>
+                                <button><h1 onClick={this.logOut}   ><i className="fa fa-sign-out" aria-hidden="true"></i>Log Out</h1></button>
+                                </div>
+
+                        </div>
+              </div>
 
           <div className="progress-tracker"> tracker</div>
 
 
-          <div >
-            {this.props.children}
+            <div>
+              {this.props.children}
+            </div>
+
           </div>
-
-
-
-      </div>
 
     );
   }
