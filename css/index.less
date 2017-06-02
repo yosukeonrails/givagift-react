@@ -874,10 +874,12 @@ margin-left: auto;
   left: 50%;
   text-align: center;
   transform: translate(-50%,-50%);
+
   h1{
-    font-size: 30px;
+    font-size: 30px !important;
     .montFont;
   }
+
   h2{
     font-size: 20px;
     font-family: Raleway,sans-serif;
@@ -926,6 +928,25 @@ margin-left: auto;
 
 /// gender alt
 
+
+
+.lady-font{
+    font-family: Parisienne,cursive !important;
+    font-size: 50px;
+}
+
+.gentleman-font{
+    font-family: Exo,sans-serif !important;
+      font-size: 50px;
+}
+
+.other-font{
+    font-family: @other1 !important;
+      font-size: 50px;
+}
+
+
+
 #lady-card{
   background: linear-gradient(rgba(113, 111, 111, 0.65),rgba(167, 22, 22, 0.32)),url(https://source.unsplash.com/s1ihVBg5tbI/1600x900);
   background-size: cover;
@@ -938,6 +959,7 @@ margin-left: auto;
         font-size: 70px;
         position: relative;
         top: 40%;
+
   }
   h2{
         font-family: 'League Script',cursive;
@@ -961,14 +983,16 @@ margin-left: auto;
   background-size: cover;
   background-position: center;
   opacity: 0.7;
+
   h1{
-    font-family: Exo,sans-serif;
-color: rgba(255,255,255,.97);
-margin: 0;
-font-size: 70px;
-position: relative;
-top: 40%;
+        font-family: Exo,sans-serif;
+        color: rgba(255,255,255,.97);
+        margin: 0;
+        font-size: 70px;
+        position: relative;
+        top: 40%;
   }
+
   h2{
     font-family: 'Montserrat Subrayada',sans-serif;
   color: #24224e;
@@ -1007,12 +1031,23 @@ top: 40%;
 
 }
 
+.gender-row-container{
+  width: 80%;
+height: 600px;
+margin-right: auto;
+margin-left: auto;
+border-radius: 10px;
+padding-top: 20px;
+background-color: #d2d2d2;
+}
+
+
 .gender-row{
   width: 70%;
   margin-left: auto;
   position: relative;
   margin-right: auto;
-  top: 10%;
+  top: 5%;
 
 }
 
@@ -1034,6 +1069,8 @@ top: 40%;
   border-radius: 10px;
   max-width: 225px;
 }
+
+
 #lady-card-blurred{
   background-color: rgba(70, 70, 70, 0.8);
 overflow: hidden;
@@ -1053,6 +1090,11 @@ overflow: hidden;
 display: none;
 }
 
+.circle-container{
+
+height: 80px;
+}
+
 .blurred-card-content{
   background-color: rgba(255,0,0,0);
   position: absolute;
@@ -1061,6 +1103,16 @@ display: none;
   max-width: 225px;
   width: 31%;
   padding-top: 200px;
+
+
+
+  h1{
+      position: relative;
+      bottom: 40%;
+      color: white !important;
+      overflow: hidden;
+      height: 60px ;
+  }
 
     i{
         position: absolute;
@@ -1072,11 +1124,16 @@ display: none;
     }
 
       button{
-            width: 60px;
-            height: 60px;
+            width: 10px;
+            height: 10px;
+            font-size: 0px;
             border-radius: 50%;
             border: 1px solid white;
             background: linear-gradient(#cc4d4d,rgb(169, 95, 138));
+            position: absolute;
+            top: 83%;
+            left: 50%;
+            transform: translate(-50%, -50%);
       }
 }
 
@@ -1169,7 +1226,6 @@ display: none;
        h2{
          margin-top: -20px;
          margin-left: 25px;
-
        }
  }
 
@@ -1253,11 +1309,23 @@ display: none;
     font-weight: 700;
     height: 100vh;
 
+    h3{
+      text-align: center;
+      font-family: Montserrat,sans-serif;
+      color:white;
+      font-weight: 700;
+      font-size: 45px;
+    }
 
     h1{
       text-align: center;
-          .montFont;
+        font-family: Montserrat,sans-serif;
+        color: #a54343;
+        font-weight: 700;
+        font-size: 45px;
     }
+
+
     }
 
 

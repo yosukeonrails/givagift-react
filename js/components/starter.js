@@ -219,7 +219,7 @@ return(
           </div>
       </div>
 
-  <h1>Let us find you the best gift!</h1>
+  <h3>Let us find you the best gift!</h3>
 
 
   <div className="happy-face">

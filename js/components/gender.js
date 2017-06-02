@@ -78,10 +78,6 @@ closeAllCards(){
           element.stop();
           blurredElement.stop();
 
-
-          console.log(currentCard)
-          console.log(dis.state.chosenGenderId)
-
           if(currentCard === dis.state.chosenGenderId){
 
                 blurredElement.css("display" , "none");
@@ -123,10 +119,17 @@ selectCard(card, gender){
       this.setState({chosenGender:gender , chosenGenderId:card });
         var elementCard=card;
 
+        $('.blurred-card-content h1').css("padding-top", "60px");
+
+        $('.blurred-card-content h1').animate({ paddingTop:'0'}, 200);
+
+
 
    elementArray.map(function(currentCard){
 
      if(currentCard === elementCard){
+
+
 
                     var element=$('#'+currentCard);
 
@@ -136,7 +139,14 @@ selectCard(card, gender){
                     $('.white-card-layer').css("opacity", "1");
 
                     var blurredElement= $('#'+card+"-blurred")
-                    blurredElement.css("display","block")
+                    blurredElement.css("display","block");
+
+                    $('.blurred-card-content button').css("fontSize", "10px");
+                        $('.blurred-card-content button').css("width", "40px");
+                          $('.blurred-card-content button').css("height", "40px");
+
+                    $('.blurred-card-content button').animate({fontSize:"17px" , width:"60px" , height:"60px"} , 200);
+                    $('.blurred-card-content button').animate({fontSize:"15px" , width:"55px" , height:"55px"}, 100);
 
      }  else {
 
@@ -279,94 +289,107 @@ render () {
 return(
 
 <div className="gender-page">
-  <h1>This gift is for a... </h1>
-
-  <div className="gender-row">
 
 
-    <div className="gender-card-holder">
+            <div className="gender-row-container">
+                    <h1>This gift is for a... </h1>
 
-                    <div className="white-card-layer white-lady-card">
-                       <button  onClick={()=> this.selectCard('lady-card' , 'lady')} onMouseOut={()=> this.outOfCard('lady-card') } onMouseOver={ ()=> this.hoverCard('lady-card') } className="gender-card" id="lady-card">
-
-                         <h1>Lady</h1>
-                         <h2>Gal</h2>
-                         <h3>Girl</h3>
-
-                       </button>
-                    </div>
-
-         <button  className="gender-card" id="lady-card-blurred">
-
-                    <div className="blurred-card-content">
-                      <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
-                        <button  onClick={()=>this.chooseGender('lady')} >next</button>
-                    </div>
-
-                    <div className="lady-card-blurred-inside">
+                    <div className="gender-row">
 
 
-                    </div>
-         </button>
+                      <div className="gender-card-holder">
 
+                                      <div className="white-card-layer white-lady-card">
+                                         <button  onClick={()=> this.selectCard('lady-card' , 'lady')} onMouseOut={()=> this.outOfCard('lady-card') } onMouseOver={ ()=> this.hoverCard('lady-card') } className="gender-card" id="lady-card">
 
-    </div>
-
-
-     <div className="gender-card-holder">
-
-               <div className="white-card-layer white-other-card">
-                       <button  onClick={()=> this.selectCard('other-card', 'robot')}  onMouseOut={()=> this.outOfCard('other-card') } onMouseOver={ ()=> this.hoverCard('other-card') }  className="gender-card" id="other-card">
-                               <h1>Other</h1>
-                       </button>
-              </div>
-
-
-              <button  className="gender-card" id="other-card-blurred">
-
-                <div className="blurred-card-content">
-                  <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
-                    <button  onClick={()=>this.chooseGender('robot')} >next</button>
-                </div>
-
-                 <div className="other-card-blurred-inside">
-
-                 </div>
-
-              </button>
-
-     </div>
-
-
-
-                   <div className="gender-card-holder">
-
-                              <div className="white-card-layer white-gentleman-card">
-                                         <button onClick={()=> this.selectCard('gentleman-card' , 'gentleman')}    onMouseOut={()=> this.outOfCard('gentleman-card') } onMouseOver={ ()=> this.hoverCard('gentleman-card') }  className="gender-card" id="gentleman-card">
-
-                                               <h1>Man</h1>
-                                               <h2>Guy</h2>
-                                               <h3>Boy</h3>
+                                           <h1>Lady</h1>
+                                           <h2>Gal</h2>
+                                           <h3>Girl</h3>
 
                                          </button>
-                               </div>
-
-                                   <button  className="gender-card" id="gentleman-card-blurred">
-
-                                     <div className="blurred-card-content">
-                                       <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
-                                         <button  onClick={()=>this.chooseGender('gentleman')} >next</button>
-                                     </div>
-
-                                      <div className="gentleman-card-blurred-inside">
                                       </div>
 
-                                   </button>
+                           <button  className="gender-card" id="lady-card-blurred">
 
-                 </div>
+                                      <div className="blurred-card-content">
+                                        <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
 
-  </div>
 
+                                            <h1 className="lady-font">Lady</h1>
+
+
+                                              <div className="circle-container">
+                                                    <button  onClick={()=>this.chooseGender('lady')} >next</button>
+                                              </div>
+
+                                      </div>
+
+                                      <div className="lady-card-blurred-inside">
+
+
+                                      </div>
+                           </button>
+
+
+                      </div>
+
+
+                       <div className="gender-card-holder">
+
+                                 <div className="white-card-layer white-other-card">
+                                         <button  onClick={()=> this.selectCard('other-card', 'robot')}  onMouseOut={()=> this.outOfCard('other-card') } onMouseOver={ ()=> this.hoverCard('other-card') }  className="gender-card" id="other-card">
+                                                 <h1 className="other-font" >Other</h1>
+                                         </button>
+                                </div>
+
+
+                                <button  className="gender-card" id="other-card-blurred">
+
+                                  <div className="blurred-card-content">
+                                    <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
+                                    <h1>Other</h1>
+                                    <button  onClick={()=>this.chooseGender('robot')} >next</button>
+                                  </div>
+
+                                   <div className="other-card-blurred-inside">
+
+                                   </div>
+
+                                </button>
+
+                       </div>
+
+
+
+                                     <div className="gender-card-holder">
+
+                                                <div className="white-card-layer white-gentleman-card">
+                                                           <button onClick={()=> this.selectCard('gentleman-card' , 'gentleman')}    onMouseOut={()=> this.outOfCard('gentleman-card') } onMouseOver={ ()=> this.hoverCard('gentleman-card') }  className="gender-card" id="gentleman-card">
+
+                                                                 <h1>Man</h1>
+                                                                 <h2>Guy</h2>
+                                                                 <h3>Boy</h3>
+
+                                                           </button>
+                                                 </div>
+
+                                                     <button  className="gender-card" id="gentleman-card-blurred">
+
+                                                       <div className="blurred-card-content">
+                                                         <i  onClick={this.closeAllCards} className="fa fa-times-circle-o" aria-hidden="true"></i>
+                                                          <h1 className="gentleman-font" >Man</h1>
+                                                          <button  onClick={()=>this.chooseGender('gentleman')} >next</button>
+                                                       </div>
+
+                                                        <div className="gentleman-card-blurred-inside">
+                                                        </div>
+
+                                                     </button>
+
+                                   </div>
+
+                          </div>
+                  </div>
 </div>
 );
 }
