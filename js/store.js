@@ -1,6 +1,6 @@
 var redux= require('redux');
 
-import reducer from './reducers/index';
+import reducer from './reducers/index.js';
 var thunk = require('redux-thunk').default;
 import { middleware as reduxPackMiddleware } from 'redux-pack'
 import { routerMiddleware, push } from 'react-router-redux'

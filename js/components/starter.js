@@ -59,7 +59,7 @@ toggleChecker(){
     $('.happy-face').css("display", "none");
 
     $('.checker').css("display" , "block"); $('.checker').animate({opacity:1})
-    $('.dark-shade').css("display" , "block") ;$('.dark-shade').animate({opacity:1})
+    $('.dark-shade').css("display" , "block") ; $('.dark-shade').animate({opacity:1})
 
     this.setState({checkerOn:true})
 

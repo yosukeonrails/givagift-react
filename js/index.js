@@ -15,12 +15,9 @@ import { Provider } from 'react-redux';
 import store from './store';
 import MainApp from './components/mainapp.js';
 import AppContainer from './components/app.js'
-import ResultsAppContainer from './components/resultsapp.js'
 import DashboardContainer from './components/dashboard.js'
 import LandingPageContainer from './components/landing.js'
-import ResultContainer from './components/result.js'
 import SignUpContainer from './components/sign-up.js'
-import AvatarContainer from './components/avatar.js'
 import TraitsContainer from './components/traits.js'
 import LevelsContainer from './components/levels.js'
 import GenderContainer from './components/gender.js'
@@ -40,9 +37,7 @@ var routes = (
                 <Route path="/home" component={HomeContainer}/>
                 <Route path="/dashboard" component={DashboardContainer}/>
                 <Route path="/home" component={LandingPageContainer}/>
-                <Route path="/result/:id" component={ResultContainer}/>
                 <Route path="/signup" component={SignUpContainer}/>
-                <Route path="/avatar" component={AvatarContainer}/>
                 <Route path="/traits/:id" component={TraitsContainer}/>
                 <Route path="/levels/:id" component={LevelsContainer}/>
                 <Route path="/gender/:id" component={GenderContainer}/>

@@ -25,13 +25,13 @@ export class App extends React.Component{
   constructor(props){
     super(props);
 
-      this.showLogIn= this.showLogIn.bind(this);
-      this.closeLogIn= this.closeLogIn.bind(this);
-       this.props.dispatch(getFacebookUser());
-       this.goToSignup = this.goToSignup.bind(this);
-       this.openOptions= this.openOptions.bind(this);
-       this.logOut= this.logOut.bind(this);
-      this.goLink= this.goLink.bind(this);
+        this.showLogIn= this.showLogIn.bind(this);
+        this.closeLogIn= this.closeLogIn.bind(this);
+        this.props.dispatch(getFacebookUser());
+        this.goToSignup = this.goToSignup.bind(this);
+        this.openOptions= this.openOptions.bind(this);
+        this.logOut= this.logOut.bind(this);
+        this.goLink= this.goLink.bind(this);
   }
 
   goToSignup(){
@@ -40,7 +40,6 @@ export class App extends React.Component{
   }
 
   goLink(e){
-
            window.location.href= e.target.id;
   }
 
@@ -140,6 +139,11 @@ export class App extends React.Component{
               username= this.props.loggedUser.username
                   signUpMode='none';
                   loggedMode='block';
+
+                  if(this.props.loggedUser.facebookId === 'guest'){
+
+                    imageUrl="https://source.unsplash.com/rx1iJ59jRyU/200x200";
+                  }
               }
 
               if(this.props.user || this.props.loggedUser){

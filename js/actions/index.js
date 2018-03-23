@@ -36,6 +36,11 @@ export var CHANGE_MODE = 'CHANGE_MODE';
   }
 
 
+
+
+
+
+
   export var SAVE_CHOSEN_BUBBLE = 'SAVE_CHOSEN_BUBBLE';
 
    export var saveChosenBubble= function(chosenBubbleArray){
@@ -174,18 +179,16 @@ headers:{
 body:JSON.stringify({
 
   first_name:data.firstName,
-  lastName:data.lastName,
-  email:data.email,
-  password:data.password,
+  last_name:data.lastName,
+  username:data.email,
   facebookId:data.facebookId,
-  token:data.token
-
+  password:data.password
 })
 };
 
 return {
 type: SIGN_UP_USER,
-promise: fetch('/mockuser', fetchData).then(function(data){
+promise: fetch('/user', fetchData).then(function(data){
 
 
 return data.json();

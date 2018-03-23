@@ -74,7 +74,7 @@ app.get('/amazonlist/:id', function(req, res){
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
-  console.log('user is logged out');
+  console.log('user is logged OOUut');
 });
 
 
@@ -470,7 +470,7 @@ passport.use(new LocalStrategy(
 
                     console.log('You are Loggeeeeed in');
                     console.log(user)
-                    
+
                     return done(null, user);
 
 

@@ -38,7 +38,11 @@ export class Dashboard extends React.Component{
           loggedUser=this.props.loggedUser;
           imageUrl= "url(https://graph.facebook.com/"+this.props.loggedUser.facebookId+"/picture?width=800&height=800)";
           userName=loggedUser.first_name;
+          
+          if(this.props.loggedUser.facebookId === 'guest'){
 
+            imageUrl="https://source.unsplash.com/rx1iJ59jRyU/200x200";
+          }
       }
 
 

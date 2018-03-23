@@ -58,8 +58,6 @@ export class SignUp extends React.Component {
 
       event.preventDefault();
 
-
-
         if(this.state.firstName.length <= 1 ){
 
             console.log(this.state)
@@ -118,14 +116,25 @@ export class SignUp extends React.Component {
               lastName:this.state.lastName,
               password:this.state.password,
               email:this.state.email,
-              token:'randomToken',
               facebookId:'guest'
             }
 
             var dis=this;
            this.props.dispatch(SignUpUser(userData)).then(function(){
 
-               console.log('succesful sign up')
+              var data={
+                  username:userData.email,
+                  password:userData.password
+              }
+
+                console.log(data)
+                     dis.props.dispatch(LogInUser(data)).then(function(){
+
+                       console.log('then happened');
+
+                       hashHistory.push('/home');
+
+                     });
 
            })
 
@@ -161,7 +170,6 @@ export class SignUp extends React.Component {
 
                      }
 
-                    console.log(this.state)
     }
 
     selectInput(element){
@@ -209,7 +217,7 @@ export class SignUp extends React.Component {
                    				<label>First Name</label>
                    				<input  onChange={ this.handleChange } id="firstNameInput" onClick={()=> this.selectInput('firstName')}  type="username" className="" required></input>
                    				</div>
-                                    <div style={{ display:this.state.firstNameWarning}} className="alert alert-danger">
+                                    <div style={{ display:this.state.firstNameWarning  , marginBottom:'3px' , padding:'5px' }} className="alert alert-danger">
                                     <strong>Sorry</strong> You must fill this field before submitting.
                                     </div>
 
@@ -218,7 +226,7 @@ export class SignUp extends React.Component {
                    				<label >Last Name</label>
                    				<input  onChange={ this.handleChange } id="lastNameInput"  onClick={()=> this.selectInput('lastName')}   type="username" className=""></input>
                    				</div>
-                                    <div style={{ display:this.state.lastNameWarning}} className="alert alert-danger">
+                                    <div style={{ display:this.state.lastNameWarning , marginBottom:'3px' , padding:'5px'}}   className="alert alert-danger">
                                     <strong>Sorry</strong> You must fill this field before submitting.
                                     </div>
 
@@ -226,7 +234,7 @@ export class SignUp extends React.Component {
                    					<label >Email</label>
                    					<input  onChange={ this.handleChange }  id="emailInput"  onClick={()=> this.selectInput('email')}    type="username" className=""></input>
                    					</div>
-                                    <div style={{ display:this.state.emailWarning}} className="alert alert-danger">
+                                    <div style={{ display:this.state.emailWarning  , marginBottom:'3px' , padding:'5px' }} className="alert alert-danger">
                                     <strong>Sorry</strong> You must fill this field before submitting.
                                     </div>
 
@@ -234,7 +242,7 @@ export class SignUp extends React.Component {
                    					<label >Password</label>
                    					<input onChange={ this.handleChange }  id="passwordInput"   onClick={()=> this.selectInput('password')}   type="password" className=""></input>
                    					</div>
-                                  <div style={{ display:this.state.passwordWarning}} className="alert alert-danger">
+                                  <div style={{ display:this.state.passwordWarning  , marginBottom:'3px' , padding:'5px' }} className="alert alert-danger">
                                   <strong>Sorry</strong> You must fill this field before submitting.
                                   </div>
 
@@ -242,7 +250,7 @@ export class SignUp extends React.Component {
                    					<label >Confirm Password</label>
                    					<input onChange={ this.handleChange }  id="confirmationInput"  onClick={()=> this.selectInput('confirmation')}  type="password" className=""></input>
                    					</div>
-                                  <div style={{ display:this.state.rePasswordWarning}} className="alert alert-danger">
+                                  <div style={{ display:this.state.rePasswordWarning  , marginBottom:'3px' , padding:'5px' }} className="alert alert-danger">
                                   <strong>Sorry</strong> You must fill this field before submitting.
                                   </div>
 
